@@ -38,26 +38,29 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="flex min-h-screen bg-muted/40">
-      {/* Desktop Sidebar */}
-      <aside className="hidden w-64 flex-col border-r border-border bg-card md:flex">
-        {/* Brand */}
-        <div className="flex h-16 items-center gap-2.5 border-b border-border px-6">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
+    <div className="dark adwaita-dark flex min-h-screen bg-[#1e1e1e] text-[#ffffff] antialiased selection:bg-[#3584e4] selection:text-white">
+      {/* Desktop Sidebar (Libadwaita Navigation View) */}
+      <aside className="hidden w-64 flex-col border-r border-[#383838] bg-[#242424] md:flex">
+        {/* Adwaita Headerbar Segment */}
+        <div className="flex h-14 items-center gap-2.5 border-b border-[#383838] px-5 bg-[#242424]">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#3584e4] text-white shadow-sm">
             <Sparkles className="h-4 w-4" />
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-bold tracking-tight text-foreground">
+            <span className="text-xs font-bold tracking-tight text-white">
               CMS Admin
             </span>
-            <span className="text-[10px] font-medium text-muted-foreground">
-              Personal Company Profile
+            <span className="text-[10px] font-medium text-[#9a9996]">
+              GNOME Adwaita Shell
             </span>
           </div>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 space-y-1 p-4">
+        {/* Sidebar Nav Items */}
+        <nav className="flex-1 space-y-0.5 p-3 overflow-y-auto">
+          <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-[#9a9996]">
+            Navigasi Panel
+          </div>
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
@@ -65,13 +68,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-xs font-semibold transition-all ${
+                className={`flex items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium transition-colors ${
                   isActive
-                    ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/30'
-                    : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                    ? 'bg-[#3584e4] text-white shadow-sm'
+                    : 'text-[#c0bfbc] hover:bg-white/5 hover:text-white'
                 }`}
               >
-                <Icon className="h-4 w-4" />
+                <Icon className="h-4 w-4 shrink-0" />
                 <span>{item.label}</span>
               </Link>
             );
@@ -79,11 +82,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
 
         {/* Bottom Actions */}
-        <div className="border-t border-border p-4 space-y-2">
+        <div className="border-t border-[#383838] p-3 space-y-1 bg-[#242424]">
           <Link
             href="/"
             target="_blank"
-            className="flex items-center justify-between rounded-xl px-3.5 py-2 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            className="flex items-center justify-between rounded-lg px-3 py-2 text-xs font-medium text-[#c0bfbc] hover:bg-white/5 hover:text-white transition-colors"
           >
             <div className="flex items-center gap-2">
               <ExternalLink className="h-4 w-4" />
@@ -94,7 +97,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <form action={adminLogout}>
             <button
               type="submit"
-              className="flex w-full items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold text-destructive transition-colors hover:bg-destructive/10 cursor-pointer"
+              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold text-[#ff7b63] transition-colors hover:bg-red-500/10 cursor-pointer"
             >
               <LogOut className="h-4 w-4" />
               <span>Keluar (Logout)</span>
@@ -104,22 +107,25 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Top Navbar */}
-        <header className="flex h-16 items-center justify-between border-b border-border bg-card px-4 sm:px-6">
+      <div className="flex flex-1 flex-col overflow-hidden bg-[#1e1e1e]">
+        {/* Libadwaita HeaderBar */}
+        <header className="flex h-14 items-center justify-between border-b border-[#383838] bg-[#303030] px-4 sm:px-6 shadow-sm">
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden"
+              className="md:hidden text-[#c0bfbc] hover:text-white hover:bg-white/10 h-8 w-8"
             >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </Button>
             <div className="flex items-center gap-2">
-              <Shield className="h-4 w-4 text-primary" />
-              <span className="text-xs font-semibold text-foreground">
+              <Shield className="h-4 w-4 text-[#3584e4]" />
+              <span className="text-xs font-bold text-white">
                 Pusat Kendali Konten
+              </span>
+              <span className="hidden sm:inline-block rounded-full bg-[#3584e4]/15 px-2 py-0.5 text-[10px] font-semibold text-[#78aeed] border border-[#3584e4]/30">
+                Adwaita Dark
               </span>
             </div>
           </div>
@@ -128,12 +134,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link
               href="/"
               target="_blank"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-muted/50 px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-muted transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-[#383838] px-3 py-1.5 text-xs font-semibold text-[#c0bfbc] hover:bg-[#424242] hover:text-white transition-colors"
             >
               <span>Lihat Publik</span>
               <ExternalLink className="h-3 w-3" />
             </Link>
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#3584e4] text-xs font-bold text-white shadow-sm">
               AD
             </div>
           </div>
@@ -141,7 +147,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Mobile Sidebar Dropdown */}
         {mobileMenuOpen && (
-          <div className="border-b border-border bg-card p-4 shadow-lg md:hidden">
+          <div className="border-b border-[#383838] bg-[#242424] p-4 shadow-xl md:hidden">
             <nav className="space-y-1">
               {navItems.map((item) => {
                 const Icon = item.icon;
@@ -151,10 +157,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-xs font-semibold ${
+                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium ${
                       isActive
-                        ? 'bg-primary text-primary-foreground'
-                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                        ? 'bg-[#3584e4] text-white'
+                        : 'text-[#c0bfbc] hover:bg-white/5 hover:text-white'
                     }`}
                   >
                     <Icon className="h-4 w-4" />
@@ -163,11 +169,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 );
               })}
             </nav>
-            <div className="mt-4 border-t border-border pt-3">
+            <div className="mt-4 border-t border-[#383838] pt-3">
               <form action={adminLogout}>
                 <button
                   type="submit"
-                  className="flex w-full items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold text-destructive"
+                  className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold text-[#ff7b63]"
                 >
                   <LogOut className="h-4 w-4" />
                   <span>Keluar (Logout)</span>
@@ -177,8 +183,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
         )}
 
-        {/* Page Content */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+        {/* Page Content View */}
+        <main className="flex-1 overflow-y-auto bg-[#1e1e1e] p-4 sm:p-6 lg:p-8">
           {children}
         </main>
       </div>
