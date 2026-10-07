@@ -89,7 +89,7 @@ export function MediaUploader({ label, value, onChange, helperText }: MediaUploa
           placeholder="Atau masukkan URL gambar langsung..."
           value={value || ''}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full rounded-lg border border-neutral-300 bg-neutral-50 px-3 py-1.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+          className="w-full rounded-lg border border-neutral-300 bg-neutral-50 px-3 py-1.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
         />
       </div>
 

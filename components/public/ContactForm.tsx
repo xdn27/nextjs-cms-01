@@ -66,7 +66,7 @@ export function ContactForm() {
             name="name"
             required
             placeholder="Contoh: Pratama Wijaya"
-            className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-indigo-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:border-indigo-400"
+            className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white dark:focus:border-indigo-400"
           />
         </div>
 
@@ -81,7 +81,7 @@ export function ContactForm() {
               name="email"
               required
               placeholder="pratama@perusahaan.com"
-              className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-indigo-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:border-indigo-400"
+              className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white dark:focus:border-indigo-400"
             />
           </div>
 
@@ -94,7 +94,7 @@ export function ContactForm() {
               id="phone"
               name="phone"
               placeholder="+62 812 3456 7890"
-              className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-indigo-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:border-indigo-400"
+              className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white dark:focus:border-indigo-400"
             />
           </div>
         </div>
@@ -106,7 +106,7 @@ export function ContactForm() {
           <select
             id="subject"
             name="subject"
-            className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 focus:border-indigo-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:border-indigo-400"
+            className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white dark:focus:border-indigo-400"
           >
             <option value="Pengembangan Web & SaaS">Pengembangan Web & SaaS Enterprise</option>
             <option value="Aplikasi Mobile iOS & Android">Aplikasi Mobile iOS & Android</option>
@@ -127,7 +127,7 @@ export function ContactForm() {
             rows={4}
             required
             placeholder="Jelaskan gambaran proyek, target waktu, atau kebutuhan sistem yang ingin Anda diskusikan..."
-            className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-indigo-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:border-indigo-400"
+            className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white dark:focus:border-indigo-400"
           />
         </div>
 

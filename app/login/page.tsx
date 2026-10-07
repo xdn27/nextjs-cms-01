@@ -65,7 +65,7 @@ function LoginForm() {
               required
               defaultValue="admin@example.com"
               placeholder="admin@example.com"
-              className="w-full rounded-xl border border-neutral-300 bg-neutral-50 py-3 pr-4 pl-10 text-sm text-neutral-900 focus:border-indigo-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+              className="w-full rounded-xl border border-neutral-300 bg-neutral-50 py-3 pr-4 pl-10 text-sm text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
             />
           </div>
         </div>
@@ -82,7 +82,7 @@ function LoginForm() {
               required
               defaultValue="admin123"
               placeholder="••••••••"
-              className="w-full rounded-xl border border-neutral-300 bg-neutral-50 py-3 pr-4 pl-10 text-sm text-neutral-900 focus:border-indigo-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+              className="w-full rounded-xl border border-neutral-300 bg-neutral-50 py-3 pr-4 pl-10 text-sm text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
             />
           </div>
         </div>

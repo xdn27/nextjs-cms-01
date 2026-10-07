@@ -247,7 +247,7 @@ export default function AdminBlogPage() {
                   required
                   defaultValue={editingPost.title}
                   placeholder="Contoh: Mengapa Arsitektur Serverless Menjadi Pilihan Utama"
-                  className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                  className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
                 />
               </div>
 
@@ -260,7 +260,7 @@ export default function AdminBlogPage() {
                     type="text"
                     name="category"
                     defaultValue={editingPost.category || 'Teknologi'}
-                    className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                    className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
                   />
                 </div>
                 <div>
@@ -271,7 +271,7 @@ export default function AdminBlogPage() {
                     type="text"
                     name="author_name"
                     defaultValue={editingPost.author_name || 'Tim Redaksi'}
-                    className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                    className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
                   />
                 </div>
                 <div>
@@ -281,7 +281,7 @@ export default function AdminBlogPage() {
                   <select
                     name="status"
                     defaultValue={editingPost.status || 'published'}
-                    className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                    className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
                   >
                     <option value="published">Published (Tayang)</option>
                     <option value="draft">Draft (Konsep)</option>
@@ -298,7 +298,7 @@ export default function AdminBlogPage() {
                   rows={2}
                   defaultValue={editingPost.excerpt || ''}
                   placeholder="Ringkasan singkat untuk kartu preview dan meta deskripsi SEO..."
-                  className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                  className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
                 />
               </div>
 
@@ -324,7 +324,7 @@ export default function AdminBlogPage() {
                   rows={8}
                   value={contentInput}
                   onChange={(e) => setContentInput(e.target.value)}
-                  className="w-full rounded-xl border border-neutral-300 bg-neutral-50 p-4 font-mono text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                  className="w-full rounded-xl border border-neutral-300 bg-neutral-50 p-4 font-mono text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
                 />
               </div>
 
@@ -337,7 +337,7 @@ export default function AdminBlogPage() {
                   value={tagsInput}
                   onChange={(e) => setTagsInput(e.target.value)}
                   placeholder="Next.js, Serverless, Supabase, Cloud"
-                  className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                  className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
                 />
               </div>
 
