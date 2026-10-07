@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <!-- Dark Tech Lab Canvas -->
+  <rect width="1920" height="1080" fill="#080f18"/>
+
+  <defs>
+    <radialGradient id="emerald-glow" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#059669" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#080f18" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blue-glow" cx="70%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#3584e4" stop-opacity="0.32"/>
+      <stop offset="70%" stop-color="#1d4ed8" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#080f18" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ambient Light Fields -->
+  <rect width="1920" height="1080" fill="url(#emerald-glow)"/>
+  <rect width="1920" height="1080" fill="url(#blue-glow)"/>
+
+  <!-- Tech Lab Grid Matrix -->
+  <g opacity="0.35">
+    <line x1="0" y1="750" x2="1920" y2="750" stroke="#10b981" stroke-opacity="0.15" stroke-width="1.5"/>
+    <line x1="0" y1="830" x2="1920" y2="830" stroke="#10b981" stroke-opacity="0.2" stroke-width="1.5"/>
+    <line x1="0" y1="920" x2="1920" y2="920" stroke="#10b981" stroke-opacity="0.25" stroke-width="2"/>
+    <line x1="0" y1="1020" x2="1920" y2="1020" stroke="#10b981" stroke-opacity="0.3" stroke-width="2"/>
+
+    <line x1="960" y1="650" x2="150" y2="1080" stroke="#10b981" stroke-opacity="0.18"/>
+    <line x1="960" y1="650" x2="550" y2="1080" stroke="#10b981" stroke-opacity="0.18"/>
+    <line x1="960" y1="650" x2="850" y2="1080" stroke="#10b981" stroke-opacity="0.18"/>
+    <line x1="960" y1="650" x2="1150" y2="1080" stroke="#10b981" stroke-opacity="0.18"/>
+    <line x1="960" y1="650" x2="1550" y2="1080" stroke="#10b981" stroke-opacity="0.18"/>
+  </g>
+
+  <!-- Diagnostics Waveform Panel (Top Right Background) -->
+  <g opacity="0.4" transform="translate(1100, 160)">
+    <rect x="0" y="0" width="550" height="240" rx="14" fill="#0b1726" stroke="#1e3a5f" stroke-width="2"/>
+    <!-- Grid -->
+    <line x1="0" y1="60" x2="550" y2="60" stroke="#1e3a5f" stroke-dasharray="6 6"/>
+    <line x1="0" y1="120" x2="550" y2="120" stroke="#1e3a5f" stroke-dasharray="6 6"/>
+    <line x1="0" y1="180" x2="550" y2="180" stroke="#1e3a5f" stroke-dasharray="6 6"/>
+    <!-- ECG / Voltage Waveform -->
+    <path d="M20 120 L80 120 L110 50 L140 190 L170 120 L240 120 L270 40 L300 180 L330 120 L420 120 L450 70 L480 160 L510 120 L540 120" stroke="#10b981" stroke-width="3" fill="none" filter="drop-shadow(0 0 8px #10b981)"/>
+    <text x="30" y="40" fill="#38bdf8" font-family="monospace" font-size="13" font-weight="bold">BENCHMARK 100% STABLE // 1.25V</text>
+  </g>
+
+  <!-- Laptop Teardown & Precision Service Stage (Right Foreground) -->
+  <g transform="translate(980, 360)">
+    <!-- Service Antistatic Mat -->
+    <rect x="0" y="0" width="750" height="460" rx="24" fill="#0f1f33" stroke="#1e3a5f" stroke-width="3"/>
+    
+    <!-- Open Gaming Laptop Chassis (Exploded View) -->
+    <g transform="translate(100, 50)">
+      <!-- Base Shell -->
+      <rect x="0" y="0" width="480" height="300" rx="16" fill="#17253b" stroke="#334155" stroke-width="2"/>
+      
+      <!-- Motherboard PCB -->
+      <rect x="25" y="25" width="430" height="250" rx="10" fill="#064e3b" stroke="#047857" stroke-width="2"/>
+      
+      <!-- Copper Heatpipes System (Dual Fan Cooling) -->
+      <path d="M80 80 L360 80 L360 140 L80 140 Z" fill="#b45309" stroke="#d97706" stroke-width="2"/>
+      <rect x="50" y="60" width="60" height="60" rx="30" fill="#0f172a" stroke="#10b981" stroke-width="3"/>
+      <circle cx="80" cy="90" r="12" fill="#10b981"/>
+      <rect x="330" y="60" width="60" height="60" rx="30" fill="#0f172a" stroke="#38bdf8" stroke-width="3"/>
+      <circle cx="360" cy="90" r="12" fill="#38bdf8"/>
+
+      <!-- CPU & GPU Sockets -->
+      <rect x="150" y="70" width="65" height="65" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+      <text x="162" y="108" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="bold">CPU</text>
+      
+      <rect x="245" y="70" width="65" height="65" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+      <text x="258" y="108" fill="#10b981" font-family="sans-serif" font-size="12" font-weight="bold">GPU</text>
+
+      <!-- Dual NVMe SSD Slots (High Speed Upgrade) -->
+      <rect x="100" y="180" width="130" height="35" rx="4" fill="#020617" stroke="#38bdf8" stroke-width="1.5"/>
+      <rect x="105" y="186" width="30" height="23" rx="2" fill="#38bdf8"/>
+      <text x="145" y="202" fill="#94a3b8" font-family="sans-serif" font-size="10" font-weight="bold">NVMe Gen4 2TB</text>
+
+      <rect x="250" y="180" width="130" height="35" rx="4" fill="#020617" stroke="#64748b" stroke-width="1.5"/>
+      <text x="295" y="202" fill="#64748b" font-family="sans-serif" font-size="10">SLOT 2</text>
+    </g>
+
+    <!-- Precision Magnetic Screwdriver -->
+    <g transform="translate(620, 160) rotate(35)">
+      <rect x="0" y="0" width="16" height="90" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+      <rect x="4" y="90" width="8" height="50" rx="2" fill="#94a3b8"/>
+      <path d="M5 140 L11 140 L8 155 Z" fill="#64748b"/>
+    </g>
+  </g>
+
+  <!-- Left Circuit Trace Decor -->
+  <g opacity="0.3">
+    <path d="M120 180 L280 180 L360 260 L620 260" stroke="#10b981" stroke-width="3" fill="none"/>
+    <circle cx="120" cy="180" r="6" fill="#10b981"/>
+    <circle cx="620" cy="260" r="6" fill="#10b981"/>
+
+    <path d="M80 320 L220 320 L300 400 L540 400" stroke="#38bdf8" stroke-width="2.5" fill="none"/>
+    <circle cx="80" cy="320" r="5" fill="#38bdf8"/>
+    <circle cx="540" cy="400" r="5" fill="#38bdf8"/>
+  </g>
+</svg>
