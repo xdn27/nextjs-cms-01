@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { Upload, X, Loader2 } from 'lucide-react';
 import { uploadMedia } from '@/lib/storage';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { toast } from '@/components/ui/sonner';
 
 interface MediaUploaderProps {
   label: string;
@@ -26,47 +29,51 @@ export function MediaUploader({ label, value, onChange, helperText }: MediaUploa
     const res = await uploadMedia(file);
     if (res.success && res.url) {
       onChange(res.url);
+      toast.success('Media berhasil diunggah');
     } else {
-      setError(res.error || 'Gagal mengunggah file.');
+      const errMsg = res.error || 'Gagal mengunggah file.';
+      setError(errMsg);
+      toast.error(errMsg);
     }
     setUploading(false);
   }
 
   return (
-    <div>
-      <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-        {label}
-      </label>
+    <div className="space-y-1.5">
+      <Label>{label}</Label>
 
       {value ? (
-        <div className="mt-2 relative inline-block">
-          <div className="relative h-32 w-48 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
+        <div className="relative inline-block mt-1">
+          <div className="relative h-32 w-48 overflow-hidden rounded-xl border border-border shadow-sm">
             <Image src={value} alt="Preview" fill className="object-cover" sizes="192px" />
           </div>
           <button
             type="button"
-            onClick={() => onChange('')}
-            className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-rose-500 text-white shadow hover:bg-rose-600"
+            onClick={() => {
+              onChange('');
+              toast.info('Gambar dihapus');
+            }}
+            className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-destructive text-destructive-foreground shadow hover:bg-destructive/90 transition-transform active:scale-90"
             title="Hapus gambar"
           >
             <X className="h-3.5 w-3.5" />
           </button>
         </div>
       ) : (
-        <div className="mt-2">
-          <label className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-neutral-300 bg-neutral-50 px-4 py-6 text-center cursor-pointer hover:bg-neutral-100 hover:border-indigo-400 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:bg-neutral-750">
+        <div className="mt-1">
+          <label className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-input bg-muted/30 px-4 py-6 text-center cursor-pointer hover:bg-muted/60 hover:border-primary/50 transition-colors">
             {uploading ? (
-              <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
-                <Loader2 className="h-5 w-5 animate-spin text-indigo-600" />
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Loader2 className="h-5 w-5 animate-spin text-primary" />
                 <span>Mengunggah gambar...</span>
               </div>
             ) : (
               <>
-                <Upload className="h-6 w-6 text-neutral-400" />
-                <span className="mt-2 text-xs font-medium text-neutral-600 dark:text-neutral-300">
+                <Upload className="h-6 w-6 text-muted-foreground" />
+                <span className="mt-2 text-xs font-medium text-foreground">
                   Klik untuk upload atau drag file ke sini
                 </span>
-                <span className="mt-1 text-[11px] text-neutral-400">
+                <span className="mt-1 text-[11px] text-muted-foreground">
                   PNG, JPG, WebP (Maks. 5MB)
                 </span>
               </>
@@ -83,18 +90,18 @@ export function MediaUploader({ label, value, onChange, helperText }: MediaUploa
       )}
 
       {/* Direct URL input fallback */}
-      <div className="mt-2">
-        <input
+      <div className="pt-1">
+        <Input
           type="text"
           placeholder="Atau masukkan URL gambar langsung..."
           value={value || ''}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full rounded-lg border border-neutral-300 bg-neutral-50 px-3 py-1.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
+          className="h-9 text-xs"
         />
       </div>
 
-      {helperText && <p className="mt-1 text-[11px] text-neutral-400">{helperText}</p>}
-      {error && <p className="mt-1 text-xs text-rose-500">{error}</p>}
+      {helperText && <p className="text-[11px] text-muted-foreground">{helperText}</p>}
+      {error && <p className="text-xs text-destructive">{error}</p>}
     </div>
   );
 }

@@ -5,6 +5,10 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Sparkles, Lock, Mail, Loader2, ArrowRight, AlertCircle, Info } from 'lucide-react';
 import { adminLogin } from '@/lib/actions';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent } from '@/components/ui/card';
 
 function LoginForm() {
   const searchParams = useSearchParams();
@@ -33,104 +37,104 @@ function LoginForm() {
   }
 
   return (
-    <div className="rounded-2xl border border-neutral-200 bg-white p-8 shadow-xl shadow-neutral-200/50 dark:border-neutral-800 dark:bg-neutral-900 dark:shadow-none">
-      {error && (
-        <div className="mb-6 flex items-start gap-3 rounded-xl border border-rose-200 bg-rose-50 p-4 text-xs text-rose-800 dark:border-rose-900 dark:bg-rose-950/40 dark:text-rose-300">
-          <AlertCircle className="h-4 w-4 shrink-0 text-rose-600" />
-          <span>{error}</span>
-        </div>
-      )}
-
-      {/* Quick Demo Credentials Info */}
-      <div className="mb-6 rounded-xl border border-indigo-100 bg-indigo-50/70 p-4 text-xs text-indigo-900 dark:border-indigo-900 dark:bg-indigo-950/50 dark:text-indigo-200">
-        <div className="flex items-center gap-2 font-semibold">
-          <Info className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-          <span>Akses Demo / Kredensial Uji Coba:</span>
-        </div>
-        <p className="mt-1 text-[11px] leading-relaxed">
-          Email: <code className="rounded bg-indigo-100 px-1 py-0.5 font-mono dark:bg-indigo-900">admin@example.com</code> | Kata Sandi: <code className="rounded bg-indigo-100 px-1 py-0.5 font-mono dark:bg-indigo-900">admin123</code>
-        </p>
-      </div>
-
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <div>
-          <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-            Email Administrator
-          </label>
-          <div className="relative mt-1.5">
-            <Mail className="absolute top-3.5 left-3.5 h-4 w-4 text-neutral-400" />
-            <input
-              type="email"
-              name="email"
-              required
-              defaultValue="admin@example.com"
-              placeholder="admin@example.com"
-              className="w-full rounded-xl border border-neutral-300 bg-neutral-50 py-3 pr-4 pl-10 text-sm text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
-            />
+    <Card className="shadow-xl">
+      <CardContent className="p-8">
+        {error && (
+          <div className="mb-6 flex items-start gap-3 rounded-xl border border-destructive/20 bg-destructive/10 p-4 text-xs text-destructive">
+            <AlertCircle className="h-4 w-4 shrink-0" />
+            <span>{error}</span>
           </div>
-        </div>
+        )}
 
-        <div>
-          <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-            Kata Sandi
-          </label>
-          <div className="relative mt-1.5">
-            <Lock className="absolute top-3.5 left-3.5 h-4 w-4 text-neutral-400" />
-            <input
-              type="password"
-              name="password"
-              required
-              defaultValue="admin123"
-              placeholder="••••••••"
-              className="w-full rounded-xl border border-neutral-300 bg-neutral-50 py-3 pr-4 pl-10 text-sm text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
-            />
+        {/* Quick Demo Credentials Info */}
+        <div className="mb-6 rounded-xl border border-primary/20 bg-primary/5 p-4 text-xs text-foreground">
+          <div className="flex items-center gap-2 font-semibold text-primary">
+            <Info className="h-4 w-4" />
+            <span>Akses Demo / Kredensial Uji Coba:</span>
           </div>
+          <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
+            Email: <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-foreground">admin@example.com</code> | Kata Sandi: <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-foreground">admin123</code>
+          </p>
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-indigo-600/20 transition-all hover:bg-indigo-500 disabled:opacity-50"
-        >
-          {loading ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" />
-              <span>Memverifikasi...</span>
-            </>
-          ) : (
-            <>
-              <span>Masuk ke Dashboard</span>
-              <ArrowRight className="h-4 w-4" />
-            </>
-          )}
-        </button>
-      </form>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="space-y-1.5">
+            <Label htmlFor="email">Email Administrator</Label>
+            <div className="relative">
+              <Mail className="absolute top-3 left-3.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                id="email"
+                type="email"
+                name="email"
+                required
+                defaultValue="admin@example.com"
+                placeholder="admin@example.com"
+                className="pl-10"
+              />
+            </div>
+          </div>
 
-      <div className="mt-6 border-t border-neutral-100 pt-5 text-center dark:border-neutral-800">
-        <Link
-          href="/"
-          className="text-xs font-medium text-neutral-500 hover:text-indigo-600 dark:text-neutral-400"
-        >
-          ← Kembali ke Halaman Publik
-        </Link>
-      </div>
-    </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="password">Kata Sandi</Label>
+            <div className="relative">
+              <Lock className="absolute top-3 left-3.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                id="password"
+                type="password"
+                name="password"
+                required
+                defaultValue="admin123"
+                placeholder="••••••••"
+                className="pl-10"
+              />
+            </div>
+          </div>
+
+          <Button
+            type="submit"
+            disabled={loading}
+            className="w-full h-11 text-sm font-semibold shadow-md"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span>Memverifikasi...</span>
+              </>
+            ) : (
+              <>
+                <span>Masuk ke Dashboard</span>
+                <ArrowRight className="h-4 w-4" />
+              </>
+            )}
+          </Button>
+        </form>
+
+        <div className="mt-6 border-t border-border pt-5 text-center">
+          <Link
+            href="/"
+            className="text-xs font-medium text-muted-foreground hover:text-primary transition-colors"
+          >
+            ← Kembali ke Halaman Publik
+          </Link>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 
 export default function LoginPage() {
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-neutral-50 px-4 py-12 sm:px-6 lg:px-8 dark:bg-neutral-950">
+    <div className="flex min-h-screen flex-col justify-center bg-muted/30 px-4 py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Link href="/" className="flex items-center justify-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20">
             <Sparkles className="h-6 w-6" />
           </div>
         </Link>
-        <h2 className="mt-6 text-center text-2xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
+        <h2 className="mt-6 text-center text-2xl font-extrabold tracking-tight text-foreground">
           Login ke Panel CMS
         </h2>
-        <p className="mt-2 text-center text-sm text-neutral-500 dark:text-neutral-400">
+        <p className="mt-2 text-center text-sm text-muted-foreground">
           Masuk untuk mengelola konten dan pengaturan Company Profile
         </p>
       </div>
@@ -138,7 +142,7 @@ export default function LoginPage() {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <Suspense fallback={
           <div className="flex justify-center p-8">
-            <Loader2 className="h-6 w-6 animate-spin text-indigo-600" />
+            <Loader2 className="h-6 w-6 animate-spin text-primary" />
           </div>
         }>
           <LoginForm />

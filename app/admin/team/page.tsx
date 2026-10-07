@@ -2,11 +2,32 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Plus, Edit2, Trash2, X, Loader2 } from 'lucide-react';
+import { Plus, Edit2, Trash2, Loader2 } from 'lucide-react';
 import { saveTeamMemberAction, deleteTeamMemberAction } from '@/lib/actions';
 import { initialTeam } from '@/lib/mock-data';
 import { TeamMember } from '@/lib/types';
 import { MediaUploader } from '@/components/admin/MediaUploader';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { toast } from '@/components/ui/sonner';
 
 export default function AdminTeamPage() {
   const [team, setTeam] = useState<TeamMember[]>(initialTeam);
@@ -14,7 +35,6 @@ export default function AdminTeamPage() {
   const [editingMember, setEditingMember] = useState<Partial<TeamMember> | null>(null);
   const [photoUrl, setPhotoUrl] = useState<string>('');
   const [loading, setLoading] = useState(false);
-  const [feedback, setFeedback] = useState<string | null>(null);
 
   function handleOpenCreate() {
     setEditingMember({
@@ -42,7 +62,7 @@ export default function AdminTeamPage() {
     setLoading(true);
     await deleteTeamMemberAction(id);
     setTeam((prev) => prev.filter((t) => t.id !== id));
-    setFeedback('Anggota tim berhasil dihapus.');
+    toast.success('Anggota tim berhasil dihapus');
     setLoading(false);
   }
 
@@ -51,7 +71,6 @@ export default function AdminTeamPage() {
     if (!editingMember) return;
 
     setLoading(true);
-    setFeedback(null);
 
     const formData = new FormData(e.currentTarget);
     const name = formData.get('name') as string;
@@ -81,17 +100,18 @@ export default function AdminTeamPage() {
         setTeam((prev) =>
           prev.map((t) => (t.id === editingMember.id ? ({ ...t, ...updatedData } as TeamMember) : t))
         );
+        toast.success('Data anggota tim berhasil diperbarui');
       } else {
         const newMember: TeamMember = {
           ...(updatedData as TeamMember),
           id: `t-${Date.now()}`,
         };
         setTeam((prev) => [...prev, newMember]);
+        toast.success('Anggota tim baru berhasil ditambahkan');
       }
       setIsModalOpen(false);
-      setFeedback('Anggota tim berhasil disimpan!');
     } else {
-      setFeedback(res.error || 'Gagal menyimpan anggota tim.');
+      toast.error(res.error || 'Gagal menyimpan anggota tim.');
     }
 
     setLoading(false);
@@ -101,147 +121,125 @@ export default function AdminTeamPage() {
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
+          <h1 className="text-2xl font-extrabold tracking-tight text-foreground">
             Kelola Anggota Tim
           </h1>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400">
+          <p className="text-xs text-muted-foreground">
             Daftar jajaran kepemimpinan dan insinyur yang tampil di halaman Tentang Kami.
           </p>
         </div>
 
-        <button
-          onClick={handleOpenCreate}
-          className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500"
-        >
-          <Plus className="h-4 w-4" />
+        <Button onClick={handleOpenCreate} size="sm">
+          <Plus className="h-4 w-4 mr-1.5" />
           <span>Tambah Anggota Tim</span>
-        </button>
+        </Button>
       </div>
 
-      {feedback && (
-        <div className="rounded-xl border border-indigo-100 bg-indigo-50 p-4 text-xs font-medium text-indigo-900 dark:border-indigo-900 dark:bg-indigo-950/40 dark:text-indigo-200">
-          {feedback}
-        </div>
-      )}
-
       {/* Team Table */}
-      <div className="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="border-b border-neutral-200 bg-neutral-50/70 text-neutral-500 uppercase font-semibold dark:border-neutral-800 dark:bg-neutral-800/50 dark:text-neutral-400">
-              <tr>
-                <th className="px-6 py-3.5">Urutan</th>
-                <th className="px-6 py-3.5">Foto & Nama</th>
-                <th className="px-6 py-3.5">Jabatan / Role</th>
-                <th className="px-6 py-3.5">Bio Singkat</th>
-                <th className="px-6 py-3.5">Status</th>
-                <th className="px-6 py-3.5 text-right">Aksi</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
-              {team.map((item) => (
-                <tr key={item.id} className="hover:bg-neutral-50/50 dark:hover:bg-neutral-800/50">
-                  <td className="px-6 py-4 font-mono font-bold text-neutral-500">
-                    {item.display_order}
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      {item.photo_url ? (
-                        <div className="relative h-10 w-10 overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-700 shrink-0">
-                          <Image src={item.photo_url} alt={item.name} fill className="object-cover" />
-                        </div>
-                      ) : (
-                        <div className="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-600">
-                          {item.name.charAt(0)}
-                        </div>
-                      )}
-                      <span className="font-bold text-neutral-900 dark:text-white">
-                        {item.name}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 font-semibold text-indigo-600 dark:text-indigo-400">
-                    {item.role}
-                  </td>
-                  <td className="px-6 py-4 max-w-xs truncate text-neutral-500">
-                    {item.bio || '-'}
-                  </td>
-                  <td className="px-6 py-4">
-                    <span
-                      className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
-                        item.is_active
-                          ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300'
-                          : 'bg-neutral-100 text-neutral-500 dark:bg-neutral-800'
-                      }`}
-                    >
-                      {item.is_active ? 'Aktif' : 'Nonaktif'}
+      <Card className="overflow-hidden shadow-sm">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-16">Urutan</TableHead>
+              <TableHead>Foto & Nama</TableHead>
+              <TableHead>Jabatan / Role</TableHead>
+              <TableHead>Bio Singkat</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-right">Aksi</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {team.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell className="font-mono font-bold text-muted-foreground">
+                  {item.display_order}
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-3">
+                    {item.photo_url ? (
+                      <div className="relative h-10 w-10 overflow-hidden rounded-full border border-border shrink-0">
+                        <Image src={item.photo_url} alt={item.name} fill className="object-cover" />
+                      </div>
+                    ) : (
+                      <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
+                        {item.name.charAt(0)}
+                      </div>
+                    )}
+                    <span className="font-bold text-foreground">
+                      {item.name}
                     </span>
-                  </td>
-                  <td className="px-6 py-4 text-right space-x-2">
-                    <button
+                  </div>
+                </TableCell>
+                <TableCell className="font-semibold text-primary">
+                  {item.role}
+                </TableCell>
+                <TableCell className="max-w-xs truncate text-muted-foreground">
+                  {item.bio || '-'}
+                </TableCell>
+                <TableCell>
+                  <Badge variant={item.is_active ? 'success' : 'secondary'}>
+                    {item.is_active ? 'Aktif' : 'Nonaktif'}
+                  </Badge>
+                </TableCell>
+                <TableCell className="text-right">
+                  <div className="flex items-center justify-end gap-1">
+                    <Button
+                      variant="ghost"
+                      size="icon"
                       onClick={() => handleOpenEdit(item)}
-                      className="rounded-lg p-1.5 text-neutral-500 hover:bg-neutral-100 hover:text-indigo-600 dark:text-neutral-400 dark:hover:bg-neutral-800"
                       title="Edit Anggota"
                     >
                       <Edit2 className="h-4 w-4" />
-                    </button>
-                    <button
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
                       onClick={() => handleDelete(item.id)}
-                      className="rounded-lg p-1.5 text-neutral-500 hover:bg-rose-50 hover:text-rose-600 dark:text-neutral-400 dark:hover:bg-rose-950/40"
+                      className="text-destructive hover:text-destructive hover:bg-destructive/10"
                       title="Hapus Anggota"
                     >
                       <Trash2 className="h-4 w-4" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Card>
 
       {/* Modal Add/Edit */}
-      {isModalOpen && editingMember && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl dark:bg-neutral-900">
-            <div className="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-neutral-800">
-              <h3 className="text-base font-bold text-neutral-900 dark:text-white">
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        {editingMember && (
+          <DialogContent className="max-w-lg">
+            <DialogHeader>
+              <DialogTitle>
                 {editingMember.id ? 'Edit Anggota Tim' : 'Tambah Anggota Tim'}
-              </h3>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="rounded-lg p-1 text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+              </DialogTitle>
+            </DialogHeader>
 
-            <form onSubmit={handleSave} className="mt-4 space-y-4">
-              <div>
-                <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                  Nama Lengkap & Gelar
-                </label>
-                <input
+            <form onSubmit={handleSave} className="space-y-4 pt-2">
+              <div className="space-y-1.5">
+                <Label htmlFor="name">Nama Lengkap & Gelar</Label>
+                <Input
+                  id="name"
                   type="text"
                   name="name"
                   required
                   defaultValue={editingMember.name}
                   placeholder="Contoh: Budi Santoso, M.Kom"
-                  className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                  Jabatan / Peran
-                </label>
-                <input
+              <div className="space-y-1.5">
+                <Label htmlFor="role">Jabatan / Peran</Label>
+                <Input
+                  id="role"
                   type="text"
                   name="role"
                   required
                   defaultValue={editingMember.role}
                   placeholder="Chief Executive Officer"
-                  className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
                 />
               </div>
 
@@ -252,41 +250,35 @@ export default function AdminTeamPage() {
                 helperText="Upload foto formal potret berorientasi persegi."
               />
 
-              <div>
-                <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                  Bio Singkat
-                </label>
-                <textarea
+              <div className="space-y-1.5">
+                <Label htmlFor="bio">Bio Singkat</Label>
+                <Textarea
+                  id="bio"
                   name="bio"
                   rows={2}
                   defaultValue={editingMember.bio || ''}
                   placeholder="Ringkasan pengalaman profesional..."
-                  className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                    LinkedIn URL
-                  </label>
-                  <input
+                <div className="space-y-1.5">
+                  <Label htmlFor="social_linkedin">LinkedIn URL</Label>
+                  <Input
+                    id="social_linkedin"
                     type="url"
                     name="social_linkedin"
                     defaultValue={editingMember.social_linkedin || ''}
                     placeholder="https://linkedin.com/in/..."
-                    className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
                   />
                 </div>
-                <div>
-                  <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                    Urutan Tampil
-                  </label>
-                  <input
+                <div className="space-y-1.5">
+                  <Label htmlFor="display_order">Urutan Tampil</Label>
+                  <Input
+                    id="display_order"
                     type="number"
                     name="display_order"
                     defaultValue={editingMember.display_order || 1}
-                    className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
                   />
                 </div>
               </div>
@@ -297,34 +289,30 @@ export default function AdminTeamPage() {
                   id="team_is_active"
                   name="is_active"
                   defaultChecked={editingMember.is_active ?? true}
-                  className="h-4 w-4 rounded border-neutral-300 text-indigo-600 focus:ring-indigo-500"
+                  className="h-4 w-4 rounded border-input text-primary focus:ring-ring cursor-pointer"
                 />
-                <label htmlFor="team_is_active" className="text-xs font-medium text-neutral-700 dark:text-neutral-300">
+                <label htmlFor="team_is_active" className="text-xs font-medium text-foreground cursor-pointer">
                   Tampilkan di Halaman Tentang Kami
                 </label>
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-neutral-100 dark:border-neutral-800">
-                <button
+              <div className="flex justify-end gap-2 pt-4 border-t border-border">
+                <Button
                   type="button"
+                  variant="outline"
                   onClick={() => setIsModalOpen(false)}
-                  className="rounded-xl border border-neutral-200 px-4 py-2 text-xs font-semibold text-neutral-700 hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-300"
                 >
                   Batal
-                </button>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2 text-xs font-semibold text-white shadow hover:bg-indigo-500 disabled:opacity-50"
-                >
-                  {loading && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
+                </Button>
+                <Button type="submit" disabled={loading}>
+                  {loading && <Loader2 className="h-4 w-4 animate-spin mr-1.5" />}
                   <span>Simpan Anggota</span>
-                </button>
+                </Button>
               </div>
             </form>
-          </div>
-        </div>
-      )}
+          </DialogContent>
+        )}
+      </Dialog>
     </div>
   );
 }

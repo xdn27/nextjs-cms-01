@@ -20,6 +20,7 @@ import {
   Shield,
 } from 'lucide-react';
 import { adminLogout } from '@/lib/actions';
+import { Button } from '@/components/ui/button';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -37,19 +38,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="flex min-h-screen bg-neutral-100 dark:bg-neutral-950">
+    <div className="flex min-h-screen bg-muted/40">
       {/* Desktop Sidebar */}
-      <aside className="hidden w-64 flex-col border-r border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900 md:flex">
+      <aside className="hidden w-64 flex-col border-r border-border bg-card md:flex">
         {/* Brand */}
-        <div className="flex h-16 items-center gap-2.5 border-b border-neutral-200 px-6 dark:border-neutral-800">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white shadow-sm">
+        <div className="flex h-16 items-center gap-2.5 border-b border-border px-6">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
             <Sparkles className="h-4 w-4" />
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-bold tracking-tight text-neutral-900 dark:text-white">
+            <span className="text-sm font-bold tracking-tight text-foreground">
               CMS Admin
             </span>
-            <span className="text-[10px] font-medium text-neutral-400">
+            <span className="text-[10px] font-medium text-muted-foreground">
               Personal Company Profile
             </span>
           </div>
@@ -66,8 +67,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 href={item.href}
                 className={`flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-xs font-semibold transition-all ${
                   isActive
-                    ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/30'
-                    : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white'
+                    ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/30'
+                    : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                 }`}
               >
                 <Icon className="h-4 w-4" />
@@ -78,11 +79,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
 
         {/* Bottom Actions */}
-        <div className="border-t border-neutral-200 p-4 dark:border-neutral-800 space-y-2">
+        <div className="border-t border-border p-4 space-y-2">
           <Link
             href="/"
             target="_blank"
-            className="flex items-center justify-between rounded-xl px-3.5 py-2 text-xs font-medium text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
+            className="flex items-center justify-between rounded-xl px-3.5 py-2 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
           >
             <div className="flex items-center gap-2">
               <ExternalLink className="h-4 w-4" />
@@ -93,7 +94,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <form action={adminLogout}>
             <button
               type="submit"
-              className="flex w-full items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold text-rose-600 transition-colors hover:bg-rose-50 dark:hover:bg-rose-950/30"
+              className="flex w-full items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold text-destructive transition-colors hover:bg-destructive/10 cursor-pointer"
             >
               <LogOut className="h-4 w-4" />
               <span>Keluar (Logout)</span>
@@ -105,17 +106,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Main Content Area */}
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* Top Navbar */}
-        <header className="flex h-16 items-center justify-between border-b border-neutral-200 bg-white px-4 dark:border-neutral-800 dark:bg-neutral-900 sm:px-6">
+        <header className="flex h-16 items-center justify-between border-b border-border bg-card px-4 sm:px-6">
           <div className="flex items-center gap-3">
-            <button
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="rounded-lg p-2 text-neutral-600 hover:bg-neutral-100 md:hidden dark:text-neutral-400 dark:hover:bg-neutral-800"
+              className="md:hidden"
             >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
             <div className="flex items-center gap-2">
-              <Shield className="h-4 w-4 text-indigo-600" />
-              <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+              <Shield className="h-4 w-4 text-primary" />
+              <span className="text-xs font-semibold text-foreground">
                 Pusat Kendali Konten
               </span>
             </div>
@@ -125,12 +128,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link
               href="/"
               target="_blank"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-xs font-semibold text-neutral-700 hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-muted/50 px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-muted transition-colors"
             >
               <span>Lihat Publik</span>
               <ExternalLink className="h-3 w-3" />
             </Link>
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-700 dark:bg-neutral-800 dark:text-indigo-400">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
               AD
             </div>
           </div>
@@ -138,7 +141,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Mobile Sidebar Dropdown */}
         {mobileMenuOpen && (
-          <div className="border-b border-neutral-200 bg-white p-4 shadow-lg md:hidden dark:border-neutral-800 dark:bg-neutral-900">
+          <div className="border-b border-border bg-card p-4 shadow-lg md:hidden">
             <nav className="space-y-1">
               {navItems.map((item) => {
                 const Icon = item.icon;
@@ -150,8 +153,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     onClick={() => setMobileMenuOpen(false)}
                     className={`flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-xs font-semibold ${
                       isActive
-                        ? 'bg-indigo-600 text-white'
-                        : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                     }`}
                   >
                     <Icon className="h-4 w-4" />
@@ -160,11 +163,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 );
               })}
             </nav>
-            <div className="mt-4 border-t border-neutral-100 pt-3 dark:border-neutral-800">
+            <div className="mt-4 border-t border-border pt-3">
               <form action={adminLogout}>
                 <button
                   type="submit"
-                  className="flex w-full items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold text-rose-600"
+                  className="flex w-full items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold text-destructive"
                 >
                   <LogOut className="h-4 w-4" />
                   <span>Keluar (Logout)</span>

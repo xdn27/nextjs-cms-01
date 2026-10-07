@@ -6,6 +6,12 @@ import { updateCompanySettingsAction } from '@/lib/actions';
 import { MediaUploader } from '@/components/admin/MediaUploader';
 import { initialSettings } from '@/lib/mock-data';
 import { CompanySettings } from '@/lib/types';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { toast } from '@/components/ui/sonner';
 
 export default function AdminSettingsPage() {
   const [settings] = useState<CompanySettings>(initialSettings);
@@ -24,8 +30,15 @@ export default function AdminSettingsPage() {
     try {
       const res = await updateCompanySettingsAction(formData);
       setFeedback(res);
+      if (res.success) {
+        toast.success(res.message || 'Pengaturan berhasil disimpan');
+      } else {
+        toast.error(res.message || 'Gagal memperbarui pengaturan.');
+      }
     } catch {
-      setFeedback({ success: false, message: 'Gagal memperbarui pengaturan.' });
+      const err = { success: false, message: 'Gagal memperbarui pengaturan.' };
+      setFeedback(err);
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -34,26 +47,26 @@ export default function AdminSettingsPage() {
   return (
     <div className="max-w-4xl space-y-6">
       <div>
-        <h1 className="text-2xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
+        <h1 className="text-2xl font-extrabold tracking-tight text-foreground">
           Pengaturan Perusahaan & Situs
         </h1>
-        <p className="text-xs text-neutral-500 dark:text-neutral-400">
+        <p className="text-xs text-muted-foreground">
           Ubah informasi umum, kontak operasional, teks banner utama (hero), dan media sosial perusahaan.
         </p>
       </div>
 
       {feedback && (
         <div
-          className={`flex items-start gap-3 rounded-xl p-4 text-xs ${
+          className={`flex items-start gap-3 rounded-xl p-4 text-xs border ${
             feedback.success
-              ? 'bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800'
-              : 'bg-rose-50 text-rose-800 border border-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-800'
+              ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20'
+              : 'bg-destructive/10 text-destructive border-destructive/20'
           }`}
         >
           {feedback.success ? (
             <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
           ) : (
-            <AlertCircle className="h-4 w-4 shrink-0 text-rose-600 dark:text-rose-400" />
+            <AlertCircle className="h-4 w-4 shrink-0 text-destructive" />
           )}
           <span>{feedback.message}</span>
         </div>
@@ -61,231 +74,229 @@ export default function AdminSettingsPage() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Identitas Umum */}
-        <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900 space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-white border-b border-neutral-100 pb-2 dark:border-neutral-800">
-            Identitas Perusahaan
-          </h2>
+        <Card className="shadow-sm">
+          <CardHeader className="p-6 pb-4 border-b border-border">
+            <CardTitle className="text-sm font-bold uppercase tracking-wider">
+              Identitas Perusahaan
+            </CardTitle>
+            <CardDescription className="text-xs">
+              Nama dan deskripsi umum bisnis
+            </CardDescription>
+          </CardHeader>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div>
-              <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                Nama Perusahaan
-              </label>
-              <input
-                type="text"
-                name="company_name"
-                defaultValue={settings.company_name}
-                required
-                className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
+          <CardContent className="p-6 space-y-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label htmlFor="company_name">Nama Perusahaan</Label>
+                <Input
+                  id="company_name"
+                  type="text"
+                  name="company_name"
+                  defaultValue={settings.company_name}
+                  required
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <Label htmlFor="tagline">Slogan / Tagline</Label>
+                <Input
+                  id="tagline"
+                  type="text"
+                  name="tagline"
+                  defaultValue={settings.tagline}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="description">Deskripsi Singkat Profil</Label>
+              <Textarea
+                id="description"
+                name="description"
+                rows={3}
+                defaultValue={settings.description}
               />
             </div>
 
-            <div>
-              <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                Slogan / Tagline
-              </label>
-              <input
-                type="text"
-                name="tagline"
-                defaultValue={settings.tagline}
-                className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-              Deskripsi Singkat Profil
-            </label>
-            <textarea
-              name="description"
-              rows={3}
-              defaultValue={settings.description}
-              className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
+            <MediaUploader
+              label="Logo Perusahaan"
+              value={logoUrl}
+              onChange={(url) => setLogoUrl(url)}
+              helperText="Unggah logo format PNG transparan atau SVG untuk hasil terbaik."
             />
-          </div>
-
-          <MediaUploader
-            label="Logo Perusahaan"
-            value={logoUrl}
-            onChange={(url) => setLogoUrl(url)}
-            helperText="Unggah logo format PNG transparan atau SVG untuk hasil terbaik."
-          />
-        </div>
+          </CardContent>
+        </Card>
 
         {/* Banner Utama (Hero) */}
-        <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900 space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-white border-b border-neutral-100 pb-2 dark:border-neutral-800">
-            Banner Beranda (Hero Section)
-          </h2>
+        <Card className="shadow-sm">
+          <CardHeader className="p-6 pb-4 border-b border-border">
+            <CardTitle className="text-sm font-bold uppercase tracking-wider">
+              Banner Beranda (Hero Section)
+            </CardTitle>
+            <CardDescription className="text-xs">
+              Teks headline dan tombol aksi di halaman utama
+            </CardDescription>
+          </CardHeader>
 
-          <div>
-            <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-              Judul Utama (Headline)
-            </label>
-            <input
-              type="text"
-              name="hero_title"
-              defaultValue={settings.hero_title}
-              required
-              className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-              Subjudul (Sub-headline)
-            </label>
-            <textarea
-              name="hero_subtitle"
-              rows={2}
-              defaultValue={settings.hero_subtitle}
-              className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div>
-              <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                Teks Tombol CTA
-              </label>
-              <input
+          <CardContent className="p-6 space-y-4">
+            <div className="space-y-1.5">
+              <Label htmlFor="hero_title">Judul Utama (Headline)</Label>
+              <Input
+                id="hero_title"
                 type="text"
-                name="hero_cta_text"
-                defaultValue={settings.hero_cta_text}
-                className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
+                name="hero_title"
+                defaultValue={settings.hero_title}
+                required
               />
             </div>
-            <div>
-              <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                Tautan Tombol CTA
-              </label>
-              <input
-                type="text"
-                name="hero_cta_link"
-                defaultValue={settings.hero_cta_link}
-                className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
+
+            <div className="space-y-1.5">
+              <Label htmlFor="hero_subtitle">Subjudul (Sub-headline)</Label>
+              <Textarea
+                id="hero_subtitle"
+                name="hero_subtitle"
+                rows={2}
+                defaultValue={settings.hero_subtitle}
               />
             </div>
-          </div>
-        </div>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label htmlFor="hero_cta_text">Teks Tombol CTA</Label>
+                <Input
+                  id="hero_cta_text"
+                  type="text"
+                  name="hero_cta_text"
+                  defaultValue={settings.hero_cta_text}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="hero_cta_link">Tautan Tombol CTA</Label>
+                <Input
+                  id="hero_cta_link"
+                  type="text"
+                  name="hero_cta_link"
+                  defaultValue={settings.hero_cta_link}
+                />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Informasi Kontak */}
-        <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900 space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-white border-b border-neutral-100 pb-2 dark:border-neutral-800">
-            Kontak & Lokasi Kantor
-          </h2>
+        <Card className="shadow-sm">
+          <CardHeader className="p-6 pb-4 border-b border-border">
+            <CardTitle className="text-sm font-bold uppercase tracking-wider">
+              Kontak & Lokasi Kantor
+            </CardTitle>
+            <CardDescription className="text-xs">
+              Kanal komunikasi resmi dan alamat operasional
+            </CardDescription>
+          </CardHeader>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div>
-              <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                Email Perusahaan
-              </label>
-              <input
-                type="email"
-                name="contact_email"
-                defaultValue={settings.contact_email}
-                required
-                className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
-              />
+          <CardContent className="p-6 space-y-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div className="space-y-1.5">
+                <Label htmlFor="contact_email">Email Perusahaan</Label>
+                <Input
+                  id="contact_email"
+                  type="email"
+                  name="contact_email"
+                  defaultValue={settings.contact_email}
+                  required
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="contact_phone">Telepon Kantor</Label>
+                <Input
+                  id="contact_phone"
+                  type="text"
+                  name="contact_phone"
+                  defaultValue={settings.contact_phone}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="contact_whatsapp">WhatsApp</Label>
+                <Input
+                  id="contact_whatsapp"
+                  type="text"
+                  name="contact_whatsapp"
+                  defaultValue={settings.contact_whatsapp}
+                />
+              </div>
             </div>
-            <div>
-              <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                Telepon Kantor
-              </label>
-              <input
-                type="text"
-                name="contact_phone"
-                defaultValue={settings.contact_phone}
-                className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                WhatsApp
-              </label>
-              <input
-                type="text"
-                name="contact_whatsapp"
-                defaultValue={settings.contact_whatsapp}
-                className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
-              />
-            </div>
-          </div>
 
-          <div>
-            <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-              Alamat Lengkap Kantor
-            </label>
-            <textarea
-              name="contact_address"
-              rows={2}
-              defaultValue={settings.contact_address}
-              className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
-            />
-          </div>
-        </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="contact_address">Alamat Lengkap Kantor</Label>
+              <Textarea
+                id="contact_address"
+                name="contact_address"
+                rows={2}
+                defaultValue={settings.contact_address}
+              />
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Media Sosial */}
-        <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900 space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-white border-b border-neutral-100 pb-2 dark:border-neutral-800">
-            Tautan Media Sosial
-          </h2>
+        <Card className="shadow-sm">
+          <CardHeader className="p-6 pb-4 border-b border-border">
+            <CardTitle className="text-sm font-bold uppercase tracking-wider">
+              Tautan Media Sosial
+            </CardTitle>
+            <CardDescription className="text-xs">
+              Tautan ke profil akun resmi di media sosial
+            </CardDescription>
+          </CardHeader>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div>
-              <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                LinkedIn URL
-              </label>
-              <input
-                type="url"
-                name="social_linkedin"
-                defaultValue={settings.social_linkedin || ''}
-                className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
-              />
+          <CardContent className="p-6 space-y-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label htmlFor="social_linkedin">LinkedIn URL</Label>
+                <Input
+                  id="social_linkedin"
+                  type="url"
+                  name="social_linkedin"
+                  defaultValue={settings.social_linkedin || ''}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="social_instagram">Instagram URL</Label>
+                <Input
+                  id="social_instagram"
+                  type="url"
+                  name="social_instagram"
+                  defaultValue={settings.social_instagram || ''}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="social_twitter">X / Twitter URL</Label>
+                <Input
+                  id="social_twitter"
+                  type="url"
+                  name="social_twitter"
+                  defaultValue={settings.social_twitter || ''}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="social_facebook">Facebook URL</Label>
+                <Input
+                  id="social_facebook"
+                  type="url"
+                  name="social_facebook"
+                  defaultValue={settings.social_facebook || ''}
+                />
+              </div>
             </div>
-            <div>
-              <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                Instagram URL
-              </label>
-              <input
-                type="url"
-                name="social_instagram"
-                defaultValue={settings.social_instagram || ''}
-                className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                X / Twitter URL
-              </label>
-              <input
-                type="url"
-                name="social_twitter"
-                defaultValue={settings.social_twitter || ''}
-                className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-                Facebook URL
-              </label>
-              <input
-                type="url"
-                name="social_facebook"
-                defaultValue={settings.social_facebook || ''}
-                className="mt-1.5 w-full rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-xs text-neutral-900 focus:border-indigo-500 focus:bg-white focus:text-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:focus:bg-neutral-800 dark:focus:text-white"
-              />
-            </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
         {/* Submit Button */}
         <div className="flex justify-end">
-          <button
+          <Button
             type="submit"
             disabled={loading}
-            className="flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-xs font-semibold text-white shadow-md shadow-indigo-600/20 hover:bg-indigo-500 disabled:opacity-50"
+            className="h-11 px-6 shadow-md"
           >
             {loading ? (
               <>
@@ -298,7 +309,7 @@ export default function AdminSettingsPage() {
                 <span>Simpan Seluruh Pengaturan</span>
               </>
             )}
-          </button>
+          </Button>
         </div>
       </form>
     </div>

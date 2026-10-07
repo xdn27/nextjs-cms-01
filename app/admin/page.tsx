@@ -16,7 +16,8 @@ import {
   getInquiries,
 } from '@/lib/data';
 import { isSupabaseConfigured } from '@/lib/supabase/client';
-
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 export default async function AdminDashboardPage() {
   const [settings, services, projects, posts, inquiries] = await Promise.all([
@@ -36,21 +37,21 @@ export default async function AdminDashboardPage() {
       count: services.length,
       href: '/admin/services',
       icon: Briefcase,
-      color: 'text-blue-600 bg-blue-50 dark:bg-blue-950/40 dark:text-blue-400',
+      color: 'text-blue-600 bg-blue-500/10 border-blue-500/20',
     },
     {
       title: 'Proyek Portofolio',
       count: projects.length,
       href: '/admin/portfolio',
       icon: FolderKanban,
-      color: 'text-violet-600 bg-violet-50 dark:bg-violet-950/40 dark:text-violet-400',
+      color: 'text-violet-600 bg-violet-500/10 border-violet-500/20',
     },
     {
       title: 'Artikel Blog',
       count: posts.length,
       href: '/admin/blog',
       icon: FileText,
-      color: 'text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 dark:text-emerald-400',
+      color: 'text-emerald-600 bg-emerald-500/10 border-emerald-500/20',
     },
     {
       title: 'Pesan Masuk',
@@ -58,7 +59,7 @@ export default async function AdminDashboardPage() {
       subtext: `${unreadInquiries.length} belum dibaca`,
       href: '/admin/inquiries',
       icon: Mail,
-      color: 'text-amber-600 bg-amber-50 dark:bg-amber-950/40 dark:text-amber-400',
+      color: 'text-amber-600 bg-amber-500/10 border-amber-500/20',
     },
   ];
 
@@ -67,25 +68,25 @@ export default async function AdminDashboardPage() {
       {/* Header Greeting */}
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
+          <h1 className="text-2xl font-extrabold tracking-tight text-foreground">
             Selamat Datang di Panel CMS
           </h1>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400">
-            Kelola seluruh konten website <strong className="text-neutral-700 dark:text-neutral-200">{settings.company_name}</strong> secara langsung.
+          <p className="text-xs text-muted-foreground">
+            Kelola seluruh konten website <strong className="text-foreground">{settings.company_name}</strong> secara langsung.
           </p>
         </div>
 
         {/* Database Status Indicator */}
-        <div className="flex items-center gap-2 rounded-xl border border-neutral-200 bg-white px-3.5 py-2 text-xs shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <Database className="h-4 w-4 text-neutral-400" />
-          <span className="text-neutral-600 dark:text-neutral-300">Database:</span>
+        <div className="flex items-center gap-2 rounded-xl border border-border bg-card px-3.5 py-2 text-xs shadow-sm">
+          <Database className="h-4 w-4 text-muted-foreground" />
+          <span className="text-muted-foreground">Database:</span>
           {supabaseActive ? (
-            <span className="flex items-center gap-1 font-semibold text-emerald-600">
+            <span className="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400">
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
               Supabase Terhubung
             </span>
           ) : (
-            <span className="flex items-center gap-1 font-semibold text-amber-600">
+            <span className="flex items-center gap-1.5 font-semibold text-amber-600 dark:text-amber-400">
               <span className="h-2 w-2 rounded-full bg-amber-500" />
               Demo / Mock Mode
             </span>
@@ -98,35 +99,35 @@ export default async function AdminDashboardPage() {
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (
-            <Link
-              key={stat.title}
-              href={stat.href}
-              className="group flex flex-col justify-between rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-sm transition-all hover:border-indigo-200 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold uppercase text-neutral-500 dark:text-neutral-400">
-                  {stat.title}
-                </span>
-                <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${stat.color}`}>
-                  <Icon className="h-5 w-5" />
-                </div>
-              </div>
+            <Link key={stat.title} href={stat.href} className="group">
+              <Card className="h-full transition-all hover:border-primary/50 hover:shadow-md cursor-pointer">
+                <CardContent className="p-6 flex flex-col justify-between h-full">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {stat.title}
+                    </span>
+                    <div className={`flex h-10 w-10 items-center justify-center rounded-xl border ${stat.color}`}>
+                      <Icon className="h-5 w-5" />
+                    </div>
+                  </div>
 
-              <div className="mt-4 flex items-baseline justify-between">
-                <span className="text-3xl font-extrabold text-neutral-900 dark:text-white">
-                  {stat.count}
-                </span>
-                {stat.subtext && (
-                  <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-700 dark:bg-amber-950 dark:text-amber-300">
-                    {stat.subtext}
-                  </span>
-                )}
-              </div>
+                  <div className="mt-4 flex items-baseline justify-between">
+                    <span className="text-3xl font-extrabold text-foreground">
+                      {stat.count}
+                    </span>
+                    {stat.subtext && (
+                      <Badge variant="secondary" className="font-bold text-[10px]">
+                        {stat.subtext}
+                      </Badge>
+                    )}
+                  </div>
 
-              <div className="mt-4 flex items-center gap-1 border-t border-neutral-100 pt-3 text-[11px] font-semibold text-indigo-600 transition-colors group-hover:text-indigo-700 dark:border-neutral-800 dark:text-indigo-400">
-                <span>Buka Pengelolaan</span>
-                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
-              </div>
+                  <div className="mt-4 flex items-center gap-1 border-t border-border pt-3 text-[11px] font-semibold text-primary transition-colors group-hover:underline">
+                    <span>Buka Pengelolaan</span>
+                    <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </CardContent>
+              </Card>
             </Link>
           );
         })}
@@ -135,93 +136,91 @@ export default async function AdminDashboardPage() {
       {/* Quick Actions & Recent Messages */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Recent Inquiries List */}
-        <div className="lg:col-span-2 rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
-          <div className="flex items-center justify-between border-b border-neutral-100 pb-4 dark:border-neutral-800">
+        <Card className="lg:col-span-2 shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between border-b border-border p-6 pb-4">
             <div>
-              <h3 className="text-base font-bold text-neutral-900 dark:text-white">
+              <CardTitle className="text-base font-bold">
                 Pesan Masuk Terbaru
-              </h3>
-              <p className="text-xs text-neutral-500">Formulir kontak yang dikirim oleh pengunjung</p>
+              </CardTitle>
+              <CardDescription className="text-xs">
+                Formulir kontak yang dikirim oleh pengunjung
+              </CardDescription>
             </div>
             <Link
               href="/admin/inquiries"
-              className="text-xs font-semibold text-indigo-600 hover:underline dark:text-indigo-400"
+              className="text-xs font-semibold text-primary hover:underline"
             >
               Lihat Semua ({inquiries.length})
             </Link>
-          </div>
+          </CardHeader>
 
-          <div className="mt-4 divide-y divide-neutral-100 dark:divide-neutral-800">
+          <CardContent className="p-6 pt-2 divide-y divide-border">
             {inquiries.slice(0, 4).map((inq) => (
-              <div key={inq.id} className="py-3.5 first:pt-0 last:pb-0">
+              <div key={inq.id} className="py-3.5 first:pt-2 last:pb-0">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-neutral-900 dark:text-white">
+                    <span className="text-xs font-bold text-foreground">
                       {inq.name}
                     </span>
-                    <span className="text-xs text-neutral-400">({inq.email})</span>
+                    <span className="text-xs text-muted-foreground">({inq.email})</span>
                   </div>
-                  <span
-                    className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
-                      inq.status === 'unread'
-                        ? 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300'
-                        : 'bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400'
-                    }`}
-                  >
+                  <Badge variant={inq.status === 'unread' ? 'destructive' : 'secondary'} className="text-[10px]">
                     {inq.status === 'unread' ? 'Belum Dibaca' : 'Sudah Dibaca'}
-                  </span>
+                  </Badge>
                 </div>
-                <p className="mt-1 text-xs font-medium text-neutral-700 dark:text-neutral-300">
+                <p className="mt-1 text-xs font-medium text-foreground">
                   {inq.subject}
                 </p>
-                <p className="mt-1 text-xs text-neutral-500 line-clamp-1">
+                <p className="mt-1 text-xs text-muted-foreground line-clamp-1">
                   {inq.message}
                 </p>
               </div>
             ))}
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
         {/* Quick Shortcut Column */}
-        <div className="space-y-4">
-          <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
-            <h3 className="text-base font-bold text-neutral-900 dark:text-white">
+        <Card className="shadow-sm">
+          <CardHeader className="p-6 pb-4 border-b border-border">
+            <CardTitle className="text-base font-bold">
               Pintasan Cepat
-            </h3>
-            <p className="text-xs text-neutral-500">Aksi langsung untuk memperbarui website</p>
+            </CardTitle>
+            <CardDescription className="text-xs">
+              Aksi langsung untuk memperbarui website
+            </CardDescription>
+          </CardHeader>
 
-            <div className="mt-4 space-y-2">
-              <Link
-                href="/admin/settings"
-                className="flex items-center justify-between rounded-xl border border-neutral-200 p-3 text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
-              >
-                <span>Edit Profil Perusahaan</span>
-                <ArrowRight className="h-3.5 w-3.5 text-neutral-400" />
-              </Link>
-              <Link
-                href="/admin/services"
-                className="flex items-center justify-between rounded-xl border border-neutral-200 p-3 text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
-              >
-                <span>Tambah / Edit Layanan</span>
-                <ArrowRight className="h-3.5 w-3.5 text-neutral-400" />
-              </Link>
-              <Link
-                href="/admin/portfolio"
-                className="flex items-center justify-between rounded-xl border border-neutral-200 p-3 text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
-              >
-                <span>Unggah Proyek Baru</span>
-                <ArrowRight className="h-3.5 w-3.5 text-neutral-400" />
-              </Link>
-              <Link
-                href="/admin/blog"
-                className="flex items-center justify-between rounded-xl border border-neutral-200 p-3 text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
-              >
-                <span>Tulis Artikel Blog</span>
-                <ArrowRight className="h-3.5 w-3.5 text-neutral-400" />
-              </Link>
-            </div>
-          </div>
-        </div>
+          <CardContent className="p-6 pt-4 space-y-2.5">
+            <Link
+              href="/admin/settings"
+              className="flex items-center justify-between rounded-xl border border-border p-3 text-xs font-semibold text-foreground transition-colors hover:bg-muted"
+            >
+              <span>Edit Profil Perusahaan</span>
+              <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
+            </Link>
+            <Link
+              href="/admin/services"
+              className="flex items-center justify-between rounded-xl border border-border p-3 text-xs font-semibold text-foreground transition-colors hover:bg-muted"
+            >
+              <span>Tambah / Edit Layanan</span>
+              <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
+            </Link>
+            <Link
+              href="/admin/portfolio"
+              className="flex items-center justify-between rounded-xl border border-border p-3 text-xs font-semibold text-foreground transition-colors hover:bg-muted"
+            >
+              <span>Unggah Proyek Baru</span>
+              <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
+            </Link>
+            <Link
+              href="/admin/blog"
+              className="flex items-center justify-between rounded-xl border border-border p-3 text-xs font-semibold text-foreground transition-colors hover:bg-muted"
+            >
+              <span>Tulis Artikel Blog</span>
+              <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
+            </Link>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
