@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { Menu, X, ShieldCheck, Monitor, MessageCircle } from 'lucide-react';
 import { CompanySettings } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 
@@ -17,27 +17,26 @@ export function Navbar({ settings }: NavbarProps) {
 
   const navLinks = [
     { href: '/', label: 'Beranda' },
-    { href: '/about', label: 'Tentang Kami' },
     { href: '/services', label: 'Layanan' },
-    { href: '/portfolio', label: 'Portofolio' },
-    { href: '/blog', label: 'Artikel' },
+    { href: '/katalog', label: 'Katalog Produk' },
+    { href: '/blog', label: 'Blog' },
     { href: '/contact', label: 'Kontak' },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/85 backdrop-blur-md transition-all">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-md transition-all">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand Logo */}
         <Link href="/" className="group flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-tr from-primary to-indigo-500 text-primary-foreground shadow-md shadow-primary/20 transition-transform group-hover:scale-105">
-            <Sparkles className="h-6 w-6" />
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-tr from-[#3584e4] to-indigo-600 text-white shadow-md shadow-[#3584e4]/20 transition-transform group-hover:scale-105">
+            <Monitor className="h-6 w-6" />
           </div>
           <div className="flex flex-col">
             <span className="text-xl font-bold tracking-tight text-foreground">
-              {settings.company_name || 'Nusantara Tech'}
+              {settings.company_name || 'CyberTech Computer'}
             </span>
             <span className="text-xs font-medium text-muted-foreground">
-              Enterprise Digital Solution
+              Pusat Rakit PC &amp; Servis Komputer
             </span>
           </div>
         </Link>
@@ -45,7 +44,11 @@ export function Navbar({ settings }: NavbarProps) {
         {/* Desktop Navigation Links */}
         <nav className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href;
+            const isActive =
+              link.href === '/'
+                ? pathname === '/'
+                : pathname === link.href || pathname.startsWith(`${link.href}/`);
+
             return (
               <Link
                 key={link.href}
@@ -70,10 +73,10 @@ export function Navbar({ settings }: NavbarProps) {
               <span>CMS Panel</span>
             </Link>
           </Button>
-          <Button asChild size="sm" className="h-9 shadow-sm">
+          <Button asChild size="sm" className="h-9 shadow-sm bg-[#3584e4] hover:bg-[#1c71d8] text-white">
             <Link href="/contact">
-              <span>{settings.hero_cta_text || 'Konsultasi'}</span>
-              <ArrowRight className="h-4 w-4 ml-1" />
+              <MessageCircle className="h-3.5 w-3.5 mr-1" />
+              <span>{settings.hero_cta_text || 'Konsultasi Rakit PC'}</span>
             </Link>
           </Button>
         </div>
@@ -95,7 +98,11 @@ export function Navbar({ settings }: NavbarProps) {
         <div className="border-b border-border bg-background/95 px-4 pt-3 pb-6 shadow-xl backdrop-blur-md md:hidden">
           <div className="flex flex-col space-y-1">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive =
+                link.href === '/'
+                  ? pathname === '/'
+                  : pathname === link.href || pathname.startsWith(`${link.href}/`);
+
               return (
                 <Link
                   key={link.href}
@@ -120,10 +127,10 @@ export function Navbar({ settings }: NavbarProps) {
                 <span>Login ke Panel CMS</span>
               </Link>
             </Button>
-            <Button asChild className="w-full shadow-sm">
+            <Button asChild className="w-full shadow-sm bg-[#3584e4] hover:bg-[#1c71d8] text-white">
               <Link href="/contact" onClick={() => setIsOpen(false)}>
-                <span>{settings.hero_cta_text || 'Konsultasi'}</span>
-                <ArrowRight className="h-4 w-4 ml-1.5" />
+                <MessageCircle className="h-4 w-4 mr-1.5" />
+                <span>{settings.hero_cta_text || 'Konsultasi Rakit PC'}</span>
               </Link>
             </Button>
           </div>

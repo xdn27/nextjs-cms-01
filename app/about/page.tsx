@@ -1,16 +1,16 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { Target, Award, CheckCircle2 } from 'lucide-react';
+import { Target, Award, CheckCircle2, Cpu } from 'lucide-react';
 import { getCompanySettings, getTeamMembers } from '@/lib/data';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
 import { TeamSection } from '@/components/public/TeamSection';
 
 export const metadata: Metadata = {
-  title: 'Tentang Perusahaan',
-  description: 'Mengenal profil, visi & misi, nilai inti, dan tim kepemimpinan di balik Nusantara Tech Innovasi.',
+  title: 'Tentang CyberTech Toko Komputer & Servis',
+  description:
+    'Profil toko, filosofi perakitan PC gaming bebas bottleneck, komitmen garansi resmi distributor, dan tim teknisi berpengalaman.',
 };
-
 
 export default async function AboutPage() {
   const [settings, team] = await Promise.all([
@@ -24,16 +24,17 @@ export default async function AboutPage() {
 
       <main className="flex-1">
         {/* Header Banner */}
-        <section className="bg-gradient-to-b from-neutral-50 via-white to-white py-16 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950">
+        <section className="bg-gradient-to-b from-muted/50 via-background to-background py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-            <span className="text-xs font-semibold tracking-wider text-indigo-600 uppercase dark:text-indigo-400">
-              Profil Perusahaan
-            </span>
-            <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl dark:text-white">
-              Membangun Solusi Digital Masa Depan
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#3584e4]/10 border border-[#3584e4]/20 px-3.5 py-1 text-xs font-semibold text-[#3584e4]">
+              <Cpu className="h-3.5 w-3.5" />
+              <span>Profil Toko &amp; Teknisi Spesialis</span>
+            </div>
+            <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+              Tentang CyberTech Computer &amp; Gaming
             </h1>
-            <p className="mt-4 max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-300">
-              Kami adalah rumah rekayasa teknologi yang berfokus menciptakan produk digital berkinerja tinggi, aman, dan berdampak nyata bagi pertumbuhan klien kami.
+            <p className="mt-3 max-w-2xl mx-auto text-base text-muted-foreground sm:text-lg">
+              Berkomitmen menghadirkan racikan PC impian yang seimbang, suku cadang 100% original bergaransi resmi, serta layanan servis hardware yang jujur dan transparan.
             </p>
           </div>
         </section>
@@ -43,64 +44,64 @@ export default async function AboutPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
               <div>
-                <span className="text-xs font-semibold text-indigo-600 uppercase dark:text-indigo-400">
-                  Perjalanan Kami
+                <span className="text-xs font-semibold text-[#3584e4] uppercase tracking-wider">
+                  Dedikasi Hardware
                 </span>
-                <h2 className="mt-2 text-3xl font-bold tracking-tight text-neutral-900 dark:text-white">
-                  Dari Ide Menjadi Standar Baru Industri
+                <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
+                  Perakitan Teliti &amp; Diagnosa Servis Bergaransi
                 </h2>
-                <p className="mt-4 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
-                  {settings.company_name} didirikan dengan tekad menjembatani kesenjangan antara strategi bisnis dan keunggulan eksekusi teknis. Kami percaya bahwa software yang hebat bukan sekadar kode yang berfungsi, melainkan produk yang dirancang dengan presisi estetika, performa tanpa cela, dan keamanan data berlapis.
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  {settings.company_name} berawal dari kecintaan mendalam terhadap dunia PC gaming dan performa komputasi. Kami memahami frustrasi pengguna saat menghadapi komputer yang lemot, suhu mendidih, atau salah memilih komponen hingga terjadi bottleneck.
                 </p>
-                <p className="mt-4 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
-                  Sepanjang perjalanan, kami telah dipercaya oleh berbagai industri mulai dari perbankan, logistik multinasional, telemedisin kesehatan, hingga startup skala internasional.
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  Oleh karena itu, setiap PC yang keluar dari workshop kami dirakit dengan standar tertinggi: cable management rapi, sirkulasi udara optimal, pasta termal kelas atas, dan telah lolos uji stabilitas 24 jam non-stop.
                 </p>
 
-                <div className="mt-8 grid grid-cols-2 gap-6 border-t border-neutral-100 pt-6 dark:border-neutral-800">
+                <div className="mt-8 grid grid-cols-2 gap-6 border-t border-border pt-6">
                   <div>
-                    <h4 className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">50+</h4>
-                    <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">Proyek Enterprise Selesai</p>
+                    <h4 className="text-3xl font-black text-[#3584e4]">2.500+</h4>
+                    <p className="mt-1 text-xs text-muted-foreground">Unit PC Selesai Dirakit</p>
                   </div>
                   <div>
-                    <h4 className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">99.9%</h4>
-                    <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">SLA Ketersediaan Sistem</p>
+                    <h4 className="text-3xl font-black text-[#2ec27e]">100%</h4>
+                    <p className="mt-1 text-xs text-muted-foreground">Garansi Resmi Distributor</p>
                   </div>
                 </div>
               </div>
 
               {/* Vision & Mission Cards */}
               <div className="space-y-6">
-                <div className="rounded-2xl border border-neutral-200/90 bg-neutral-50/70 p-8 dark:border-neutral-800 dark:bg-neutral-900">
+                <div className="rounded-2xl border border-border bg-card p-8 shadow-sm">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 text-white">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#3584e4] text-white">
                       <Target className="h-5 w-5" />
                     </div>
-                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white">Visi Kami</h3>
+                    <h3 className="text-lg font-bold text-foreground">Visi Kami</h3>
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
-                    Menjadi mitra rekayasa perangkat lunak dan arsitektur cloud terdepan di Asia Tenggara yang mendefinisikan standar keunggulan, kecepatan, dan integritas digital.
+                  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                    Menjadi pusat solusi komputer terlengkap dan paling terpercaya di Indonesia dengan mengedepankan integritas kejujuran teknis, kerapian pengerjaan, dan kepuasan pelanggan nomor satu.
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-neutral-200/90 bg-neutral-50/70 p-8 dark:border-neutral-800 dark:bg-neutral-900">
+                <div className="rounded-2xl border border-border bg-card p-8 shadow-sm">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-600 text-white">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#2ec27e] text-white">
                       <Award className="h-5 w-5" />
                     </div>
-                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white">Misi Kami</h3>
+                    <h3 className="text-lg font-bold text-foreground">Misi Kami</h3>
                   </div>
-                  <ul className="mt-3 space-y-2 text-sm text-neutral-600 dark:text-neutral-300">
+                  <ul className="mt-3 space-y-2.5 text-xs text-muted-foreground">
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-violet-500" />
-                      <span>Menghadirkan sistem digital dengan standar rekayasa kelas dunia dan performa latensi ultra-rendah.</span>
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#2ec27e]" />
+                      <span>Memberikan konsultasi racikan PC seimbang bebas bottleneck tanpa memaksakan anggaran pelanggan.</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-violet-500" />
-                      <span>Mengutamakan keamanan data dan keandalan sistem tanpa kompromi.</span>
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#2ec27e]" />
+                      <span>Menjamin penggunaan suku cadang baru dengan segel resmi distributor nasional.</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-violet-500" />
-                      <span>Memberikan dampak bisnis terukur bagi setiap mitra yang bekerja sama dengan kami.</span>
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#2ec27e]" />
+                      <span>Menyediakan jasa servis laptop dan PC dengan diagnosa awal transparan dan garansi nyata.</span>
                     </li>
                   </ul>
                 </div>
@@ -109,7 +110,7 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        {/* Team Members */}
+        {/* Tim Teknisi */}
         <TeamSection team={team} />
       </main>
 

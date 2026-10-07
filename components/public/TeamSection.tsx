@@ -15,13 +15,13 @@ export function TeamSection({ team }: TeamSectionProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <span className="text-xs font-semibold tracking-wider text-primary uppercase">
-            Tim Kepemimpinan
+            Teknisi &amp; Konsultan Hardware
           </span>
           <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
-            Para Insinyur & Inovator Kami
+            Tim Ahli Rakit PC &amp; Servis Komputer
           </h2>
           <p className="mt-3 max-w-2xl mx-auto text-base text-muted-foreground">
-            Didukung oleh para profesional berpengalaman yang berdedikasi menciptakan standar keunggulan teknologi baru.
+            Didukung oleh para teknisi perakitan berpengalaman dan spesialis perbaikan hardware bersertifikasi.
           </p>
         </div>
 

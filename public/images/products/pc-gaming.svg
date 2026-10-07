@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#18181b"/>
+  <!-- Background Glow & Grid -->
+  <circle cx="400" cy="250" r="240" fill="#3584e4" fill-opacity="0.15" filter="blur(40px)"/>
+  <circle cx="520" cy="200" r="180" fill="#9333ea" fill-opacity="0.15" filter="blur(40px)"/>
+  <defs>
+    <linearGradient id="rgb1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3584e4"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+
+  <!-- PC Case Outer Chassis -->
+  <rect x="260" y="70" width="280" height="360" rx="16" fill="#202024" stroke="#383838" stroke-width="4"/>
+  <!-- Front Panel with Mesh -->
+  <rect x="275" y="85" width="40" height="330" rx="8" fill="#121214"/>
+  <line x1="285" y1="100" x2="305" y2="100" stroke="#3584e4" stroke-width="3" stroke-linecap="round"/>
+  <line x1="285" y1="120" x2="305" y2="120" stroke="#3584e4" stroke-width="3" stroke-linecap="round"/>
+  <line x1="285" y1="140" x2="305" y2="140" stroke="#3584e4" stroke-width="3" stroke-linecap="round"/>
+  <line x1="285" y1="160" x2="305" y2="160" stroke="#3584e4" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="295" cy="380" r="8" fill="#2ec27e"/>
+
+  <!-- Glass Chamber Interior -->
+  <rect x="330" y="85" width="195" height="330" rx="8" fill="#121214" stroke="#2e2e34" stroke-width="2"/>
+  <rect x="330" y="85" width="195" height="330" rx="8" fill="url(#glass)"/>
+
+  <!-- Motherboard & RGB Fans -->
+  <circle cx="425" cy="150" r="42" stroke="url(#rgb1)" stroke-width="6" fill="#18181b"/>
+  <circle cx="425" cy="150" r="16" fill="#3584e4" fill-opacity="0.6"/>
+  <circle cx="425" cy="255" r="42" stroke="url(#rgb1)" stroke-width="6" fill="#18181b"/>
+  <circle cx="425" cy="255" r="16" fill="#a855f7" fill-opacity="0.6"/>
+
+  <!-- Graphics Card (GPU) with RGB Strip -->
+  <rect x="345" y="315" width="165" height="42" rx="6" fill="#27272a" stroke="#3f3f46" stroke-width="2"/>
+  <rect x="355" y="325" width="145" height="6" rx="3" fill="url(#rgb1)"/>
+  <text x="360" y="347" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#71717a">RTX 4070 Ti SUPER</text>
+
+  <!-- RAM Sticks with RGB -->
+  <rect x="475" y="120" width="8" height="48" rx="2" fill="url(#rgb1)"/>
+  <rect x="488" y="120" width="8" height="48" rx="2" fill="url(#rgb1)"/>
+
+  <!-- Bottom Badges / Spec Pills -->
+  <rect x="140" y="445" width="160" height="32" rx="16" fill="#242428" stroke="#383838"/>
+  <text x="220" y="465" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#a1a1aa" text-anchor="middle">Ryzen 7 7800X3D</text>
+
+  <rect x="320" y="445" width="160" height="32" rx="16" fill="#242428" stroke="#383838"/>
+  <text x="400" y="465" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#3584e4" text-anchor="middle">32GB DDR5 6000MHz</text>
+
+  <rect x="500" y="445" width="160" height="32" rx="16" fill="#242428" stroke="#383838"/>
+  <text x="580" y="465" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#2ec27e" text-anchor="middle">Garansi Toko & Resmi</text>
+</svg>

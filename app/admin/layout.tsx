@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard,
   Settings,
-  Briefcase,
-  FolderKanban,
+  Wrench,
+  ShoppingBag,
   FileText,
   Users,
   MessageSquareQuote,
@@ -16,7 +16,7 @@ import {
   LogOut,
   Menu,
   X,
-  Sparkles,
+  Monitor,
   Shield,
 } from 'lucide-react';
 import { adminLogout } from '@/lib/actions';
@@ -28,13 +28,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const navItems = [
     { href: '/admin', label: 'Ringkasan Dashboard', icon: LayoutDashboard },
-    { href: '/admin/settings', label: 'Pengaturan Perusahaan', icon: Settings },
-    { href: '/admin/services', label: 'Kelola Layanan', icon: Briefcase },
-    { href: '/admin/portfolio', label: 'Kelola Portofolio', icon: FolderKanban },
-    { href: '/admin/blog', label: 'Kelola Blog & Artikel', icon: FileText },
-    { href: '/admin/team', label: 'Kelola Anggota Tim', icon: Users },
-    { href: '/admin/testimonials', label: 'Kelola Testimoni', icon: MessageSquareQuote },
-    { href: '/admin/inquiries', label: 'Kotak Masuk Pesan', icon: Mail },
+    { href: '/admin/settings', label: 'Pengaturan Toko', icon: Settings },
+    { href: '/admin/services', label: 'Kelola Layanan Servis', icon: Wrench },
+    { href: '/admin/portfolio', label: 'Kelola Katalog Produk', icon: ShoppingBag },
+    { href: '/admin/blog', label: 'Kelola Blog & Tips Hardware', icon: FileText },
+    { href: '/admin/team', label: 'Kelola Teknisi & Tim', icon: Users },
+    { href: '/admin/testimonials', label: 'Kelola Ulasan Pelanggan', icon: MessageSquareQuote },
+    { href: '/admin/inquiries', label: 'Pesan & Konsultasi', icon: Mail },
   ];
 
   return (
@@ -44,14 +44,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Adwaita Headerbar Segment */}
         <div className="flex h-14 items-center gap-2.5 border-b border-[#383838] px-5 bg-[#242424]">
           <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#3584e4] text-white shadow-sm">
-            <Sparkles className="h-4 w-4" />
+            <Monitor className="h-4 w-4" />
           </div>
           <div className="flex flex-col">
             <span className="text-xs font-bold tracking-tight text-white">
-              CMS Admin
+              CyberTech CMS
             </span>
             <span className="text-[10px] font-medium text-[#9a9996]">
-              GNOME Adwaita Shell
+              Toko Komputer Admin
             </span>
           </div>
         </div>

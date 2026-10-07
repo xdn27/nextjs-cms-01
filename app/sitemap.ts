@@ -4,7 +4,7 @@ import { getServices, getProjects, getPosts } from '@/lib/data';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
 
-  const [services, projects, posts] = await Promise.all([
+  const [services, products, posts] = await Promise.all([
     getServices(),
     getProjects(),
     getPosts(),
@@ -18,22 +18,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
       url: `${baseUrl}/services`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/portfolio`,
+      url: `${baseUrl}/katalog`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.8,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/blog`,
@@ -56,11 +50,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const projectRoutes: MetadataRoute.Sitemap = projects.map((p) => ({
-    url: `${baseUrl}/portfolio/${p.slug}`,
+  const productRoutes: MetadataRoute.Sitemap = products.map((p) => ({
+    url: `${baseUrl}/katalog/${p.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
-    priority: 0.7,
+    priority: 0.8,
   }));
 
   const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
@@ -70,5 +64,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...postRoutes];
+  return [...staticRoutes, ...serviceRoutes, ...productRoutes, ...postRoutes];
 }

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#18181b"/>
+  <circle cx="400" cy="240" r="230" fill="#e01b24" fill-opacity="0.12" filter="blur(40px)"/>
+
+  <!-- Temperature Meter / Heat Sink -->
+  <!-- Heatsink Fin Array -->
+  <g fill="#27272a" stroke="#383838" stroke-width="2">
+    <rect x="240" y="120" width="20" height="150" rx="3"/>
+    <rect x="270" y="120" width="20" height="150" rx="3"/>
+    <rect x="300" y="120" width="20" height="150" rx="3"/>
+    <rect x="330" y="120" width="20" height="150" rx="3"/>
+    <rect x="360" y="120" width="20" height="150" rx="3"/>
+    <rect x="390" y="120" width="20" height="150" rx="3"/>
+    <rect x="420" y="120" width="20" height="150" rx="3"/>
+    <rect x="450" y="120" width="20" height="150" rx="3"/>
+    <rect x="480" y="120" width="20" height="150" rx="3"/>
+    <rect x="510" y="120" width="20" height="150" rx="3"/>
+    <rect x="540" y="120" width="20" height="150" rx="3"/>
+  </g>
+
+  <!-- Copper Base Plate -->
+  <rect x="220" y="270" width="360" height="18" rx="4" fill="#d97706" stroke="#b45309" stroke-width="2"/>
+
+  <!-- Thermal Paste Layer (Blue Arctic / Grey) -->
+  <rect x="250" y="292" width="300" height="8" rx="4" fill="#3584e4"/>
+
+  <!-- CPU Die / Heat Spreader -->
+  <rect x="220" y="304" width="360" height="24" rx="4" fill="#202024" stroke="#383838" stroke-width="2"/>
+  <text x="400" y="321" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#2ec27e" text-anchor="middle">SUHU DINGIN (TURUN HINGGA 25°C)</text>
+
+  <!-- Syringe / Paste Tube on Right -->
+  <path d="M560 250 L630 180 L650 200 L580 270 Z" fill="#3584e4" stroke="#1c71d8" stroke-width="2"/>
+  <line x1="560" y1="250" x2="540" y2="270" stroke="#a1a1aa" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Title Bottom -->
+  <text x="400" y="420" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">Kapan Waktunya Ganti Thermal Paste Laptop &amp; PC?</text>
+  <text x="400" y="445" font-family="system-ui, sans-serif" font-size="13" fill="#a1a1aa" text-anchor="middle">Cegah Kerusakan Chipset dan Kipas Bising Akibat Keringnya Thermal Paste</text>
+</svg>

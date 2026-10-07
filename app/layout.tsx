@@ -16,12 +16,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: {
-    template: '%s | Nusantara Tech Innovasi',
-    default: 'Nusantara Tech Innovasi | Mitra Transformasi Digital & Solusi Enterprise',
+    template: '%s | CyberTech Computer & Gaming',
+    default: 'CyberTech Computer | Pusat Rakit PC Gaming, Laptop & Servis Komputer',
   },
   description:
-    'Solusi rekayasa perangkat lunak modern, aplikasi web & mobile skala enterprise, arsitektur cloud serverless, dan kecerdasan buatan terapan.',
-  keywords: ['software house', 'next.js', 'supabase', 'serverless', 'enterprise solution', 'indonesia'],
+    'Pusat rakit PC gaming & workstation custom, laptop garansi resmi, upgrade RAM & SSD NVMe super cepat, serta service komputer profesional dengan sparepart original.',
+  keywords: ['toko komputer', 'rakit pc gaming', 'service laptop', 'upgrade ssd ram', 'harco mangga dua', 'pc workstation', 'komputer jakarta'],
 };
 
 export default function RootLayout({

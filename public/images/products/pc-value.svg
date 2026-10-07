@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#18181b"/>
+  <circle cx="400" cy="250" r="220" fill="#2ec27e" fill-opacity="0.12" filter="blur(40px)"/>
+  <defs>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2ec27e"/>
+      <stop offset="100%" stop-color="#3584e4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- PC Case Outer Chassis -->
+  <rect x="270" y="75" width="260" height="350" rx="14" fill="#222226" stroke="#383838" stroke-width="4"/>
+  <!-- Front Panel -->
+  <rect x="285" y="90" width="35" height="320" rx="6" fill="#141416"/>
+  <circle cx="302" cy="115" r="5" fill="#2ec27e"/>
+  <rect x="295" y="140" width="15" height="4" rx="2" fill="#383838"/>
+  <rect x="295" y="152" width="15" height="4" rx="2" fill="#383838"/>
+
+  <!-- Glass Chamber Interior -->
+  <rect x="330" y="90" width="185" height="320" rx="6" fill="#121214" stroke="#2e2e34" stroke-width="2"/>
+  
+  <!-- Air Cooler Tower with Fan -->
+  <rect x="380" y="130" width="80" height="75" rx="6" fill="#27272a" stroke="#3f3f46" stroke-width="2"/>
+  <circle cx="420" cy="167" r="28" stroke="url(#tealGrad)" stroke-width="5" fill="#18181b"/>
+
+  <!-- GPU RX 6600 -->
+  <rect x="345" y="270" width="155" height="44" rx="6" fill="#27272a" stroke="#3f3f46" stroke-width="2"/>
+  <circle cx="380" cy="292" r="14" stroke="#e01b24" stroke-width="3" fill="#18181b"/>
+  <circle cx="430" cy="292" r="14" stroke="#e01b24" stroke-width="3" fill="#18181b"/>
+  <text x="355" y="285" font-family="system-ui, sans-serif" font-size="9" font-weight="bold" fill="#a1a1aa">RADEON RX 6600</text>
+
+  <!-- RAM Sticks -->
+  <rect x="470" y="135" width="6" height="40" rx="2" fill="#2ec27e"/>
+  <rect x="480" y="135" width="6" height="40" rx="2" fill="#2ec27e"/>
+
+  <!-- Spec Pills -->
+  <rect x="150" y="445" width="150" height="32" rx="16" fill="#242428" stroke="#383838"/>
+  <text x="225" y="465" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#2ec27e" text-anchor="middle">Ryzen 5 5600</text>
+
+  <rect x="320" y="445" width="160" height="32" rx="16" fill="#242428" stroke="#383838"/>
+  <text x="400" y="465" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#a1a1aa" text-anchor="middle">16GB DDR4 Dual</text>
+
+  <rect x="500" y="445" width="150" height="32" rx="16" fill="#242428" stroke="#383838"/>
+  <text x="575" y="465" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#3584e4" text-anchor="middle">512GB NVMe SSD</text>
+</svg>

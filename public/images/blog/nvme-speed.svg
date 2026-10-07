@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#18181b"/>
+  <circle cx="400" cy="240" r="230" fill="#2ec27e" fill-opacity="0.12" filter="blur(40px)"/>
+
+  <!-- SSD Stick PCB -->
+  <rect x="200" y="160" width="400" height="120" rx="10" fill="#15803d" stroke="#166534" stroke-width="3"/>
+  <!-- Gold Pins (M.2 Key M) -->
+  <rect x="180" y="185" width="20" height="70" rx="3" fill="#eab308"/>
+  <line x1="180" y1="220" x2="200" y2="220" stroke="#15803d" stroke-width="4"/>
+
+  <!-- NAND Flash Chips on PCB -->
+  <rect x="230" y="180" width="75" height="80" rx="4" fill="#18181b" stroke="#27272a" stroke-width="2"/>
+  <text x="267" y="225" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#71717a" text-anchor="middle">NAND 3D</text>
+
+  <rect x="325" y="180" width="75" height="80" rx="4" fill="#18181b" stroke="#27272a" stroke-width="2"/>
+  <text x="362" y="225" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#71717a" text-anchor="middle">NAND 3D</text>
+
+  <!-- Controller Chip -->
+  <rect x="425" y="190" width="60" height="60" rx="4" fill="#27272a" stroke="#3f3f46" stroke-width="2"/>
+  <text x="455" y="225" font-family="system-ui, sans-serif" font-size="9" font-weight="bold" fill="#3584e4" text-anchor="middle">Gen4x4</text>
+
+  <!-- Speed Bars Comparison -->
+  <g transform="translate(180, 310)">
+    <!-- SATA -->
+    <rect x="0" y="0" width="80" height="16" rx="4" fill="#52525b"/>
+    <text x="90" y="13" font-family="system-ui, sans-serif" font-size="11" fill="#a1a1aa">SATA 3 (550 MB/s)</text>
+
+    <!-- Gen3 -->
+    <rect x="0" y="24" width="220" height="16" rx="4" fill="#3584e4"/>
+    <text x="230" y="37" font-family="system-ui, sans-serif" font-size="11" fill="#3584e4">NVMe Gen3 (3,500 MB/s)</text>
+
+    <!-- Gen4 -->
+    <rect x="0" y="48" width="440" height="16" rx="4" fill="#2ec27e"/>
+    <text x="320" y="61" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2ec27e">NVMe Gen4 (7,400 MB/s) - Kencang &amp; Stabil!</text>
+  </g>
+
+  <!-- Title Bottom -->
+  <text x="400" y="430" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">Perbandingan SSD SATA, Gen3, Gen4 &amp; Gen5</text>
+  <text x="400" y="455" font-family="system-ui, sans-serif" font-size="13" fill="#a1a1aa" text-anchor="middle">Pilih SSD yang Tepat Sesuai Kebutuhan Gaming dan Budget Anda</text>
+</svg>

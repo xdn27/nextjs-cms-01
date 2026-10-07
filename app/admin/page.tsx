@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import {
-  Briefcase,
-  FolderKanban,
+  Wrench,
+  ShoppingBag,
   FileText,
   Mail,
   ArrowRight,
@@ -20,7 +20,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Badge } from '@/components/ui/badge';
 
 export default async function AdminDashboardPage() {
-  const [settings, services, projects, posts, inquiries] = await Promise.all([
+  const [settings, services, products, posts, inquiries] = await Promise.all([
     getCompanySettings(),
     getServices(),
     getProjects(),
@@ -33,33 +33,33 @@ export default async function AdminDashboardPage() {
 
   const stats = [
     {
-      title: 'Total Layanan',
+      title: 'Layanan Servis',
       count: services.length,
       href: '/admin/services',
-      icon: Briefcase,
-      color: 'text-blue-600 bg-blue-500/10 border-blue-500/20',
+      icon: Wrench,
+      color: 'text-blue-500 bg-blue-500/10 border-blue-500/20',
     },
     {
-      title: 'Proyek Portofolio',
-      count: projects.length,
+      title: 'Katalog Produk',
+      count: products.length,
       href: '/admin/portfolio',
-      icon: FolderKanban,
-      color: 'text-violet-600 bg-violet-500/10 border-violet-500/20',
+      icon: ShoppingBag,
+      color: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
     },
     {
-      title: 'Artikel Blog',
+      title: 'Tips & Blog',
       count: posts.length,
       href: '/admin/blog',
       icon: FileText,
-      color: 'text-emerald-600 bg-emerald-500/10 border-emerald-500/20',
+      color: 'text-violet-500 bg-violet-500/10 border-violet-500/20',
     },
     {
-      title: 'Pesan Masuk',
+      title: 'Pesan & Konsultasi',
       count: inquiries.length,
       subtext: `${unreadInquiries.length} belum dibaca`,
       href: '/admin/inquiries',
       icon: Mail,
-      color: 'text-amber-600 bg-amber-500/10 border-amber-500/20',
+      color: 'text-amber-500 bg-amber-500/10 border-amber-500/20',
     },
   ];
 
@@ -69,10 +69,10 @@ export default async function AdminDashboardPage() {
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-extrabold tracking-tight text-foreground">
-            Selamat Datang di Panel CMS
+            Panel CMS {settings.company_name}
           </h1>
           <p className="text-xs text-muted-foreground">
-            Kelola seluruh konten website <strong className="text-foreground">{settings.company_name}</strong> secara langsung.
+            Kelola katalog produk, paket rakitan PC, layanan servis, dan konsultasi pelanggan secara langsung.
           </p>
         </div>
 

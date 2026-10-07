@@ -44,10 +44,10 @@ export function ContactForm() {
     <Card className="shadow-sm border-border bg-card">
       <CardHeader className="p-8 pb-4">
         <CardTitle className="text-xl font-bold">
-          Kirimkan Pesan atau Rencana Proyek
+          Formulir Konsultasi &amp; Booking Servis
         </CardTitle>
         <CardDescription className="text-sm">
-          Isi formulir di bawah ini. Tim konsultan kami akan menghubungi Anda dalam waktu 1x24 jam kerja.
+          Isi formulir di bawah ini. Tim teknisi dan admin kami akan membalas via WhatsApp atau Email dalam hitungan jam.
         </CardDescription>
       </CardHeader>
 
@@ -87,61 +87,62 @@ export function ContactForm() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">
               <Label htmlFor="email">
-                Email Bisnis <span className="text-destructive">*</span>
+                Alamat Email <span className="text-destructive">*</span>
               </Label>
               <Input
                 type="email"
                 id="email"
                 name="email"
                 required
-                placeholder="pratama@perusahaan.com"
+                placeholder="pratama@gmail.com"
                 className="h-11"
               />
             </div>
 
             <div className="space-y-1.5">
               <Label htmlFor="phone">
-                No. Telepon / WhatsApp
+                No. WhatsApp Aktif <span className="text-destructive">*</span>
               </Label>
               <Input
                 type="tel"
                 id="phone"
                 name="phone"
-                placeholder="+62 812 3456 7890"
+                placeholder="081234567890"
                 className="h-11"
               />
             </div>
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="subject">Topik Kebutuhan</Label>
+            <Label htmlFor="subject">Topik Konsultasi / Layanan</Label>
             <div className="relative">
               <select
                 id="subject"
                 name="subject"
-                defaultValue="Pengembangan Web & SaaS"
+                defaultValue="Konsultasi Rakit PC Gaming Custom"
                 className="flex h-11 w-full rounded-xl border border-input bg-background px-3.5 py-2 text-sm text-foreground shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
               >
-                <option value="Pengembangan Web & SaaS">Pengembangan Web & SaaS Enterprise</option>
-                <option value="Aplikasi Mobile iOS & Android">Aplikasi Mobile iOS & Android</option>
-                <option value="Cloud Architecture & DevOps">Cloud Architecture & DevOps</option>
-                <option value="AI & Solusi Kecerdasan Buatan">AI & Solusi Kecerdasan Buatan</option>
-                <option value="Desain UI/UX Produk">Desain UI/UX Produk</option>
-                <option value="Konsultasi Umum Lainnya">Konsultasi Umum Lainnya</option>
+                <option value="Konsultasi Rakit PC Gaming Custom">Konsultasi Rakit PC Gaming Custom</option>
+                <option value="Servis Laptop / Perbaikan PC Mati">Servis Laptop / Perbaikan PC Mati</option>
+                <option value="Deep Cleaning & Ganti Thermal Paste">Deep Cleaning &amp; Ganti Thermal Paste</option>
+                <option value="Upgrade RAM & SSD NVMe">Upgrade RAM &amp; SSD NVMe</option>
+                <option value="Instalasi Windows & Software">Instalasi Windows &amp; Software</option>
+                <option value="Pengadaan Komputer Kantor / Sekolah">Pengadaan Komputer Kantor / Sekolah</option>
+                <option value="Tanya Stok Produk / Lainnya">Tanya Stok Produk / Lainnya</option>
               </select>
             </div>
           </div>
 
           <div className="space-y-1.5">
             <Label htmlFor="message">
-              Deskripsi Kebutuhan / Pesan <span className="text-destructive">*</span>
+              Rincian Kebutuhan / Gejala Kerusakan <span className="text-destructive">*</span>
             </Label>
             <Textarea
               id="message"
               name="message"
               rows={4}
               required
-              placeholder="Jelaskan gambaran proyek, target waktu, atau kebutuhan sistem yang ingin Anda diskusikan..."
+              placeholder="Contoh: Mau rakit PC gaming budget 12 juta untuk main Valorant dan streaming, atau Laptop ASUS ROG tiba-tiba mati total tidak bisa dicas..."
             />
           </div>
 

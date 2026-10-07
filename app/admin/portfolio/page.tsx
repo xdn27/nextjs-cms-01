@@ -40,8 +40,8 @@ export default function AdminPortfolioPage() {
     setEditingProject({
       title: '',
       slug: '',
-      category: 'Web Development',
-      client_name: '',
+      category: 'PC Gaming & Streaming',
+      client_name: 'Rp 0',
       summary: '',
       description: '',
       cover_image: '',
@@ -60,11 +60,11 @@ export default function AdminPortfolioPage() {
   }
 
   async function handleDelete(id: string) {
-    if (!confirm('Hapus proyek ini dari portofolio?')) return;
+    if (!confirm('Apakah Anda yakin ingin menghapus produk ini dari katalog?')) return;
     setLoading(true);
     await deleteProjectAction(id);
     setProjects((prev) => prev.filter((p) => p.id !== id));
-    toast.success('Proyek berhasil dihapus');
+    toast.success('Produk berhasil dihapus dari katalog');
     setLoading(false);
   }
 
@@ -106,18 +106,18 @@ export default function AdminPortfolioPage() {
         setProjects((prev) =>
           prev.map((p) => (p.id === editingProject.id ? ({ ...p, ...updatedData } as Project) : p))
         );
-        toast.success('Proyek portofolio berhasil diperbarui');
+        toast.success('Produk katalog berhasil diperbarui');
       } else {
         const newProject: Project = {
           ...(updatedData as Project),
-          id: `p-${Date.now()}`,
+          id: `prod-${Date.now()}`,
         };
         setProjects((prev) => [...prev, newProject]);
-        toast.success('Proyek portofolio berhasil ditambahkan');
+        toast.success('Produk baru berhasil ditambahkan ke katalog');
       }
       setIsModalOpen(false);
     } else {
-      toast.error(res.error || 'Gagal menyimpan proyek.');
+      toast.error(res.error || 'Gagal menyimpan produk.');
     }
 
     setLoading(false);
@@ -128,29 +128,29 @@ export default function AdminPortfolioPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-extrabold tracking-tight text-foreground">
-            Kelola Portofolio & Proyek
+            Kelola Katalog Produk &amp; Komputer
           </h1>
           <p className="text-xs text-muted-foreground">
-            Daftar karya dan studi kasus yang ditampilkan di galeri portofolio.
+            Daftar paket rakitan PC, laptop gaming/office, dan aksesoris yang ditampilkan di katalog website.
           </p>
         </div>
 
-        <Button onClick={handleOpenCreate} size="sm">
+        <Button onClick={handleOpenCreate} size="sm" className="bg-[#3584e4] hover:bg-[#1c71d8] text-white">
           <Plus className="h-4 w-4 mr-1.5" />
-          <span>Tambah Proyek Baru</span>
+          <span>Tambah Produk Baru</span>
         </Button>
       </div>
 
-      {/* Projects Table */}
+      {/* Projects / Products Table */}
       <Card className="overflow-hidden shadow-sm">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead className="w-16">Urutan</TableHead>
-              <TableHead>Foto & Judul Proyek</TableHead>
+              <TableHead>Foto &amp; Nama Produk</TableHead>
               <TableHead>Kategori</TableHead>
-              <TableHead>Klien</TableHead>
-              <TableHead>Unggulan</TableHead>
+              <TableHead>Harga / Info Garansi</TableHead>
+              <TableHead>Best Seller</TableHead>
               <TableHead className="text-right">Aksi</TableHead>
             </TableRow>
           </TableHeader>
@@ -163,7 +163,7 @@ export default function AdminPortfolioPage() {
                 <TableCell>
                   <div className="flex items-center gap-3">
                     {item.cover_image ? (
-                      <div className="relative h-12 w-16 overflow-hidden rounded-lg border border-border shrink-0">
+                      <div className="relative h-12 w-16 overflow-hidden rounded-lg border border-border shrink-0 bg-muted">
                         <Image src={item.cover_image} alt={item.title} fill className="object-cover" />
                       </div>
                     ) : (
@@ -186,17 +186,17 @@ export default function AdminPortfolioPage() {
                     {item.category}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-muted-foreground">
+                <TableCell className="font-semibold text-xs text-[#3584e4]">
                   {item.client_name || '-'}
                 </TableCell>
                 <TableCell>
                   {item.is_featured ? (
-                    <span className="inline-flex items-center gap-1 text-amber-600 font-semibold text-[11px]">
+                    <span className="inline-flex items-center gap-1 text-amber-500 font-semibold text-[11px]">
                       <Star className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
                       <span>Ya</span>
                     </span>
                   ) : (
-                    <span className="text-muted-foreground">Tidak</span>
+                    <span className="text-muted-foreground text-xs">Tidak</span>
                   )}
                 </TableCell>
                 <TableCell className="text-right">
@@ -205,7 +205,7 @@ export default function AdminPortfolioPage() {
                       variant="ghost"
                       size="icon"
                       onClick={() => handleOpenEdit(item)}
-                      title="Edit Proyek"
+                      title="Edit Produk"
                     >
                       <Edit2 className="h-4 w-4" />
                     </Button>
@@ -214,7 +214,7 @@ export default function AdminPortfolioPage() {
                       size="icon"
                       onClick={() => handleDelete(item.id)}
                       className="text-destructive hover:text-destructive hover:bg-destructive/10"
-                      title="Hapus Proyek"
+                      title="Hapus Produk"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -232,86 +232,86 @@ export default function AdminPortfolioPage() {
           <DialogContent className="max-w-xl">
             <DialogHeader>
               <DialogTitle>
-                {editingProject.id ? 'Edit Proyek' : 'Tambah Proyek Baru'}
+                {editingProject.id ? 'Edit Produk Katalog' : 'Tambah Produk Baru'}
               </DialogTitle>
             </DialogHeader>
 
             <form onSubmit={handleSave} className="space-y-4 pt-2">
               <div className="space-y-1.5">
-                <Label htmlFor="title">Judul Proyek</Label>
+                <Label htmlFor="title">Nama Produk / Paket PC</Label>
                 <Input
                   id="title"
                   type="text"
                   name="title"
                   required
                   defaultValue={editingProject.title}
-                  placeholder="Contoh: Platform Analitik FinTech"
+                  placeholder="Contoh: PC Gaming Rig Ryzen 7 7800X3D + RTX 4070 Ti"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <Label htmlFor="category">Kategori</Label>
+                  <Label htmlFor="category">Kategori Produk</Label>
                   <Input
                     id="category"
                     type="text"
                     name="category"
-                    defaultValue={editingProject.category || 'Web Development'}
-                    placeholder="Web Development / Mobile App"
+                    defaultValue={editingProject.category || 'PC Gaming & Streaming'}
+                    placeholder="PC Gaming / Laptop / Workstation"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="client_name">Nama Klien</Label>
+                  <Label htmlFor="client_name">Harga &amp; Info Garansi</Label>
                   <Input
                     id="client_name"
                     type="text"
                     name="client_name"
                     defaultValue={editingProject.client_name || ''}
-                    placeholder="Contoh: FinTech Nusantara"
+                    placeholder="Contoh: Rp 28.500.000 (Garansi 3 Thn)"
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="summary">Ringkasan Singkat (Summary)</Label>
+                <Label htmlFor="summary">Ringkasan Spesifikasi Utama</Label>
                 <Textarea
                   id="summary"
                   name="summary"
                   rows={2}
                   required
                   defaultValue={editingProject.summary}
-                  placeholder="Ringkasan 1-2 kalimat untuk preview kartu portofolio..."
+                  placeholder="Ringkasan 1-2 kalimat untuk preview kartu produk..."
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="description">Deskripsi Studi Kasus Lengkap</Label>
+                <Label htmlFor="description">Rincian Spesifikasi Lengkap</Label>
                 <Textarea
                   id="description"
                   name="description"
                   rows={3}
                   defaultValue={editingProject.description || ''}
-                  placeholder="Penjelasan tantangan, arsitektur, dan solusi yang diimplementasikan..."
+                  placeholder="Prosesor, GPU, RAM, Storage, Motherboard, Power Supply, Casing..."
                 />
               </div>
 
               {/* Cover Image Upload */}
               <MediaUploader
-                label="Foto Sampul Proyek"
+                label="Foto / Ilustrasi Produk"
                 value={coverImageUrl}
                 onChange={(url) => setCoverImageUrl(url)}
-                helperText="Upload gambar beresolusi minimal 1200x800px untuk hasil tajam."
+                helperText="Upload gambar produk atau masukkan URL SVG/PNG."
               />
 
               <div className="grid grid-cols-2 gap-3 items-center">
                 <div className="space-y-1.5">
-                  <Label htmlFor="project_url">URL Demo Proyek (Opsional)</Label>
+                  <Label htmlFor="project_url">Link Pemesanan WhatsApp / Toko</Label>
                   <Input
                     id="project_url"
                     type="url"
                     name="project_url"
                     defaultValue={editingProject.project_url || ''}
-                    placeholder="https://..."
+                    placeholder="https://wa.me/..."
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -334,7 +334,7 @@ export default function AdminPortfolioPage() {
                   className="h-4 w-4 rounded border-input text-primary focus:ring-ring cursor-pointer"
                 />
                 <label htmlFor="is_featured" className="text-xs font-medium text-foreground cursor-pointer">
-                  Tampilkan di Beranda sebagai Proyek Unggulan
+                  Tampilkan di Beranda sebagai Produk Pilihan (Best Seller)
                 </label>
               </div>
 
@@ -346,9 +346,9 @@ export default function AdminPortfolioPage() {
                 >
                   Batal
                 </Button>
-                <Button type="submit" disabled={loading}>
+                <Button type="submit" disabled={loading} className="bg-[#3584e4] hover:bg-[#1c71d8] text-white">
                   {loading && <Loader2 className="h-4 w-4 animate-spin mr-1.5" />}
-                  <span>Simpan Proyek</span>
+                  <span>Simpan Produk</span>
                 </Button>
               </div>
             </form>

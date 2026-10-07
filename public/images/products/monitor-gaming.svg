@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#18181b"/>
+  <circle cx="400" cy="220" r="230" fill="#3584e4" fill-opacity="0.14" filter="blur(40px)"/>
+
+  <!-- Gaming Monitor Bezel-less Screen -->
+  <rect x="140" y="60" width="520" height="290" rx="8" fill="#111113" stroke="#383838" stroke-width="3"/>
+  <rect x="146" y="66" width="508" height="278" rx="4" fill="#0c0c0e"/>
+
+  <!-- Wallpaper visual on monitor -->
+  <path d="M146 260 L280 180 L380 230 L520 140 L654 220 L654 344 L146 344 Z" fill="#1e1e24" opacity="0.6"/>
+  <circle cx="340" cy="140" r="30" fill="#3584e4" fill-opacity="0.3"/>
+  <!-- Gaming HUD overlay -->
+  <rect x="170" y="90" width="80" height="24" rx="4" fill="#1e1e24" stroke="#3584e4" stroke-width="1"/>
+  <text x="210" y="106" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2ec27e" text-anchor="middle">180 FPS</text>
+  <rect x="550" y="90" width="70" height="24" rx="4" fill="#1e1e24" stroke="#3584e4" stroke-width="1"/>
+  <text x="585" y="106" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#3584e4" text-anchor="middle">1ms GtG</text>
+
+  <!-- Monitor Stand (V-Shape Gaming Base) -->
+  <polygon points="385,350 415,350 410,400 390,400" fill="#242428" stroke="#383838" stroke-width="2"/>
+  <polygon points="260,425 400,395 540,425 520,432 400,405 280,432" fill="#27272c" stroke="#3f3f46" stroke-width="2"/>
+  <circle cx="400" cy="400" r="6" fill="#e01b24"/>
+
+  <!-- Spec Pills -->
+  <rect x="150" y="445" width="150" height="32" rx="16" fill="#242428" stroke="#383838"/>
+  <text x="225" y="465" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#3584e4" text-anchor="middle">27" Fast IPS 2K QHD</text>
+
+  <rect x="320" y="445" width="160" height="32" rx="16" fill="#242428" stroke="#383838"/>
+  <text x="400" y="465" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#2ec27e" text-anchor="middle">180Hz Refresh Rate</text>
+
+  <rect x="500" y="445" width="150" height="32" rx="16" fill="#242428" stroke="#383838"/>
+  <text x="575" y="465" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#a1a1aa" text-anchor="middle">G-Sync & FreeSync</text>
+</svg>

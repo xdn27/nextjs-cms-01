@@ -16,13 +16,13 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <span className="text-xs font-semibold tracking-wider text-primary uppercase">
-            Kepercayaan Klien
+            Ulasan &amp; Kepuasan Pelanggan
           </span>
           <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
-            Apa Kata Para Pemimpin Bisnis
+            Apa Kata Pembeli &amp; Klien Servis Kami
           </h2>
           <p className="mt-3 max-w-2xl mx-auto text-base text-muted-foreground">
-            Dengar langsung testimoni dari mitra bisnis dan pimpinan korporasi yang telah merasakan dampak solusi digital kami.
+            Ulasan nyata dari gamer, editor video, dan pelaku usaha yang telah merakit PC atau servis di CyberTech Computer.
           </p>
         </div>
 
