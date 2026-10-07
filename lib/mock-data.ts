@@ -1,4 +1,4 @@
-import { CompanySettings, Service, Project, Post, TeamMember, Testimonial, Inquiry } from './types';
+import { CompanySettings, Service, Project, Post, TeamMember, Testimonial, Inquiry, HeroSlide } from './types';
 
 export const initialSettings: CompanySettings = {
   id: 1,
@@ -345,5 +345,71 @@ export const initialInquiries: Inquiry[] = [
     message: 'Selamat siang, laptop kantor saya merk Lenovo ThinkPad tiba-tiba tidak mau menyala sama sekali setelah kena lonjakan listrik. Di dalamnya ada data penting pasien, apakah bisa dicek dan dibackup datanya hari ini?',
     status: 'read',
     created_at: '2026-10-04T14:10:00Z',
+  },
+];
+
+export const initialHeroSlides: HeroSlide[] = [
+  {
+    id: 'slide-1',
+    title: 'Rakit PC Gaming & Workstation Bebas Bottleneck',
+    subtitle:
+      'Konsultasi racikan spesifikasi gratis sesuai alokasi dana, perakitan kabel rapi, dan uji kestabilan stress test 24 jam dengan 100% komponen resmi.',
+    badge_text: 'Spesialis Rakit PC Gaming & Workstation',
+    badge_color: 'border-[#3584e4]/30 bg-[#3584e4]/10 text-[#3584e4]',
+    badge_icon: 'Cpu',
+    image_url: '/images/hero/slide-1-gaming-pc.svg',
+    primary_cta_text: 'Lihat Katalog Produk',
+    primary_cta_link: '/katalog',
+    secondary_cta_text: 'Hubungi Kontak Toko',
+    secondary_cta_link: '/contact',
+    highlights: [
+      { text: 'Racikan Bebas Bottleneck', icon: 'Zap', iconColor: 'text-amber-500' },
+      { text: '100% Komponen Baru & Resmi', icon: 'ShieldCheck', iconColor: 'text-[#2ec27e]' },
+      { text: 'Stress Test & Uji Beban 24 Jam', icon: 'Cpu', iconColor: 'text-[#3584e4]' },
+    ],
+    display_order: 1,
+    is_active: true,
+  },
+  {
+    id: 'slide-2',
+    title: 'Service Komputer & Laptop Profesional Bergaransi',
+    subtitle:
+      'Solusi tuntas laptop lambat dan overheat. Upgrade SSD NVMe & RAM instan, penggantian pasta termal berkualitas tinggi, serta perbaikan motherboard terpercaya.',
+    badge_text: 'Layanan Servis & Upgrade Kilat',
+    badge_color: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-500',
+    badge_icon: 'Wrench',
+    image_url: '/images/hero/slide-2-service-workshop.svg',
+    primary_cta_text: 'Lihat Layanan Servis',
+    primary_cta_link: '/services',
+    secondary_cta_text: 'Cek Alamat & Jadwal Toko',
+    secondary_cta_link: '/contact',
+    highlights: [
+      { text: 'Pengerjaan Cepat & Transparan', icon: 'Zap', iconColor: 'text-amber-500' },
+      { text: 'Garansi Servis Pasti', icon: 'ShieldCheck', iconColor: 'text-emerald-500' },
+      { text: 'Thermal Paste Premium', icon: 'Sparkles', iconColor: 'text-sky-400' },
+    ],
+    display_order: 2,
+    is_active: true,
+  },
+  {
+    id: 'slide-3',
+    title: 'Pusat Komponen Hardware & Aksesoris Gaming Terlengkap',
+    subtitle:
+      'Pilihan prosesor Intel & Ryzen terbaru, kartu grafis RTX/Radeon, monitor gaming high-refresh rate, dan periferal bergaransi distributor resmi Indonesia.',
+    badge_text: 'Katalog Komponen & Peripheral Resmi',
+    badge_color: 'border-purple-500/30 bg-purple-500/10 text-purple-400',
+    badge_icon: 'ShoppingBag',
+    image_url: '/images/hero/slide-3-hardware-catalog.svg',
+    primary_cta_text: 'Jelajahi Produk Pilihan',
+    primary_cta_link: '/katalog',
+    secondary_cta_text: 'Tanya Stok & Spesifikasi',
+    secondary_cta_link: '/contact',
+    highlights: [
+      { text: 'Garansi Distributor Resmi', icon: 'ShieldCheck', iconColor: 'text-purple-400' },
+      { text: 'Packing Kayu Aman Se-Nusantara', icon: 'Zap', iconColor: 'text-amber-500' },
+      { text: 'Harga Kompetitif & Real-Time', icon: 'Cpu', iconColor: 'text-[#3584e4]' },
+    ],
+    display_order: 3,
+    is_active: true,
   },
 ];

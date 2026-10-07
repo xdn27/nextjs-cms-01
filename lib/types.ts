@@ -98,3 +98,27 @@ export interface Inquiry {
   status: 'unread' | 'read' | 'replied';
   created_at?: string;
 }
+
+export interface HeroSlideHighlight {
+  text: string;
+  icon?: string;
+  iconColor?: string;
+}
+
+export interface HeroSlide {
+  id: string;
+  title: string;
+  subtitle: string;
+  badge_text: string;
+  badge_color?: string | null;
+  badge_icon?: string | null;
+  image_url: string;
+  primary_cta_text: string;
+  primary_cta_link: string;
+  secondary_cta_text: string;
+  secondary_cta_link: string;
+  highlights?: HeroSlideHighlight[] | string[] | null;
+  display_order: number;
+  is_active: boolean;
+  created_at?: string;
+}

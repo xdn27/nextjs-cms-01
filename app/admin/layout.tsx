@@ -18,6 +18,7 @@ import {
   X,
   Monitor,
   Shield,
+  Sliders,
 } from 'lucide-react';
 import { adminLogout } from '@/lib/actions';
 import { Button } from '@/components/ui/button';
@@ -28,6 +29,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const navItems = [
     { href: '/admin', label: 'Ringkasan Dashboard', icon: LayoutDashboard },
+    { href: '/admin/sliders', label: 'Kelola Slider Hero', icon: Sliders },
     { href: '/admin/settings', label: 'Pengaturan Toko', icon: Settings },
     { href: '/admin/services', label: 'Kelola Layanan Servis', icon: Wrench },
     { href: '/admin/portfolio', label: 'Kelola Katalog Produk', icon: ShoppingBag },

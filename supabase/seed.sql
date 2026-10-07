@@ -301,3 +301,66 @@ INSERT INTO public.inquiries (name, email, phone, subject, message, status, crea
     NOW() - INTERVAL '3 days'
 )
 ON CONFLICT DO NOTHING;
+
+-- 8. HERO SLIDES
+INSERT INTO public.hero_slides (
+    title,
+    subtitle,
+    badge_text,
+    badge_color,
+    badge_icon,
+    image_url,
+    primary_cta_text,
+    primary_cta_link,
+    secondary_cta_text,
+    secondary_cta_link,
+    highlights,
+    display_order,
+    is_active
+) VALUES
+(
+    'Rakit PC Gaming & Workstation Bebas Bottleneck',
+    'Konsultasi racikan spesifikasi gratis sesuai alokasi dana, perakitan kabel rapi, dan uji kestabilan stress test 24 jam dengan 100% komponen resmi.',
+    'Spesialis Rakit PC Gaming & Workstation',
+    'border-[#3584e4]/30 bg-[#3584e4]/10 text-[#3584e4]',
+    'Cpu',
+    '/images/hero/slide-1-gaming-pc.svg',
+    'Lihat Katalog Produk',
+    '/katalog',
+    'Hubungi Kontak Toko',
+    '/contact',
+    '[{"text":"Racikan Bebas Bottleneck","icon":"Zap","iconColor":"text-amber-500"},{"text":"100% Komponen Baru & Resmi","icon":"ShieldCheck","iconColor":"text-[#2ec27e]"},{"text":"Stress Test & Uji Beban 24 Jam","icon":"Cpu","iconColor":"text-[#3584e4]"}]'::jsonb,
+    1,
+    true
+),
+(
+    'Service Komputer & Laptop Profesional Bergaransi',
+    'Solusi tuntas laptop lambat dan overheat. Upgrade SSD NVMe & RAM instan, penggantian pasta termal berkualitas tinggi, serta perbaikan motherboard terpercaya.',
+    'Layanan Servis & Upgrade Kilat',
+    'border-emerald-500/30 bg-emerald-500/10 text-emerald-500',
+    'Wrench',
+    '/images/hero/slide-2-service-workshop.svg',
+    'Lihat Layanan Servis',
+    '/services',
+    'Cek Alamat & Jadwal Toko',
+    '/contact',
+    '[{"text":"Pengerjaan Cepat & Transparan","icon":"Zap","iconColor":"text-amber-500"},{"text":"Garansi Servis Pasti","icon":"ShieldCheck","iconColor":"text-emerald-500"},{"text":"Thermal Paste Premium","icon":"Sparkles","iconColor":"text-sky-400"}]'::jsonb,
+    2,
+    true
+),
+(
+    'Pusat Komponen Hardware & Aksesoris Gaming Terlengkap',
+    'Pilihan prosesor Intel & Ryzen terbaru, kartu grafis RTX/Radeon, monitor gaming high-refresh rate, dan periferal bergaransi distributor resmi Indonesia.',
+    'Katalog Komponen & Peripheral Resmi',
+    'border-purple-500/30 bg-purple-500/10 text-purple-400',
+    'ShoppingBag',
+    '/images/hero/slide-3-hardware-catalog.svg',
+    'Jelajahi Produk Pilihan',
+    '/katalog',
+    'Tanya Stok & Spesifikasi',
+    '/contact',
+    '[{"text":"Garansi Distributor Resmi","icon":"ShieldCheck","iconColor":"text-purple-400"},{"text":"Packing Kayu Aman Se-Nusantara","icon":"Zap","iconColor":"text-amber-500"},{"text":"Harga Kompetitif & Real-Time","icon":"Cpu","iconColor":"text-[#3584e4]"}]'::jsonb,
+    3,
+    true
+)
+ON CONFLICT DO NOTHING;

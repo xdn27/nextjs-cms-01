@@ -1,33 +1,29 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
   ArrowRight,
-  ShieldCheck,
-  Zap,
-  Cpu,
-  ShoppingBag,
   ChevronLeft,
   ChevronRight,
-  Wrench,
-  Sparkles,
 } from 'lucide-react';
-import { CompanySettings } from '@/lib/types';
+import { CompanySettings, HeroSlide as DatabaseHeroSlide, HeroSlideHighlight } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { DynamicIcon } from '@/components/public/DynamicIcon';
 
 interface HeroProps {
-  settings: CompanySettings;
+  settings?: CompanySettings;
+  initialSlides?: DatabaseHeroSlide[];
 }
 
-interface HeroSlide {
+interface FormattedHeroSlide {
   id: string;
   image: string;
   badge: {
     text: string;
-    icon: React.ElementType;
+    icon: string;
     color: string;
   };
   title: string;
@@ -35,136 +31,183 @@ interface HeroSlide {
   primaryCta: {
     text: string;
     href: string;
-    icon: React.ElementType;
+    icon: string;
   };
   secondaryCta: {
     text: string;
     href: string;
   };
   highlights: {
-    icon: React.ElementType;
+    icon: string;
     text: string;
     iconColor: string;
   }[];
 }
 
-export function Hero({}: HeroProps) {
-  const slides: HeroSlide[] = [
-    {
-      id: 'gaming-pc',
-      image: '/images/hero/slide-1-gaming-pc.svg',
-      badge: {
-        text: 'Spesialis Rakit PC Gaming & Workstation',
-        icon: Cpu,
-        color: 'border-[#3584e4]/30 bg-[#3584e4]/10 text-[#3584e4]',
-      },
-      title: 'Rakit PC Gaming & Workstation Bebas Bottleneck',
-      subtitle:
-        'Konsultasi racikan spesifikasi gratis sesuai alokasi dana, perakitan kabel rapi, dan uji kestabilan stress test 24 jam dengan 100% komponen resmi.',
-      primaryCta: {
-        text: 'Lihat Katalog Produk',
-        href: '/katalog',
-        icon: ShoppingBag,
-      },
-      secondaryCta: {
-        text: 'Hubungi Kontak Toko',
-        href: '/contact',
-      },
-      highlights: [
-        {
-          icon: Zap,
-          text: 'Racikan Bebas Bottleneck',
-          iconColor: 'text-amber-500',
-        },
-        {
-          icon: ShieldCheck,
-          text: '100% Komponen Baru & Resmi',
-          iconColor: 'text-[#2ec27e]',
-        },
-        {
-          icon: Cpu,
-          text: 'Stress Test & Uji Beban 24 Jam',
-          iconColor: 'text-[#3584e4]',
-        },
-      ],
+const DEFAULT_SLIDES: FormattedHeroSlide[] = [
+  {
+    id: 'gaming-pc',
+    image: '/images/hero/slide-1-gaming-pc.svg',
+    badge: {
+      text: 'Spesialis Rakit PC Gaming & Workstation',
+      icon: 'Cpu',
+      color: 'border-[#3584e4]/30 bg-[#3584e4]/10 text-[#3584e4]',
     },
-    {
-      id: 'service-workshop',
-      image: '/images/hero/slide-2-service-workshop.svg',
-      badge: {
-        text: 'Layanan Servis & Upgrade Kilat',
-        icon: Wrench,
-        color: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-500',
-      },
-      title: 'Service Komputer & Laptop Profesional Bergaransi',
-      subtitle:
-        'Solusi tuntas laptop lambat dan overheat. Upgrade SSD NVMe & RAM instan, penggantian pasta termal berkualitas tinggi, serta perbaikan motherboard terpercaya.',
-      primaryCta: {
-        text: 'Lihat Layanan Servis',
-        href: '/services',
-        icon: Wrench,
-      },
-      secondaryCta: {
-        text: 'Cek Alamat & Jadwal Toko',
-        href: '/contact',
-      },
-      highlights: [
-        {
-          icon: Zap,
-          text: 'Pengerjaan Cepat & Transparan',
-          iconColor: 'text-amber-500',
-        },
-        {
-          icon: ShieldCheck,
-          text: 'Garansi Servis Pasti',
-          iconColor: 'text-emerald-500',
-        },
-        {
-          icon: Sparkles,
-          text: 'Thermal Paste Premium',
-          iconColor: 'text-[#3584e4]',
-        },
-      ],
+    title: 'Rakit PC Gaming & Workstation Bebas Bottleneck',
+    subtitle:
+      'Konsultasi racikan spesifikasi gratis sesuai alokasi dana, perakitan kabel rapi, dan uji kestabilan stress test 24 jam dengan 100% komponen resmi.',
+    primaryCta: {
+      text: 'Lihat Katalog Produk',
+      href: '/katalog',
+      icon: 'ShoppingBag',
     },
-    {
-      id: 'hardware-catalog',
-      image: '/images/hero/slide-3-hardware-catalog.svg',
-      badge: {
-        text: 'Katalog Komponen & Peripheral Resmi',
-        icon: ShoppingBag,
-        color: 'border-purple-500/30 bg-purple-500/10 text-purple-400',
-      },
-      title: 'Pusat Komponen Hardware & Aksesoris Gaming Terlengkap',
-      subtitle:
-        'Pilihan prosesor Intel & Ryzen terbaru, kartu grafis RTX/Radeon, monitor gaming high-refresh rate, dan periferal bergaransi distributor resmi Indonesia.',
-      primaryCta: {
-        text: 'Jelajahi Produk Pilihan',
-        href: '/katalog',
-        icon: ShoppingBag,
-      },
-      secondaryCta: {
-        text: 'Tanya Stok & Spesifikasi',
-        href: '/contact',
-      },
-      highlights: [
-        {
-          icon: ShieldCheck,
-          text: 'Garansi Distributor Resmi',
-          iconColor: 'text-purple-400',
-        },
-        {
-          icon: Zap,
-          text: 'Packing Kayu Aman Se-Nusantara',
-          iconColor: 'text-amber-500',
-        },
-        {
-          icon: Cpu,
-          text: 'Harga Kompetitif & Real-Time',
-          iconColor: 'text-[#3584e4]',
-        },
-      ],
+    secondaryCta: {
+      text: 'Hubungi Kontak Toko',
+      href: '/contact',
     },
-  ];
+    highlights: [
+      {
+        icon: 'Zap',
+        text: 'Racikan Bebas Bottleneck',
+        iconColor: 'text-amber-500',
+      },
+      {
+        icon: 'ShieldCheck',
+        text: '100% Komponen Baru & Resmi',
+        iconColor: 'text-[#2ec27e]',
+      },
+      {
+        icon: 'Cpu',
+        text: 'Stress Test & Uji Beban 24 Jam',
+        iconColor: 'text-[#3584e4]',
+      },
+    ],
+  },
+  {
+    id: 'service-workshop',
+    image: '/images/hero/slide-2-service-workshop.svg',
+    badge: {
+      text: 'Layanan Servis & Upgrade Kilat',
+      icon: 'Wrench',
+      color: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-500',
+    },
+    title: 'Service Komputer & Laptop Profesional Bergaransi',
+    subtitle:
+      'Solusi tuntas laptop lambat dan overheat. Upgrade SSD NVMe & RAM instan, penggantian pasta termal berkualitas tinggi, serta perbaikan motherboard terpercaya.',
+    primaryCta: {
+      text: 'Lihat Layanan Servis',
+      href: '/services',
+      icon: 'Wrench',
+    },
+    secondaryCta: {
+      text: 'Cek Alamat & Jadwal Toko',
+      href: '/contact',
+    },
+    highlights: [
+      {
+        icon: 'Zap',
+        text: 'Pengerjaan Cepat & Transparan',
+        iconColor: 'text-amber-500',
+      },
+      {
+        icon: 'ShieldCheck',
+        text: 'Garansi Servis Pasti',
+        iconColor: 'text-emerald-500',
+      },
+      {
+        icon: 'Sparkles',
+        text: 'Thermal Paste Premium',
+        iconColor: 'text-[#3584e4]',
+      },
+    ],
+  },
+  {
+    id: 'hardware-catalog',
+    image: '/images/hero/slide-3-hardware-catalog.svg',
+    badge: {
+      text: 'Katalog Komponen & Peripheral Resmi',
+      icon: 'ShoppingBag',
+      color: 'border-purple-500/30 bg-purple-500/10 text-purple-400',
+    },
+    title: 'Pusat Komponen Hardware & Aksesoris Gaming Terlengkap',
+    subtitle:
+      'Pilihan prosesor Intel & Ryzen terbaru, kartu grafis RTX/Radeon, monitor gaming high-refresh rate, dan periferal bergaransi distributor resmi Indonesia.',
+    primaryCta: {
+      text: 'Jelajahi Produk Pilihan',
+      href: '/katalog',
+      icon: 'ShoppingBag',
+    },
+    secondaryCta: {
+      text: 'Tanya Stok & Spesifikasi',
+      href: '/contact',
+    },
+    highlights: [
+      {
+        icon: 'ShieldCheck',
+        text: 'Garansi Distributor Resmi',
+        iconColor: 'text-purple-400',
+      },
+      {
+        icon: 'Zap',
+        text: 'Packing Kayu Aman Se-Nusantara',
+        iconColor: 'text-amber-500',
+      },
+      {
+        icon: 'Cpu',
+        text: 'Harga Kompetitif & Real-Time',
+        iconColor: 'text-[#3584e4]',
+      },
+    ],
+  },
+];
+
+export function Hero({ initialSlides }: HeroProps) {
+  const slides: FormattedHeroSlide[] = useMemo(() => {
+    if (initialSlides && initialSlides.length > 0) {
+      return initialSlides.map((s) => {
+        const rawHighlights = (s.highlights || []) as (HeroSlideHighlight | string)[];
+        const parsedHighlights = rawHighlights.map((hl, idx) => {
+          if (typeof hl === 'string') {
+            const defaultIcons = ['Zap', 'ShieldCheck', 'Cpu'];
+            const defaultColors = ['text-amber-500', 'text-[#2ec27e]', 'text-[#3584e4]'];
+            return {
+              text: hl,
+              icon: defaultIcons[idx] || 'ShieldCheck',
+              iconColor: defaultColors[idx] || 'text-[#3584e4]',
+            };
+          }
+          return {
+            text: hl.text || '',
+            icon: hl.icon || 'ShieldCheck',
+            iconColor: hl.iconColor || 'text-[#3584e4]',
+          };
+        });
+
+        return {
+          id: s.id,
+          image: s.image_url || '/images/hero/slide-1-gaming-pc.svg',
+          badge: {
+            text: s.badge_text || 'CyberTech Computer',
+            icon: s.badge_icon || 'Cpu',
+            color: s.badge_color || 'border-[#3584e4]/30 bg-[#3584e4]/10 text-[#3584e4]',
+          },
+          title: s.title,
+          subtitle: s.subtitle,
+          primaryCta: {
+            text: s.primary_cta_text || 'Lihat Katalog Produk',
+            href: s.primary_cta_link || '/katalog',
+            icon: 'ShoppingBag',
+          },
+          secondaryCta: {
+            text: s.secondary_cta_text || 'Hubungi Kontak Toko',
+            href: s.secondary_cta_link || '/contact',
+          },
+          highlights: parsedHighlights.length > 0 ? parsedHighlights : DEFAULT_SLIDES[0].highlights,
+        };
+      });
+    }
+    return DEFAULT_SLIDES;
+  }, [initialSlides]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -179,12 +222,12 @@ export function Hero({}: HeroProps) {
 
   // Autoplay timer
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || slides.length <= 1) return;
     const timer = setInterval(() => {
       nextSlide();
     }, 6000);
     return () => clearInterval(timer);
-  }, [isPaused, nextSlide]);
+  }, [isPaused, nextSlide, slides.length]);
 
   return (
     <section
@@ -229,8 +272,6 @@ export function Hero({}: HeroProps) {
           <div className="grid grid-cols-1 grid-rows-1 w-full items-start">
             {slides.map((slide, index) => {
               const isActive = index === currentIndex;
-              const BadgeIcon = slide.badge.icon;
-              const PrimaryIcon = slide.primaryCta.icon;
 
               return (
                 <div
@@ -248,7 +289,7 @@ export function Hero({}: HeroProps) {
                       variant="secondary"
                       className={`px-4 py-1.5 text-xs font-semibold shadow-sm border ${slide.badge.color} backdrop-blur-md`}
                     >
-                      <BadgeIcon className="h-3.5 w-3.5 mr-1.5" />
+                      <DynamicIcon name={slide.badge.icon || 'Cpu'} className="h-3.5 w-3.5 mr-1.5" />
                       <span>{slide.badge.text}</span>
                     </Badge>
                   </div>
@@ -275,7 +316,7 @@ export function Hero({}: HeroProps) {
                       className="h-13 px-8 text-base font-semibold shadow-xl shadow-[#3584e4]/30 bg-[#3584e4] hover:bg-[#1c71d8] text-white group cursor-pointer transition-transform duration-150 ease-out hover:scale-105 active:scale-95"
                     >
                       <Link href={slide.primaryCta.href} tabIndex={isActive ? 0 : -1}>
-                        <PrimaryIcon className="h-4 w-4 mr-2" />
+                        <DynamicIcon name={slide.primaryCta.icon || 'ShoppingBag'} className="h-4 w-4 mr-2" />
                         <span>{slide.primaryCta.text}</span>
                         <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-1 ml-1.5" />
                       </Link>
@@ -294,18 +335,18 @@ export function Hero({}: HeroProps) {
 
                   {/* Value Highlights */}
                   <div className="mt-12 sm:mt-14 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-8 border-t border-white/10 pt-8 sm:pt-10 w-full">
-                    {slide.highlights.map((highlight, idx) => {
-                      const HighlightIcon = highlight.icon;
-                      return (
-                        <div
-                          key={idx}
-                          className="flex items-center justify-center gap-2.5 text-xs sm:text-sm font-medium text-neutral-300"
-                        >
-                          <HighlightIcon className={`h-4 w-4 shrink-0 ${highlight.iconColor}`} />
-                          <span>{highlight.text}</span>
-                        </div>
-                      );
-                    })}
+                    {slide.highlights.map((highlight, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center justify-center gap-2.5 text-xs sm:text-sm font-medium text-neutral-300"
+                      >
+                        <DynamicIcon
+                          name={highlight.icon || 'ShieldCheck'}
+                          className={`h-4 w-4 shrink-0 ${highlight.iconColor}`}
+                        />
+                        <span>{highlight.text}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               );
@@ -313,7 +354,7 @@ export function Hero({}: HeroProps) {
           </div>
 
           {/* Slider Controls: Dots & Navigation Arrows */}
-          <div className="mt-10 flex items-center justify-between w-full max-w-md pt-4">
+          <div className="mt-8 sm:mt-10 flex items-center justify-between w-full max-w-md pt-4">
             <Button
               variant="ghost"
               size="icon"

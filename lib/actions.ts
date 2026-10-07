@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { createClient, isSupabaseConfigured } from './supabase/server';
-import { Service, Project, Post, TeamMember, Testimonial } from './types';
+import { Service, Project, Post, TeamMember, Testimonial, HeroSlide } from './types';
 
 // =========================================================
 // 1. PUBLIC ACTIONS
@@ -342,4 +342,57 @@ export async function updateInquiryStatusAction(id: string, status: 'unread' | '
 
   revalidatePath('/admin/inquiries');
   return { success: true, message: 'Status pesan berhasil diperbarui!' };
+}
+
+// =========================================================
+// HERO SLIDE ACTIONS
+// =========================================================
+
+export async function saveHeroSlideAction(slide: Partial<HeroSlide>) {
+  if (isSupabaseConfigured()) {
+    const supabase = await createClient();
+    if (slide.id && !slide.id.startsWith('slide-')) {
+      const { error } = await supabase
+        .from('hero_slides')
+        .update(slide)
+        .eq('id', slide.id);
+      if (error) return { success: false, error: error.message };
+    } else {
+      const insertData = { ...slide };
+      delete insertData.id;
+      const { error } = await supabase.from('hero_slides').insert(insertData);
+      if (error) return { success: false, error: error.message };
+    }
+  }
+
+  revalidatePath('/');
+  revalidatePath('/admin/sliders');
+  return { success: true, message: 'Slide hero berhasil disimpan!' };
+}
+
+export async function deleteHeroSlideAction(id: string) {
+  if (isSupabaseConfigured()) {
+    const supabase = await createClient();
+    const { error } = await supabase.from('hero_slides').delete().eq('id', id);
+    if (error) return { success: false, error: error.message };
+  }
+
+  revalidatePath('/');
+  revalidatePath('/admin/sliders');
+  return { success: true, message: 'Slide hero berhasil dihapus!' };
+}
+
+export async function toggleHeroSlideStatusAction(id: string, is_active: boolean) {
+  if (isSupabaseConfigured()) {
+    const supabase = await createClient();
+    const { error } = await supabase
+      .from('hero_slides')
+      .update({ is_active })
+      .eq('id', id);
+    if (error) return { success: false, error: error.message };
+  }
+
+  revalidatePath('/');
+  revalidatePath('/admin/sliders');
+  return { success: true, message: `Status slide berhasil ${is_active ? 'diaktifkan' : 'dinonaktifkan'}!` };
 }

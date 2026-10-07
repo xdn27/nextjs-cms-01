@@ -7,6 +7,7 @@ import {
   Mail,
   ArrowRight,
   Database,
+  Sliders,
 } from 'lucide-react';
 import {
   getCompanySettings,
@@ -14,24 +15,34 @@ import {
   getProjects,
   getPosts,
   getInquiries,
+  getAllHeroSlides,
 } from '@/lib/data';
 import { isSupabaseConfigured } from '@/lib/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
 export default async function AdminDashboardPage() {
-  const [settings, services, products, posts, inquiries] = await Promise.all([
+  const [settings, services, products, posts, inquiries, slides] = await Promise.all([
     getCompanySettings(),
     getServices(),
     getProjects(),
     getPosts(),
     getInquiries(),
+    getAllHeroSlides(),
   ]);
 
   const unreadInquiries = inquiries.filter((inq) => inq.status === 'unread');
   const supabaseActive = isSupabaseConfigured();
 
   const stats = [
+    {
+      title: 'Slider Hero Banner',
+      count: slides.length,
+      subtext: `${slides.filter((s) => s.is_active).length} aktif tayang`,
+      href: '/admin/sliders',
+      icon: Sliders,
+      color: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20',
+    },
     {
       title: 'Layanan Servis',
       count: services.length,

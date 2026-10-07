@@ -7,8 +7,9 @@ import {
   initialTeam,
   initialTestimonials,
   initialInquiries,
+  initialHeroSlides,
 } from './mock-data';
-import { CompanySettings, Service, Project, Post, TeamMember, Testimonial, Inquiry } from './types';
+import { CompanySettings, Service, Project, Post, TeamMember, Testimonial, Inquiry, HeroSlide } from './types';
 
 export async function getCompanySettings(): Promise<CompanySettings> {
   if (!isSupabaseConfigured()) {
@@ -235,5 +236,50 @@ export async function getInquiries(): Promise<Inquiry[]> {
     return data as Inquiry[];
   } catch {
     return initialInquiries;
+  }
+}
+
+export async function getHeroSlides(): Promise<HeroSlide[]> {
+  if (!isSupabaseConfigured()) {
+    return initialHeroSlides.filter((s) => s.is_active);
+  }
+
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('hero_slides')
+      .select('*')
+      .eq('is_active', true)
+      .order('display_order', { ascending: true });
+
+    if (error || !data || data.length === 0) {
+      return initialHeroSlides.filter((s) => s.is_active);
+    }
+
+    return data as HeroSlide[];
+  } catch {
+    return initialHeroSlides.filter((s) => s.is_active);
+  }
+}
+
+export async function getAllHeroSlides(): Promise<HeroSlide[]> {
+  if (!isSupabaseConfigured()) {
+    return initialHeroSlides;
+  }
+
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('hero_slides')
+      .select('*')
+      .order('display_order', { ascending: true });
+
+    if (error || !data || data.length === 0) {
+      return initialHeroSlides;
+    }
+
+    return data as HeroSlide[];
+  } catch {
+    return initialHeroSlides;
   }
 }

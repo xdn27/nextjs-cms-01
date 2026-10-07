@@ -114,6 +114,25 @@ CREATE TABLE IF NOT EXISTS public.inquiries (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- 8. HERO SLIDES TABLE
+CREATE TABLE IF NOT EXISTS public.hero_slides (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title TEXT NOT NULL,
+    subtitle TEXT NOT NULL,
+    badge_text TEXT NOT NULL,
+    badge_color TEXT DEFAULT 'border-[#3584e4]/30 bg-[#3584e4]/10 text-[#3584e4]',
+    badge_icon TEXT DEFAULT 'Cpu',
+    image_url TEXT NOT NULL,
+    primary_cta_text TEXT NOT NULL DEFAULT 'Lihat Katalog Produk',
+    primary_cta_link TEXT NOT NULL DEFAULT '/katalog',
+    secondary_cta_text TEXT NOT NULL DEFAULT 'Hubungi Kontak Toko',
+    secondary_cta_link TEXT NOT NULL DEFAULT '/contact',
+    highlights JSONB DEFAULT '[]'::jsonb,
+    display_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- =========================================================
 -- ROW LEVEL SECURITY (RLS) POLICIES
 -- =========================================================
@@ -125,6 +144,7 @@ ALTER TABLE public.posts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.team_members ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.testimonials ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.inquiries ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.hero_slides ENABLE ROW LEVEL SECURITY;
 
 -- Public READ policies
 CREATE POLICY "Public can view company settings" ON public.company_settings FOR SELECT USING (true);
@@ -133,6 +153,7 @@ CREATE POLICY "Public can view projects" ON public.projects FOR SELECT USING (tr
 CREATE POLICY "Public can view published posts" ON public.posts FOR SELECT USING (status = 'published' OR auth.role() = 'authenticated');
 CREATE POLICY "Public can view active team members" ON public.team_members FOR SELECT USING (is_active = true OR auth.role() = 'authenticated');
 CREATE POLICY "Public can view active testimonials" ON public.testimonials FOR SELECT USING (is_active = true OR auth.role() = 'authenticated');
+CREATE POLICY "Public can view active hero slides" ON public.hero_slides FOR SELECT USING (is_active = true OR auth.role() = 'authenticated');
 
 -- Public INSERT policy for Inquiries (Contact Form)
 CREATE POLICY "Public can submit inquiries" ON public.inquiries FOR INSERT WITH CHECK (true);
@@ -145,6 +166,7 @@ CREATE POLICY "Admin full access posts" ON public.posts FOR ALL USING (auth.role
 CREATE POLICY "Admin full access team members" ON public.team_members FOR ALL USING (auth.role() = 'authenticated');
 CREATE POLICY "Admin full access testimonials" ON public.testimonials FOR ALL USING (auth.role() = 'authenticated');
 CREATE POLICY "Admin full access inquiries" ON public.inquiries FOR ALL USING (auth.role() = 'authenticated');
+CREATE POLICY "Admin full access hero slides" ON public.hero_slides FOR ALL USING (auth.role() = 'authenticated');
 
 -- =========================================================
 -- STORAGE BUCKET CONFIGURATION (cms-media)

@@ -17,6 +17,7 @@ import {
   getProjects,
   getPosts,
   getTestimonials,
+  getHeroSlides,
 } from '@/lib/data';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
@@ -27,12 +28,13 @@ import { BlogCard } from '@/components/public/BlogCard';
 import { TestimonialSection } from '@/components/public/TestimonialSection';
 
 export default async function HomePage() {
-  const [settings, services, products, posts, testimonials] = await Promise.all([
+  const [settings, services, products, posts, testimonials, slides] = await Promise.all([
     getCompanySettings(),
     getServices(),
     getProjects(),
     getPosts(),
     getTestimonials(),
+    getHeroSlides(),
   ]);
 
   const featuredProducts = products.filter((p) => p.is_featured).slice(0, 3);
@@ -85,7 +87,7 @@ export default async function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <Hero settings={settings} />
+        <Hero settings={settings} initialSlides={slides} />
 
         {/* Layanan Unggulan Toko */}
         <section className="py-20 bg-background">
