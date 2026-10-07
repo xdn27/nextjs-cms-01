@@ -29,11 +29,11 @@ export function TeamSection({ team }: TeamSectionProps) {
           {team.map((member) => (
             <Card
               key={member.id}
-              className="group flex flex-col items-center text-center transition-all duration-300 ease-out hover:border-primary/40 hover:shadow-xl hover:-translate-y-1"
+              className="group flex flex-col items-center text-center transition-all duration-200 ease-out hover:border-primary/40 hover:shadow-xl hover:-translate-y-1"
             >
               <CardContent className="p-6 flex flex-col items-center w-full">
                 {/* Photo */}
-                <div className="relative h-32 w-32 overflow-hidden rounded-full border-2 border-primary/20 shadow-md transition-transform duration-300 ease-out group-hover:scale-105 will-change-transform">
+                <div className="relative h-32 w-32 overflow-hidden rounded-full border-2 border-primary/20 shadow-md transition-transform duration-150 ease-out group-hover:scale-105">
                   {member.photo_url ? (
                     <Image
                       src={member.photo_url}

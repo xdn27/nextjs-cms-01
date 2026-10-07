@@ -20,7 +20,7 @@ export function BlogCard({ post }: BlogCardProps) {
     : 'Terbaru';
 
   return (
-    <Card className="group flex flex-col overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
+    <Card className="group flex flex-col overflow-hidden transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
       {/* Cover Image */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
         {post.cover_image ? (
@@ -28,7 +28,7 @@ export function BlogCard({ post }: BlogCardProps) {
             src={post.cover_image}
             alt={post.title}
             fill
-            className="object-cover transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform"
+            className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
