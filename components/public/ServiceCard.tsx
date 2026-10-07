@@ -11,7 +11,7 @@ interface ServiceCardProps {
 
 export function ServiceCard({ service }: ServiceCardProps) {
   return (
-    <Card className="group relative flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 hover:border-primary/40">
+    <Card className="group relative flex flex-col justify-between transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 hover:border-primary/40">
       <CardContent className="p-7 flex flex-col justify-between h-full">
         <div>
           {/* Service Icon */}

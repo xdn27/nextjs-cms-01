@@ -30,7 +30,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
           {testimonials.map((item) => (
             <Card
               key={item.id}
-              className="flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:border-primary/40 hover:-translate-y-1"
+              className="flex flex-col justify-between transition-all duration-300 ease-out hover:shadow-xl hover:border-primary/40 hover:-translate-y-1"
             >
               <CardContent className="p-8 flex flex-col justify-between h-full">
                 <div>

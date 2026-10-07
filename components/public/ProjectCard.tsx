@@ -22,7 +22,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   }
 
   return (
-    <Card className="group flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-[#3584e4]/40">
+    <Card className="group flex flex-col overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:border-[#3584e4]/40">
       {/* Cover Image */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
         {project.cover_image ? (
@@ -30,7 +30,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             src={project.cover_image}
             alt={project.title}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (

@@ -218,7 +218,7 @@ export default async function ProductDetailPage({
                         src={rel.cover_image}
                         alt={rel.title}
                         fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform"
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     )}

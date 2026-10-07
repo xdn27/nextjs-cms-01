@@ -53,7 +53,7 @@ export function MediaUploader({ label, value, onChange, helperText }: MediaUploa
               onChange('');
               toast.info('Gambar dihapus');
             }}
-            className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-destructive text-destructive-foreground shadow hover:bg-destructive/90 transition-transform active:scale-90"
+            className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-destructive text-destructive-foreground shadow hover:bg-destructive/90 transition-all duration-150 ease-out active:scale-90"
             title="Hapus gambar"
           >
             <X className="h-3.5 w-3.5" />
