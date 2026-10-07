@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Mail, Phone, MapPin, Monitor, Clock, MessageCircle } from 'lucide-react';
 import { CompanySettings } from '@/lib/types';
+import { FloatingWhatsApp } from '@/components/public/FloatingWhatsApp';
 
 interface FooterProps {
   settings: CompanySettings;
@@ -183,12 +184,15 @@ export function Footer({ settings }: FooterProps) {
             <Link href="/contact" className="hover:text-neutral-400">
               Kontak
             </Link>
-            <Link href="/admin" className="hover:text-[#3584e4]">
-              Admin Panel
-            </Link>
           </div>
         </div>
       </div>
+
+      {/* Floating WhatsApp Action Button */}
+      <FloatingWhatsApp
+        whatsappNumber={settings.contact_whatsapp}
+        companyName={settings.company_name}
+      />
     </footer>
   );
 }

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ShieldCheck, Monitor, MessageCircle } from 'lucide-react';
+import { Menu, X, Monitor, MessageCircle } from 'lucide-react';
 import { CompanySettings } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 
@@ -65,15 +65,9 @@ export function Navbar({ settings }: NavbarProps) {
           })}
         </nav>
 
-        {/* Action Button & Admin Link */}
-        <div className="hidden items-center gap-3 sm:flex">
-          <Button asChild variant="outline" size="sm" className="h-9">
-            <Link href="/admin">
-              <ShieldCheck className="h-3.5 w-3.5 text-primary mr-1" />
-              <span>CMS Panel</span>
-            </Link>
-          </Button>
-          <Button asChild size="sm" className="h-9 shadow-sm bg-[#3584e4] hover:bg-[#1c71d8] text-white">
+        {/* Action Button */}
+        <div className="hidden items-center sm:flex">
+          <Button asChild size="sm" className="h-9 shadow-sm bg-[#3584e4] hover:bg-[#1c71d8] text-white cursor-pointer">
             <Link href="/contact">
               <MessageCircle className="h-3.5 w-3.5 mr-1" />
               <span>{settings.hero_cta_text || 'Konsultasi Rakit PC'}</span>
@@ -120,13 +114,7 @@ export function Navbar({ settings }: NavbarProps) {
             })}
           </div>
 
-          <div className="mt-4 flex flex-col gap-2 pt-4 border-t border-border">
-            <Button asChild variant="outline" className="w-full">
-              <Link href="/admin" onClick={() => setIsOpen(false)}>
-                <ShieldCheck className="h-4 w-4 text-primary mr-1.5" />
-                <span>Login ke Panel CMS</span>
-              </Link>
-            </Button>
+          <div className="mt-4 pt-3 border-t border-border">
             <Button asChild className="w-full shadow-sm bg-[#3584e4] hover:bg-[#1c71d8] text-white">
               <Link href="/contact" onClick={() => setIsOpen(false)}>
                 <MessageCircle className="h-4 w-4 mr-1.5" />
