@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="logisticsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022C22" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#logisticsGrad)" />
+  <circle cx="650" cy="120" r="140" fill="#10B981" opacity="0.15" />
+  
+  <!-- Map Route UI -->
+  <rect x="120" y="80" width="560" height="340" rx="16" fill="#065F46" stroke="#047857" stroke-width="2" />
+  <circle cx="220" cy="200" r="16" fill="#34D399" />
+  <circle cx="400" cy="160" r="16" fill="#38BDF8" />
+  <circle cx="580" cy="280" r="20" fill="#F43F5E" />
+  
+  <path d="M220 200 Q310 120 400 160 T580 280" fill="none" stroke="#6EE7B7" stroke-width="6" stroke-dasharray="12 8" />
+  
+  <!-- Delivery Stats -->
+  <rect x="160" y="320" width="140" height="60" rx="10" fill="#047857" />
+  <rect x="330" y="320" width="140" height="60" rx="10" fill="#047857" />
+  <rect x="500" y="320" width="140" height="60" rx="10" fill="#047857" />
+  
+  <text x="400" y="460" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#A7F3D0" text-anchor="middle">Logistics &amp; Realtime Fleet Tracking App</text>
+</svg>

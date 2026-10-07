@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="ecomGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4C1D95" />
+      <stop offset="100%" stop-color="#6D28D9" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#ecomGrad)" />
+  <circle cx="680" cy="380" r="140" fill="#C084FC" opacity="0.15" />
+  
+  <rect x="120" y="80" width="560" height="340" rx="16" fill="#5B21B6" stroke="#7C3AED" stroke-width="2" />
+  
+  <!-- Shopping Cart & AI Stars -->
+  <circle cx="340" cy="270" r="14" fill="#DDD6FE" />
+  <circle cx="460" cy="270" r="14" fill="#DDD6FE" />
+  <path d="M260 170 L300 170 L340 240 L480 240 L520 180 L315 180" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <polygon points="580,120 590,145 615,145 595,160 602,185 580,170 558,185 565,160 545,145 570,145" fill="#FDE047" />
+  <polygon points="220,130 225,145 240,145 228,155 232,170 220,160 208,170 212,155 200,145 215,145" fill="#FDE047" />
+  
+  <text x="400" y="460" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#DDD6FE" text-anchor="middle">AI Recommendation Engine for Retail E-Commerce</text>
+</svg>

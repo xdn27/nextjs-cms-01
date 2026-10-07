@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="tm3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#047857" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#tm3Grad)" />
+  <circle cx="100" cy="80" r="34" fill="#A7F3D0" />
+  <path d="M45 160 C45 130 70 120 100 120 C130 120 155 130 155 160 Z" fill="#34D399" />
+</svg>

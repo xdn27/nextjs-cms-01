@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <defs>
+    <linearGradient id="t4Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED" />
+      <stop offset="100%" stop-color="#4C1D95" />
+    </linearGradient>
+  </defs>
+  <circle cx="150" cy="150" r="150" fill="url(#t4Grad)" />
+  <circle cx="150" cy="115" r="50" fill="#EDE9FE" />
+  <path d="M70 240 C70 195 105 175 150 175 C195 175 230 195 230 240 Z" fill="#DDD6FE" />
+  <text x="150" y="275" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Client Delivery</text>
+</svg>

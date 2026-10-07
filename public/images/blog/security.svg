@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="secGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022C22" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#secGrad)" />
+  <circle cx="400" cy="220" r="140" fill="#10B981" opacity="0.2" />
+  
+  <!-- Shield & Check -->
+  <path d="M400 130 L480 170 V240 C480 300 400 340 400 340 C400 340 320 300 320 240 V170 Z" fill="#059669" stroke="#34D399" stroke-width="4" />
+  <path d="M365 235 L390 260 L445 205" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <text x="400" y="390" font-family="system-ui, sans-serif" font-size="22" font-weight="bold" fill="#FFFFFF" text-anchor="middle">PostgreSQL Row-Level Security (RLS)</text>
+  <text x="400" y="430" font-family="system-ui, sans-serif" font-size="14" fill="#A7F3D0" text-anchor="middle">Database-Level Authorization &amp; Data Protection</text>
+</svg>

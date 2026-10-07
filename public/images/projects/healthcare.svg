@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="healthGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C4A6E" />
+      <stop offset="100%" stop-color="#0369A1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#healthGrad)" />
+  <circle cx="200" cy="140" r="130" fill="#38BDF8" opacity="0.15" />
+  
+  <rect x="120" y="80" width="560" height="340" rx="16" fill="#075985" stroke="#0284C7" stroke-width="2" />
+  
+  <!-- Hospital Cross -->
+  <rect x="375" y="140" width="50" height="120" rx="10" fill="#FFFFFF" />
+  <rect x="340" y="175" width="120" height="50" rx="10" fill="#FFFFFF" />
+  
+  <!-- Pulse Line -->
+  <path d="M160 330 L280 330 L320 280 L350 370 L390 300 L430 350 L460 330 L640 330" fill="none" stroke="#7DD3FC" stroke-width="5" stroke-linecap="round" />
+  
+  <text x="400" y="460" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#BAE6FD" text-anchor="middle">Telemedicine &amp; Electronic Medical Records</text>
+</svg>
