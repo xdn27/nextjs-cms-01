@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Monitor, MessageCircle } from 'lucide-react';
+import { Menu, X, Monitor } from 'lucide-react';
 import { CompanySettings } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 
@@ -65,16 +65,6 @@ export function Navbar({ settings }: NavbarProps) {
           })}
         </nav>
 
-        {/* Action Button */}
-        <div className="hidden items-center sm:flex">
-          <Button asChild size="sm" className="h-9 shadow-sm bg-[#3584e4] hover:bg-[#1c71d8] text-white cursor-pointer">
-            <Link href="/contact">
-              <MessageCircle className="h-3.5 w-3.5 mr-1" />
-              <span>{settings.hero_cta_text || 'Konsultasi Rakit PC'}</span>
-            </Link>
-          </Button>
-        </div>
-
         {/* Mobile Hamburger Button */}
         <Button
           variant="ghost"
@@ -112,15 +102,6 @@ export function Navbar({ settings }: NavbarProps) {
                 </Link>
               );
             })}
-          </div>
-
-          <div className="mt-4 pt-3 border-t border-border">
-            <Button asChild className="w-full shadow-sm bg-[#3584e4] hover:bg-[#1c71d8] text-white">
-              <Link href="/contact" onClick={() => setIsOpen(false)}>
-                <MessageCircle className="h-4 w-4 mr-1.5" />
-                <span>{settings.hero_cta_text || 'Konsultasi Rakit PC'}</span>
-              </Link>
-            </Button>
           </div>
         </div>
       )}
