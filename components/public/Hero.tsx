@@ -186,10 +186,6 @@ export function Hero({}: HeroProps) {
     return () => clearInterval(timer);
   }, [isPaused, nextSlide]);
 
-  const currentSlide = slides[currentIndex];
-  const BadgeIcon = currentSlide.badge.icon;
-  const PrimaryIcon = currentSlide.primaryCta.icon;
-
   return (
     <section
       className="relative overflow-hidden bg-[#090d16] text-white py-24 lg:py-32 min-h-[660px] flex items-center"
@@ -228,72 +224,92 @@ export function Hero({}: HeroProps) {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex flex-col items-center max-w-4xl mx-auto w-full">
-          {/* Animated Slide Content (Fades smoothly on change) */}
-          <div
-            key={currentIndex}
-            className="animate-hero-fade flex flex-col items-center text-center w-full"
-          >
-            {/* Top Badge (Slide Specific) */}
-            <div>
-              <Badge
-                variant="secondary"
-                className={`px-4 py-1.5 text-xs font-semibold shadow-sm border ${currentSlide.badge.color} backdrop-blur-md`}
-              >
-                <BadgeIcon className="h-3.5 w-3.5 mr-1.5" />
-                <span>{currentSlide.badge.text}</span>
-              </Badge>
-            </div>
+          {/* Stacked Slides Container: CSS Grid (col-start-1 row-start-1) */}
+          {/* Locks container height to the tallest slide at any viewport width so the layout never jumps */}
+          <div className="grid grid-cols-1 grid-rows-1 w-full items-start">
+            {slides.map((slide, index) => {
+              const isActive = index === currentIndex;
+              const BadgeIcon = slide.badge.icon;
+              const PrimaryIcon = slide.primaryCta.icon;
 
-            {/* Headline (Slide Specific) */}
-            <h1 className="mt-8 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.15] drop-shadow-sm">
-              {currentSlide.title}
-            </h1>
-
-            {/* Subtitle (Slide Specific) */}
-            <p className="mt-6 max-w-2xl text-base sm:text-lg lg:text-xl leading-relaxed text-neutral-300">
-              {currentSlide.subtitle}
-            </p>
-
-            {/* Action CTA Buttons */}
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center justify-center w-full sm:w-auto">
-              <Button
-                asChild
-                size="lg"
-                className="h-13 px-8 text-base font-semibold shadow-xl shadow-[#3584e4]/30 bg-[#3584e4] hover:bg-[#1c71d8] text-white group cursor-pointer transition-transform duration-150 ease-out hover:scale-105 active:scale-95"
-              >
-                <Link href={currentSlide.primaryCta.href}>
-                  <PrimaryIcon className="h-4 w-4 mr-2" />
-                  <span>{currentSlide.primaryCta.text}</span>
-                  <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-1 ml-1.5" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="h-13 px-8 text-base font-semibold cursor-pointer border-white/20 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-transform duration-150 ease-out hover:scale-105 active:scale-95"
-              >
-                <Link href={currentSlide.secondaryCta.href}>
-                  <span>{currentSlide.secondaryCta.text}</span>
-                </Link>
-              </Button>
-            </div>
-
-            {/* Value Highlights */}
-            <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-8 border-t border-white/10 pt-10 w-full">
-              {currentSlide.highlights.map((highlight, idx) => {
-                const HighlightIcon = highlight.icon;
-                return (
-                  <div
-                    key={idx}
-                    className="flex items-center justify-center gap-2.5 text-xs sm:text-sm font-medium text-neutral-300"
-                  >
-                    <HighlightIcon className={`h-4 w-4 shrink-0 ${highlight.iconColor}`} />
-                    <span>{highlight.text}</span>
+              return (
+                <div
+                  key={slide.id}
+                  className={`col-start-1 row-start-1 flex flex-col items-center text-center w-full transition-all duration-700 ease-in-out ${
+                    isActive
+                      ? 'opacity-100 z-10 translate-y-0 pointer-events-auto'
+                      : 'opacity-0 z-0 -translate-y-1 pointer-events-none'
+                  }`}
+                  aria-hidden={!isActive}
+                >
+                  {/* Top Badge (Slide Specific) */}
+                  <div className="flex items-center justify-center">
+                    <Badge
+                      variant="secondary"
+                      className={`px-4 py-1.5 text-xs font-semibold shadow-sm border ${slide.badge.color} backdrop-blur-md`}
+                    >
+                      <BadgeIcon className="h-3.5 w-3.5 mr-1.5" />
+                      <span>{slide.badge.text}</span>
+                    </Badge>
                   </div>
-                );
-              })}
-            </div>
+
+                  {/* Headline (Slide Specific) - reserved flex container for uniform positioning */}
+                  <div className="mt-6 sm:mt-8 flex items-center justify-center min-h-[5.5rem] sm:min-h-[7rem] lg:min-h-[8.5rem] w-full">
+                    <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.15] drop-shadow-sm">
+                      {slide.title}
+                    </h1>
+                  </div>
+
+                  {/* Subtitle (Slide Specific) - reserved flex container for uniform positioning */}
+                  <div className="mt-4 sm:mt-6 flex items-center justify-center min-h-[4.5rem] sm:min-h-[4rem] lg:min-h-[3.5rem] max-w-2xl w-full">
+                    <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-neutral-300">
+                      {slide.subtitle}
+                    </p>
+                  </div>
+
+                  {/* Action CTA Buttons */}
+                  <div className="mt-8 sm:mt-10 flex flex-col gap-4 sm:flex-row sm:items-center justify-center w-full sm:w-auto">
+                    <Button
+                      asChild
+                      size="lg"
+                      className="h-13 px-8 text-base font-semibold shadow-xl shadow-[#3584e4]/30 bg-[#3584e4] hover:bg-[#1c71d8] text-white group cursor-pointer transition-transform duration-150 ease-out hover:scale-105 active:scale-95"
+                    >
+                      <Link href={slide.primaryCta.href} tabIndex={isActive ? 0 : -1}>
+                        <PrimaryIcon className="h-4 w-4 mr-2" />
+                        <span>{slide.primaryCta.text}</span>
+                        <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-1 ml-1.5" />
+                      </Link>
+                    </Button>
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="lg"
+                      className="h-13 px-8 text-base font-semibold cursor-pointer border-white/20 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-transform duration-150 ease-out hover:scale-105 active:scale-95"
+                    >
+                      <Link href={slide.secondaryCta.href} tabIndex={isActive ? 0 : -1}>
+                        <span>{slide.secondaryCta.text}</span>
+                      </Link>
+                    </Button>
+                  </div>
+
+                  {/* Value Highlights */}
+                  <div className="mt-12 sm:mt-14 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-8 border-t border-white/10 pt-8 sm:pt-10 w-full">
+                    {slide.highlights.map((highlight, idx) => {
+                      const HighlightIcon = highlight.icon;
+                      return (
+                        <div
+                          key={idx}
+                          className="flex items-center justify-center gap-2.5 text-xs sm:text-sm font-medium text-neutral-300"
+                        >
+                          <HighlightIcon className={`h-4 w-4 shrink-0 ${highlight.iconColor}`} />
+                          <span>{highlight.text}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           {/* Slider Controls: Dots & Navigation Arrows */}
