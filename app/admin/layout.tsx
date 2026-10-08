@@ -9,7 +9,6 @@ import {
   Wrench,
   ShoppingBag,
   FileText,
-  Users,
   MessageSquareQuote,
   Mail,
   ExternalLink,
@@ -34,7 +33,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: '/admin/services', label: 'Kelola Layanan Servis', icon: Wrench },
     { href: '/admin/portfolio', label: 'Kelola Katalog Produk', icon: ShoppingBag },
     { href: '/admin/blog', label: 'Kelola Blog & Tips Hardware', icon: FileText },
-    { href: '/admin/team', label: 'Kelola Teknisi & Tim', icon: Users },
     { href: '/admin/testimonials', label: 'Kelola Ulasan Pelanggan', icon: MessageSquareQuote },
     { href: '/admin/inquiries', label: 'Pesan & Konsultasi', icon: Mail },
   ];

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useDeferredValue, startTransition, ViewTransition } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, ShoppingBag, ArrowRight, MessageCircle } from 'lucide-react';
@@ -17,6 +17,7 @@ interface ProductCatalogViewProps {
 export function ProductCatalogView({ products }: ProductCatalogViewProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('Semua');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const deferredSearchQuery = useDeferredValue(searchQuery);
 
   const categories = useMemo(() => {
     const cats = Array.from(new Set(products.map((p) => p.category)));
@@ -28,14 +29,14 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
       const matchCategory =
         selectedCategory === 'Semua' || product.category === selectedCategory;
       const matchSearch =
-        product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.title.toLowerCase().includes(deferredSearchQuery.toLowerCase()) ||
+        product.summary.toLowerCase().includes(deferredSearchQuery.toLowerCase()) ||
         (product.description &&
-          product.description.toLowerCase().includes(searchQuery.toLowerCase()));
+          product.description.toLowerCase().includes(deferredSearchQuery.toLowerCase()));
 
       return matchCategory && matchSearch;
     });
-  }, [products, selectedCategory, searchQuery]);
+  }, [products, selectedCategory, deferredSearchQuery]);
 
   return (
     <div className="space-y-10">
@@ -46,7 +47,7 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
           {categories.map((cat) => (
             <button
               key={cat}
-              onClick={() => setSelectedCategory(cat)}
+              onClick={() => startTransition(() => setSelectedCategory(cat))}
               className={`rounded-xl px-4 py-2 text-xs font-semibold transition-all cursor-pointer ${
                 selectedCategory === cat
                   ? 'bg-[#3584e4] text-white shadow-sm shadow-[#3584e4]/30'
@@ -73,26 +74,30 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
 
       {/* Product Grid */}
       {filteredProducts.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-border p-12 text-center">
-          <ShoppingBag className="mx-auto h-10 w-10 text-muted-foreground opacity-50" />
-          <h3 className="mt-4 text-base font-bold text-foreground">
-            Tidak ada produk yang cocok
-          </h3>
-          <p className="mt-1 text-xs text-muted-foreground">
-            Coba ubah kata kunci pencarian atau pilih kategori lain.
-          </p>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              setSelectedCategory('Semua');
-              setSearchQuery('');
-            }}
-            className="mt-4 text-xs"
-          >
-            Reset Pencarian
-          </Button>
-        </div>
+        <ViewTransition enter="fade-in" exit="fade-out">
+          <div className="rounded-2xl border border-dashed border-border p-12 text-center">
+            <ShoppingBag className="mx-auto h-10 w-10 text-muted-foreground opacity-50" />
+            <h3 className="mt-4 text-base font-bold text-foreground">
+              Tidak ada produk yang cocok
+            </h3>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Coba ubah kata kunci pencarian atau pilih kategori lain.
+            </p>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                startTransition(() => {
+                  setSelectedCategory('Semua');
+                  setSearchQuery('');
+                });
+              }}
+              className="mt-4 text-xs"
+            >
+              Reset Pencarian
+            </Button>
+          </div>
+        </ViewTransition>
       ) : (
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {filteredProducts.map((product) => {
@@ -102,20 +107,24 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
             const waUrl = `https://wa.me/6281388997722?text=${waText}`;
 
             return (
+              <ViewTransition key={product.id}>
               <Card
-                key={product.id}
                 className="group flex flex-col overflow-hidden transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-xl hover:border-[#3584e4]/40"
               >
                 {/* Product Image */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
                   {product.cover_image ? (
-                    <Image
-                      src={product.cover_image}
-                      alt={product.title}
-                      fill
-                      className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
+                    <Link href={`/katalog/${product.slug}`} transitionTypes={['nav-forward']}>
+                      <ViewTransition name={`product-${product.id}`} share="morph" default="none">
+                        <Image
+                          src={product.cover_image}
+                          alt={product.title}
+                          fill
+                          className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      </ViewTransition>
+                    </Link>
                   ) : (
                     <div className="flex h-full w-full items-center justify-center text-xs text-muted-foreground">
                       <span>Gambar Produk</span>
@@ -141,7 +150,7 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
                       </div>
                     )}
                     <h3 className="text-base font-bold tracking-tight text-foreground group-hover:text-primary transition-colors leading-snug">
-                      <Link href={`/katalog/${product.slug}`}>
+                      <Link href={`/katalog/${product.slug}`} transitionTypes={['nav-forward']}>
                         {product.title}
                       </Link>
                     </h3>
@@ -169,7 +178,7 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
                         size="sm"
                         className="h-9 px-3 text-xs cursor-pointer"
                       >
-                        <Link href={`/katalog/${product.slug}`}>
+                        <Link href={`/katalog/${product.slug}`} transitionTypes={['nav-forward']}>
                           <span>Spesifikasi</span>
                           <ArrowRight className="h-3 w-3 ml-1" />
                         </Link>
@@ -178,6 +187,7 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
                   </div>
                 </CardContent>
               </Card>
+              </ViewTransition>
             );
           })}
         </div>

@@ -4,12 +4,11 @@ import {
   initialServices,
   initialProjects,
   initialPosts,
-  initialTeam,
   initialTestimonials,
   initialInquiries,
   initialHeroSlides,
 } from './mock-data';
-import { CompanySettings, Service, Project, Post, TeamMember, Testimonial, Inquiry, HeroSlide } from './types';
+import { CompanySettings, Service, Project, Post, Testimonial, Inquiry, HeroSlide } from './types';
 
 export async function getCompanySettings(): Promise<CompanySettings> {
   if (!isSupabaseConfigured()) {
@@ -168,29 +167,6 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     return data as Post;
   } catch {
     return initialPosts.find((p) => p.slug === slug) || null;
-  }
-}
-
-export async function getTeamMembers(): Promise<TeamMember[]> {
-  if (!isSupabaseConfigured()) {
-    return initialTeam;
-  }
-
-  try {
-    const supabase = await createClient();
-    const { data, error } = await supabase
-      .from('team_members')
-      .select('*')
-      .eq('is_active', true)
-      .order('display_order', { ascending: true });
-
-    if (error || !data || data.length === 0) {
-      return initialTeam;
-    }
-
-    return data as TeamMember[];
-  } catch {
-    return initialTeam;
   }
 }
 

@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { createClient, isSupabaseConfigured } from './supabase/server';
-import { Service, Project, Post, TeamMember, Testimonial, HeroSlide } from './types';
+import { Service, Project, Post, Testimonial, HeroSlide } from './types';
 
 // =========================================================
 // 1. PUBLIC ACTIONS
@@ -113,21 +113,14 @@ export async function adminLogout() {
 export async function updateCompanySettingsAction(formData: FormData) {
   const data = {
     company_name: formData.get('company_name') as string,
-    tagline: formData.get('tagline') as string,
     description: formData.get('description') as string,
     logo_url: formData.get('logo_url') as string,
-    hero_title: formData.get('hero_title') as string,
-    hero_subtitle: formData.get('hero_subtitle') as string,
-    hero_cta_text: formData.get('hero_cta_text') as string,
-    hero_cta_link: formData.get('hero_cta_link') as string,
     contact_email: formData.get('contact_email') as string,
     contact_phone: formData.get('contact_phone') as string,
     contact_whatsapp: formData.get('contact_whatsapp') as string,
     contact_address: formData.get('contact_address') as string,
     social_facebook: formData.get('social_facebook') as string,
     social_instagram: formData.get('social_instagram') as string,
-    social_linkedin: formData.get('social_linkedin') as string,
-    social_twitter: formData.get('social_twitter') as string,
     updated_at: new Date().toISOString(),
   };
 
@@ -257,41 +250,6 @@ export async function deletePostAction(id: string) {
   revalidatePath('/blog');
   revalidatePath('/admin/blog');
   return { success: true, message: 'Artikel berhasil dihapus!' };
-}
-
-// TEAM ACTIONS
-export async function saveTeamMemberAction(member: Partial<TeamMember>) {
-  if (isSupabaseConfigured()) {
-    const supabase = await createClient();
-    if (member.id && !member.id.startsWith('t')) {
-      const { error } = await supabase
-        .from('team_members')
-        .update(member)
-        .eq('id', member.id);
-      if (error) return { success: false, error: error.message };
-    } else {
-      const insertData = { ...member };
-      delete insertData.id;
-      const { error } = await supabase.from('team_members').insert(insertData);
-      if (error) return { success: false, error: error.message };
-    }
-  }
-
-  revalidatePath('/about');
-  revalidatePath('/admin/team');
-  return { success: true, message: 'Anggota tim berhasil disimpan!' };
-}
-
-export async function deleteTeamMemberAction(id: string) {
-  if (isSupabaseConfigured()) {
-    const supabase = await createClient();
-    const { error } = await supabase.from('team_members').delete().eq('id', id);
-    if (error) return { success: false, error: error.message };
-  }
-
-  revalidatePath('/about');
-  revalidatePath('/admin/team');
-  return { success: true, message: 'Anggota tim berhasil dihapus!' };
 }
 
 // TESTIMONIAL ACTIONS

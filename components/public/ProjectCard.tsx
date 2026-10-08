@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ViewTransition } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, MessageCircle } from 'lucide-react';
@@ -26,13 +26,17 @@ export function ProjectCard({ project }: ProjectCardProps) {
       {/* Cover Image */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
         {project.cover_image ? (
-          <Image
-            src={project.cover_image}
-            alt={project.title}
-            fill
-            className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+          <Link href={`/katalog/${project.slug}`} transitionTypes={['nav-forward']}>
+            <ViewTransition name={`product-${project.id}`} share="morph" default="none">
+              <Image
+                src={project.cover_image}
+                alt={project.title}
+                fill
+                className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </ViewTransition>
+          </Link>
         ) : (
           <div className="flex h-full w-full items-center justify-center text-muted-foreground text-xs">
             <span>Tidak ada foto</span>
@@ -54,7 +58,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </div>
           )}
           <h3 className="text-base font-bold tracking-tight text-foreground group-hover:text-primary transition-colors line-clamp-2">
-            <Link href={`/katalog/${project.slug}`}>
+            <Link href={`/katalog/${project.slug}`} transitionTypes={['nav-forward']}>
               {project.title}
             </Link>
           </h3>
@@ -76,7 +80,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </Button>
 
           <Button asChild variant="outline" size="sm" className="h-8 px-3 text-xs cursor-pointer">
-            <Link href={`/katalog/${project.slug}`}>
+            <Link href={`/katalog/${project.slug}`} transitionTypes={['nav-forward']}>
               <span>Detail</span>
               <ArrowRight className="h-3 w-3 ml-1" />
             </Link>

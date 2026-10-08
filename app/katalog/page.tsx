@@ -4,6 +4,7 @@ import { ShoppingBag } from 'lucide-react';
 import { getCompanySettings, getProjects } from '@/lib/data';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
+import { DirectionalTransition } from '@/components/public/DirectionalTransition';
 import { ProductCatalogView } from '@/components/public/ProductCatalogView';
 
 export const metadata: Metadata = {
@@ -19,7 +20,8 @@ export default async function KatalogPage() {
   ]);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <DirectionalTransition>
+      <div className="flex min-h-screen flex-col">
       <Navbar settings={settings} />
 
       <main className="flex-1">
@@ -49,5 +51,6 @@ export default async function KatalogPage() {
 
       <Footer settings={settings} />
     </div>
+    </DirectionalTransition>
   );
 }

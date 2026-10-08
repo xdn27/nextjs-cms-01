@@ -18,7 +18,11 @@ export function FloatingWhatsApp({
   const waUrl = `https://wa.me/${cleanPhone}?text=${defaultMessage}`;
 
   return (
-    <aside aria-label="Konsultasi WhatsApp" className="fixed bottom-6 right-6 z-50">
+    <aside
+      style={{ viewTransitionName: 'floating-wa' }}
+      aria-label="Konsultasi WhatsApp"
+      className="fixed bottom-6 right-6 z-50"
+    >
       <a
         href={waUrl}
         target="_blank"

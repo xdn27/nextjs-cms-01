@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ViewTransition } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, User, ArrowRight } from 'lucide-react';
@@ -24,13 +24,17 @@ export function BlogCard({ post }: BlogCardProps) {
       {/* Cover Image */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
         {post.cover_image ? (
-          <Image
-            src={post.cover_image}
-            alt={post.title}
-            fill
-            className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+          <Link href={`/blog/${post.slug}`} transitionTypes={['nav-forward']}>
+            <ViewTransition name={`post-${post.id}`} share="morph" default="none">
+              <Image
+                src={post.cover_image}
+                alt={post.title}
+                fill
+                className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </ViewTransition>
+          </Link>
         ) : (
           <div className="flex h-full w-full items-center justify-center text-muted-foreground text-xs">
             <span>Tidak ada foto</span>
@@ -58,7 +62,7 @@ export function BlogCard({ post }: BlogCardProps) {
           </div>
 
           <h3 className="mt-3 text-lg font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
-            <Link href={`/blog/${post.slug}`}>
+            <Link href={`/blog/${post.slug}`} transitionTypes={['nav-forward']}>
               {post.title}
             </Link>
           </h3>
@@ -71,6 +75,7 @@ export function BlogCard({ post }: BlogCardProps) {
         <div className="mt-6 border-t border-border pt-4">
           <Link
             href={`/blog/${post.slug}`}
+            transitionTypes={['nav-forward']}
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline transition-colors"
           >
             <span>Baca Selengkapnya</span>

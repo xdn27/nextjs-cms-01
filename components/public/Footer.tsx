@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Mail, Phone, MapPin, Monitor, Clock, MessageCircle } from 'lucide-react';
 import { CompanySettings } from '@/lib/types';
 import { FloatingWhatsApp } from '@/components/public/FloatingWhatsApp';
@@ -19,10 +20,20 @@ export function Footer({ settings }: FooterProps) {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
           {/* Company Info */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-[#3584e4] to-indigo-600 text-white shadow-md">
-                <Monitor className="h-5 w-5" />
-              </div>
+            <Link transitionTypes={['nav-lateral']} href="/" className="flex items-center gap-3">
+              {settings.logo_url ? (
+                <Image
+                  src={settings.logo_url}
+                  alt={`Logo ${settings.company_name}`}
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 rounded-xl object-contain"
+                />
+              ) : (
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-[#3584e4] to-indigo-600 text-white shadow-md">
+                  <Monitor className="h-5 w-5" />
+                </div>
+              )}
               <span className="text-xl font-bold tracking-tight text-white">
                 {settings.company_name}
               </span>
@@ -76,27 +87,27 @@ export function Footer({ settings }: FooterProps) {
             </h3>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li>
-                <Link href="/" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/" className="hover:text-white transition-colors">
                   Beranda
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/services" className="hover:text-white transition-colors">
                   Layanan &amp; Servis
                 </Link>
               </li>
               <li>
-                <Link href="/katalog" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/katalog" className="hover:text-white transition-colors">
                   Katalog Produk
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/blog" className="hover:text-white transition-colors">
                   Blog &amp; Tips Hardware
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/contact" className="hover:text-white transition-colors">
                   Kontak &amp; Alamat Toko
                 </Link>
               </li>
@@ -110,32 +121,32 @@ export function Footer({ settings }: FooterProps) {
             </h3>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li>
-                <Link href="/katalog" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/katalog" className="hover:text-white transition-colors">
                   PC Gaming &amp; Streaming
                 </Link>
               </li>
               <li>
-                <Link href="/katalog" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/katalog" className="hover:text-white transition-colors">
                   Laptop Gaming &amp; Office
                 </Link>
               </li>
               <li>
-                <Link href="/services#rakit-pc-gaming-custom" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/services#rakit-pc-gaming-custom" className="hover:text-white transition-colors">
                   Jasa Rakit PC Custom
                 </Link>
               </li>
               <li>
-                <Link href="/services#servis-laptop-pc-desktop" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/services#servis-laptop-pc-desktop" className="hover:text-white transition-colors">
                   Servis Laptop &amp; PC
                 </Link>
               </li>
               <li>
-                <Link href="/services#cleaning-repaste-laptop-pc" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/services#cleaning-repaste-laptop-pc" className="hover:text-white transition-colors">
                   Deep Cleaning &amp; Repaste
                 </Link>
               </li>
               <li>
-                <Link href="/services#upgrade-ram-ssd-gpu" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/services#upgrade-ram-ssd-gpu" className="hover:text-white transition-colors">
                   Upgrade RAM &amp; SSD NVMe
                 </Link>
               </li>
@@ -175,13 +186,13 @@ export function Footer({ settings }: FooterProps) {
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[#2e2e34] pt-8 text-xs text-neutral-500 sm:flex-row">
           <p>© {currentYear} {settings.company_name}. Hak Cipta Dilindungi Undang-Undang.</p>
           <div className="flex items-center gap-6">
-            <Link href="/services" className="hover:text-neutral-400">
+            <Link transitionTypes={['nav-lateral']} href="/services" className="hover:text-neutral-400">
               Layanan
             </Link>
-            <Link href="/katalog" className="hover:text-neutral-400">
+            <Link transitionTypes={['nav-lateral']} href="/katalog" className="hover:text-neutral-400">
               Katalog
             </Link>
-            <Link href="/contact" className="hover:text-neutral-400">
+            <Link transitionTypes={['nav-lateral']} href="/contact" className="hover:text-neutral-400">
               Kontak
             </Link>
           </div>

@@ -6,45 +6,29 @@
 INSERT INTO public.company_settings (
     id,
     company_name,
-    tagline,
     description,
     logo_url,
-    hero_title,
-    hero_subtitle,
-    hero_cta_text,
-    hero_cta_link,
     contact_email,
     contact_phone,
     contact_whatsapp,
     contact_address,
     social_facebook,
-    social_instagram,
-    social_linkedin,
-    social_twitter
+    social_instagram
 ) VALUES (
     1,
-    'Nusantara Tech Innovasi',
-    'Mitra Transformasi Digital & Solusi Perangkat Lunak Terdepan',
-    'Kami membantu korporasi dan startup berkembang pesat melalui rekayasa perangkat lunak modern, arsitektur cloud serverless, dan kecerdasan buatan terapan.',
+    'CyberTech Computer & Gaming',
+    'Pusat belanja kebutuhan komputer, rakit custom PC gaming & workstation bergaransi resmi, upgrade komponen, dan jasa service laptop/komputer oleh teknisi profesional.',
     '/images/logo.svg',
-    'Akselerasi Pertumbuhan Bisnis Anda dengan Solusi Digital Andal',
-    'Bangun aplikasi web, mobile, dan sistem enterprise berkinerja tinggi bersama tim insinyur berpengalaman yang berfokus pada hasil nyata.',
-    'Mulai Konsultasi',
-    '/contact',
-    'halo@nusantaratech.id',
-    '+62 21 5550 9876',
-    '+62 812 8899 7700',
-    'Sudirman Central Business District (SCBD), Gedung Artha Graha Lt. 24, Jakarta Selatan, 12190',
-    'https://facebook.com/nusantaratech',
-    'https://instagram.com/nusantaratech',
-    'https://linkedin.com/company/nusantaratech',
-    'https://x.com/nusantaratech'
+    'sales@cybertechcomputer.co.id',
+    '+62 21 6230 1888',
+    '+62 813 8899 7722',
+    'Harco Mangga Dua Plaza Lt. 2 Blok B No. 12-14, Jl. Mangga Dua Raya, Jakarta Pusat 10730',
+    'https://facebook.com/cybertechcomputer',
+    'https://instagram.com/cybertechcomputer'
 ) ON CONFLICT (id) DO UPDATE SET
     company_name = EXCLUDED.company_name,
-    tagline = EXCLUDED.tagline,
     description = EXCLUDED.description,
-    hero_title = EXCLUDED.hero_title,
-    hero_subtitle = EXCLUDED.hero_subtitle;
+    logo_url = EXCLUDED.logo_url;
 
 -- 2. SERVICES
 INSERT INTO public.services (slug, title, summary, description, icon, features, display_order, is_active) VALUES
@@ -202,51 +186,8 @@ INSERT INTO public.posts (slug, title, excerpt, content, cover_image, category, 
 )
 ON CONFLICT (slug) DO NOTHING;
 
--- 5. TEAM MEMBERS
-INSERT INTO public.team_members (name, role, photo_url, bio, social_linkedin, social_twitter, display_order, is_active) VALUES
-(
-    'Budi Santoso, M.Kom',
-    'Chief Executive Officer & Founder',
-    '/images/team/budi.svg',
-    'Praktisi teknologi dengan pengalaman 15+ tahun memimpin transformasi digital di berbagai korporasi multinasional dan startup unicorn.',
-    'https://linkedin.com',
-    'https://x.com',
-    1,
-    true
-),
-(
-    'Dewi Anggraini, S.T.',
-    'Chief Technology Officer',
-    '/images/team/dewi.svg',
-    'Pakar arsitektur cloud serverless, keamanan data terdistribusi, dan kecerdasan buatan terapan.',
-    'https://linkedin.com',
-    'https://x.com',
-    2,
-    true
-),
-(
-    'Rian Prasetyo, B.Des',
-    'Head of Product & Design',
-    '/images/team/rian.svg',
-    'Desainer produk digital peraih penghargaan yang berfokus pada pengalaman pengguna yang intuitif, elegan, dan berdampak nyata.',
-    'https://linkedin.com',
-    'https://x.com',
-    3,
-    true
-),
-(
-    'Siti Rahmawati',
-    'Head of Client Success & Delivery',
-    '/images/team/siti.svg',
-    'Menjaga hubungan erat dengan mitra bisnis dan memastikan setiap proyek diselesaikan tepat waktu sesuai standar kualitas tinggi.',
-    'https://linkedin.com',
-    'https://x.com',
-    4,
-    true
-)
-ON CONFLICT DO NOTHING;
 
--- 6. TESTIMONIALS
+-- 5. TESTIMONIALS
 INSERT INTO public.testimonials (client_name, client_title, company, avatar_url, quote, rating, display_order, is_active) VALUES
 (
     'Ir. Hendra Gunawan',
@@ -280,7 +221,7 @@ INSERT INTO public.testimonials (client_name, client_title, company, avatar_url,
 )
 ON CONFLICT DO NOTHING;
 
--- 7. INQUIRIES (SAMPLE DATA)
+-- 6. INQUIRIES (SAMPLE DATA)
 INSERT INTO public.inquiries (name, email, phone, subject, message, status, created_at) VALUES
 (
     'Ahmad Fauzi',
@@ -302,7 +243,7 @@ INSERT INTO public.inquiries (name, email, phone, subject, message, status, crea
 )
 ON CONFLICT DO NOTHING;
 
--- 8. HERO SLIDES
+-- 7. HERO SLIDES
 INSERT INTO public.hero_slides (
     title,
     subtitle,

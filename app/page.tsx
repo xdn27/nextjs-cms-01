@@ -21,6 +21,7 @@ import {
 } from '@/lib/data';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
+import { DirectionalTransition } from '@/components/public/DirectionalTransition';
 import { Hero } from '@/components/public/Hero';
 import { ServiceCard } from '@/components/public/ServiceCard';
 import { ProjectCard } from '@/components/public/ProjectCard';
@@ -82,7 +83,8 @@ export default async function HomePage() {
   const waNumber = settings.contact_whatsapp.replace(/[^0-9]/g, '');
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <DirectionalTransition>
+      <div className="flex min-h-screen flex-col">
       <Navbar settings={settings} />
 
       <main className="flex-1">
@@ -106,6 +108,7 @@ export default async function HomePage() {
               </div>
               <Link
                 href="/services"
+                transitionTypes={['nav-lateral']}
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#3584e4] hover:text-[#1c71d8] transition-colors"
               >
                 <span>Lihat Semua Layanan</span>
@@ -138,6 +141,7 @@ export default async function HomePage() {
               </div>
               <Link
                 href="/katalog"
+                transitionTypes={['nav-lateral']}
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#3584e4] hover:text-[#1c71d8] transition-colors"
               >
                 <span>Buka Semua Katalog Produk</span>
@@ -213,6 +217,7 @@ export default async function HomePage() {
                 </div>
                 <Link
                   href="/blog"
+                  transitionTypes={['nav-lateral']}
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#3584e4] hover:text-[#1c71d8] transition-colors"
                 >
                   <span>Lihat Semua Artikel Blog</span>
@@ -255,6 +260,7 @@ export default async function HomePage() {
               </a>
               <Link
                 href="/contact"
+                transitionTypes={['nav-lateral']}
                 className="inline-flex items-center gap-2 rounded-xl border border-neutral-700 bg-neutral-800/80 px-8 py-4 text-base font-semibold text-neutral-200 transition-colors hover:bg-neutral-700 hover:text-white"
               >
                 <span>Lihat Alamat Toko Fisik</span>
@@ -267,5 +273,6 @@ export default async function HomePage() {
 
       <Footer settings={settings} />
     </div>
+    </DirectionalTransition>
   );
 }

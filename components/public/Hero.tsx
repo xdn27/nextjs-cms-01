@@ -315,7 +315,7 @@ export function Hero({ initialSlides }: HeroProps) {
                       size="lg"
                       className="h-13 px-8 text-base font-semibold shadow-xl shadow-[#3584e4]/30 bg-[#3584e4] hover:bg-[#1c71d8] text-white group cursor-pointer transition-transform duration-150 ease-out hover:scale-105 active:scale-95"
                     >
-                      <Link href={slide.primaryCta.href} tabIndex={isActive ? 0 : -1}>
+                      <Link transitionTypes={['nav-lateral']} href={slide.primaryCta.href} tabIndex={isActive ? 0 : -1}>
                         <DynamicIcon name={slide.primaryCta.icon || 'ShoppingBag'} className="h-4 w-4 mr-2" />
                         <span>{slide.primaryCta.text}</span>
                         <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-1 ml-1.5" />
@@ -327,7 +327,7 @@ export function Hero({ initialSlides }: HeroProps) {
                       size="lg"
                       className="h-13 px-8 text-base font-semibold cursor-pointer border-white/20 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-transform duration-150 ease-out hover:scale-105 active:scale-95"
                     >
-                      <Link href={slide.secondaryCta.href} tabIndex={isActive ? 0 : -1}>
+                      <Link transitionTypes={['nav-lateral']} href={slide.secondaryCta.href} tabIndex={isActive ? 0 : -1}>
                         <span>{slide.secondaryCta.text}</span>
                       </Link>
                     </Button>

@@ -1,23 +1,16 @@
-import { CompanySettings, Service, Project, Post, TeamMember, Testimonial, Inquiry, HeroSlide } from './types';
+import { CompanySettings, Service, Project, Post, Testimonial, Inquiry, HeroSlide } from './types';
 
 export const initialSettings: CompanySettings = {
   id: 1,
   company_name: 'CyberTech Computer & Gaming',
-  tagline: 'Pusat Rakit PC Gaming, Laptop, Upgrade & Servis Komputer Terpercaya',
   description: 'Pusat belanja kebutuhan komputer, rakit custom PC gaming & workstation bergaransi resmi, upgrade komponen, dan jasa service laptop/komputer oleh teknisi profesional.',
   logo_url: '/images/logo.svg',
-  hero_title: 'Rakit PC Impian & Solusi Komputer Terlengkap Bergaransi Resmi',
-  hero_subtitle: 'Spesialis rakitan PC gaming custom tanpa bottleneck, laptop bergaransi resmi, upgrade SSD & RAM super cepat, serta service komputer profesional dengan sparepart original.',
-  hero_cta_text: 'Konsultasi Rakit PC',
-  hero_cta_link: '/contact',
   contact_email: 'sales@cybertechcomputer.co.id',
   contact_phone: '+62 21 6230 1888',
   contact_whatsapp: '+62 813 8899 7722',
   contact_address: 'Harco Mangga Dua Plaza Lt. 2 Blok B No. 12-14, Jl. Mangga Dua Raya, Jakarta Pusat 10730',
   social_facebook: 'https://facebook.com/cybertechcomputer',
   social_instagram: 'https://instagram.com/cybertechcomputer',
-  social_linkedin: 'https://linkedin.com/company/cybertechcomputer',
-  social_twitter: 'https://x.com/cybertechpc',
 };
 
 export const initialServices: Service[] = [
@@ -239,53 +232,6 @@ export const initialPosts: Post[] = [
     tags: ['SSD', 'NVMe', 'Storage', 'Upgrade PC', 'Benchmark'],
     status: 'published',
     published_at: '2026-09-29T14:15:00Z',
-  },
-];
-
-export const initialTeam: TeamMember[] = [
-  {
-    id: 't1',
-    name: 'Hendra Wijaya, S.Kom',
-    role: 'Lead System Builder & Hardware Consultant',
-    photo_url: '/images/team/hendra.svg',
-    bio: 'Pengalaman 10+ tahun dalam arsitektur PC rakitan gaming, tuning overclocking, custom liquid cooling, dan optimalisasi sistem operasi.',
-    social_linkedin: 'https://linkedin.com',
-    social_twitter: 'https://x.com',
-    display_order: 1,
-    is_active: true,
-  },
-  {
-    id: 't2',
-    name: 'Dimas Pratama',
-    role: 'Senior Hardware Repair Technician (BGA Specialist)',
-    photo_url: '/images/team/dimas.svg',
-    bio: 'Ahli perbaikan motherboard laptop dan kartu grafis level komponen, reballing chipset, dan penanganan mati total bergaransi.',
-    social_linkedin: 'https://linkedin.com',
-    social_twitter: 'https://x.com',
-    display_order: 2,
-    is_active: true,
-  },
-  {
-    id: 't3',
-    name: 'Alvin Setiawan',
-    role: 'Hardware Specialist & Customer Service',
-    photo_url: '/images/team/alvin.svg',
-    bio: 'Siap membantu konsultasi pemilihan racikan spesifikasi PC seimbang sesuai alokasi dana dan kebutuhan software pengguna.',
-    social_linkedin: 'https://linkedin.com',
-    social_twitter: 'https://x.com',
-    display_order: 3,
-    is_active: true,
-  },
-  {
-    id: 't4',
-    name: 'Rini Handayani',
-    role: 'Procurement & Corporate IT Account Manager',
-    photo_url: '/images/team/rini.svg',
-    bio: 'Menangani pengadaan partai besar untuk kantor, sekolah, dan warnet gaming dengan faktur pajak dan garansi resmi distributor.',
-    social_linkedin: 'https://linkedin.com',
-    social_twitter: 'https://x.com',
-    display_order: 4,
-    is_active: true,
   },
 ];
 

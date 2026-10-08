@@ -51,7 +51,7 @@ export default function AdminSettingsPage() {
           Pengaturan Perusahaan & Situs
         </h1>
         <p className="text-xs text-muted-foreground">
-          Ubah informasi umum, kontak operasional, teks banner utama (hero), dan media sosial perusahaan.
+          Ubah informasi umum, logo, kontak operasional, dan media sosial perusahaan.
         </p>
       </div>
 
@@ -96,16 +96,6 @@ export default function AdminSettingsPage() {
                   required
                 />
               </div>
-
-              <div className="space-y-1.5">
-                <Label htmlFor="tagline">Slogan / Tagline</Label>
-                <Input
-                  id="tagline"
-                  type="text"
-                  name="tagline"
-                  defaultValue={settings.tagline}
-                />
-              </div>
             </div>
 
             <div className="space-y-1.5">
@@ -124,62 +114,6 @@ export default function AdminSettingsPage() {
               onChange={(url) => setLogoUrl(url)}
               helperText="Unggah logo format PNG transparan atau SVG untuk hasil terbaik."
             />
-          </CardContent>
-        </Card>
-
-        {/* Banner Utama (Hero) */}
-        <Card className="shadow-sm">
-          <CardHeader className="p-6 pb-4 border-b border-border">
-            <CardTitle className="text-sm font-bold uppercase tracking-wider">
-              Banner Beranda (Hero Section)
-            </CardTitle>
-            <CardDescription className="text-xs">
-              Teks headline dan tombol aksi di halaman utama
-            </CardDescription>
-          </CardHeader>
-
-          <CardContent className="p-6 space-y-4">
-            <div className="space-y-1.5">
-              <Label htmlFor="hero_title">Judul Utama (Headline)</Label>
-              <Input
-                id="hero_title"
-                type="text"
-                name="hero_title"
-                defaultValue={settings.hero_title}
-                required
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="hero_subtitle">Subjudul (Sub-headline)</Label>
-              <Textarea
-                id="hero_subtitle"
-                name="hero_subtitle"
-                rows={2}
-                defaultValue={settings.hero_subtitle}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="space-y-1.5">
-                <Label htmlFor="hero_cta_text">Teks Tombol CTA</Label>
-                <Input
-                  id="hero_cta_text"
-                  type="text"
-                  name="hero_cta_text"
-                  defaultValue={settings.hero_cta_text}
-                />
-              </div>
-              <div className="space-y-1.5">
-                <Label htmlFor="hero_cta_link">Tautan Tombol CTA</Label>
-                <Input
-                  id="hero_cta_link"
-                  type="text"
-                  name="hero_cta_link"
-                  defaultValue={settings.hero_cta_link}
-                />
-              </div>
-            </div>
           </CardContent>
         </Card>
 
@@ -252,30 +186,12 @@ export default function AdminSettingsPage() {
           <CardContent className="p-6 space-y-4">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-1.5">
-                <Label htmlFor="social_linkedin">LinkedIn URL</Label>
-                <Input
-                  id="social_linkedin"
-                  type="url"
-                  name="social_linkedin"
-                  defaultValue={settings.social_linkedin || ''}
-                />
-              </div>
-              <div className="space-y-1.5">
                 <Label htmlFor="social_instagram">Instagram URL</Label>
                 <Input
                   id="social_instagram"
                   type="url"
                   name="social_instagram"
                   defaultValue={settings.social_instagram || ''}
-                />
-              </div>
-              <div className="space-y-1.5">
-                <Label htmlFor="social_twitter">X / Twitter URL</Label>
-                <Input
-                  id="social_twitter"
-                  type="url"
-                  name="social_twitter"
-                  defaultValue={settings.social_twitter || ''}
                 />
               </div>
               <div className="space-y-1.5">

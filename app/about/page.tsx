@@ -1,10 +1,10 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { Target, Award, CheckCircle2, Cpu } from 'lucide-react';
-import { getCompanySettings, getTeamMembers } from '@/lib/data';
+import { getCompanySettings } from '@/lib/data';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
-import { TeamSection } from '@/components/public/TeamSection';
+import { DirectionalTransition } from '@/components/public/DirectionalTransition';
 
 export const metadata: Metadata = {
   title: 'Tentang CyberTech Toko Komputer & Servis',
@@ -13,13 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  const [settings, team] = await Promise.all([
-    getCompanySettings(),
-    getTeamMembers(),
-  ]);
+  const settings = await getCompanySettings();
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <DirectionalTransition>
+      <div className="flex min-h-screen flex-col">
       <Navbar settings={settings} />
 
       <main className="flex-1">
@@ -110,11 +108,10 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        {/* Tim Teknisi */}
-        <TeamSection team={team} />
       </main>
 
       <Footer settings={settings} />
     </div>
+    </DirectionalTransition>
   );
 }

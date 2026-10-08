@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, ViewTransition } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Sparkles, Lock, Mail, Loader2, ArrowRight, AlertCircle, Info } from 'lucide-react';
@@ -112,6 +112,7 @@ function LoginForm() {
         <div className="mt-6 border-t border-[#383838] pt-5 text-center">
           <Link
             href="/"
+            transitionTypes={['nav-back']}
             className="text-xs font-medium text-[#9a9996] hover:text-[#78aeed] transition-colors"
           >
             ← Kembali ke Halaman Publik
@@ -126,7 +127,7 @@ export default function LoginPage() {
   return (
     <div className="dark adwaita-dark flex min-h-screen flex-col justify-center bg-[#1e1e1e] text-white px-4 py-12 sm:px-6 lg:px-8 selection:bg-[#3584e4] selection:text-white">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <Link href="/" className="flex items-center justify-center gap-3">
+        <Link href="/" transitionTypes={['nav-back']} className="flex items-center justify-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#3584e4] text-white shadow-lg shadow-[#3584e4]/30">
             <Sparkles className="h-6 w-6" />
           </div>
@@ -141,11 +142,15 @@ export default function LoginPage() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <Suspense fallback={
-          <div className="flex justify-center p-8">
-            <Loader2 className="h-6 w-6 animate-spin text-[#3584e4]" />
-          </div>
+          <ViewTransition exit="slide-down">
+            <div className="flex justify-center p-8">
+              <Loader2 className="h-6 w-6 animate-spin text-[#3584e4]" />
+            </div>
+          </ViewTransition>
         }>
-          <LoginForm />
+          <ViewTransition enter="slide-up" default="none">
+            <LoginForm />
+          </ViewTransition>
         </Suspense>
       </div>
     </div>

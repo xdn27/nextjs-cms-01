@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ViewTransition } from 'react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,6 +14,7 @@ import {
 import { getCompanySettings, getProjectBySlug, getProjects } from '@/lib/data';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
+import { DirectionalTransition } from '@/components/public/DirectionalTransition';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -66,14 +67,17 @@ export default async function ProductDetailPage({
   const waUrl = `https://wa.me/6281388997722?text=${waText}`;
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <DirectionalTransition>
+      <div className="flex min-h-screen flex-col">
       <Navbar settings={settings} />
 
       <main className="flex-1 pb-24">
+        <ViewTransition key={product.slug} name="product-detail" share="auto" default="none">
         {/* Back Link */}
         <div className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">
           <Link
             href="/katalog"
+            transitionTypes={['nav-back']}
             className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-primary transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -88,14 +92,16 @@ export default async function ProductDetailPage({
             <div className="lg:col-span-6">
               <div className="relative aspect-[16/11] w-full overflow-hidden rounded-2xl border border-border bg-muted shadow-lg">
                 {product.cover_image ? (
-                  <Image
-                    src={product.cover_image}
-                    alt={product.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    priority
-                  />
+                  <ViewTransition name={`product-${product.id}`} share="morph">
+                    <Image
+                      src={product.cover_image}
+                      alt={product.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority
+                    />
+                  </ViewTransition>
                 ) : (
                   <div className="flex h-full w-full items-center justify-center text-sm text-muted-foreground">
                     Tidak ada gambar
@@ -210,17 +216,20 @@ export default async function ProductDetailPage({
                 <Link
                   key={rel.id}
                   href={`/katalog/${rel.slug}`}
+                  transitionTypes={['nav-forward']}
                   className="group rounded-xl border border-border bg-card p-4 transition-all hover:border-[#3584e4]/50 hover:shadow-md"
                 >
                   <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-muted">
                     {rel.cover_image && (
-                      <Image
-                        src={rel.cover_image}
-                        alt={rel.title}
-                        fill
-                        className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                      />
+                      <ViewTransition name={`product-${rel.id}`} share="morph" default="none">
+                        <Image
+                          src={rel.cover_image}
+                          alt={rel.title}
+                          fill
+                          className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                        />
+                      </ViewTransition>
                     )}
                   </div>
                   <h3 className="mt-3 text-xs font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
@@ -234,9 +243,11 @@ export default async function ProductDetailPage({
             </div>
           </div>
         )}
+        </ViewTransition>
       </main>
 
       <Footer settings={settings} />
     </div>
+    </DirectionalTransition>
   );
 }

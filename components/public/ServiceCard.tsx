@@ -45,6 +45,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
         <div className="mt-6 pt-2">
           <Link
             href={`/services#${service.slug}`}
+            transitionTypes={['nav-lateral']}
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary transition-colors hover:underline"
           >
             <span>Pelajari Selengkapnya</span>

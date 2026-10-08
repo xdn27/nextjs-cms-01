@@ -1,21 +1,14 @@
 export interface CompanySettings {
   id: number;
   company_name: string;
-  tagline: string;
   description: string;
   logo_url?: string | null;
-  hero_title: string;
-  hero_subtitle: string;
-  hero_cta_text: string;
-  hero_cta_link: string;
   contact_email: string;
   contact_phone: string;
   contact_whatsapp: string;
   contact_address: string;
   social_facebook?: string | null;
   social_instagram?: string | null;
-  social_linkedin?: string | null;
-  social_twitter?: string | null;
   updated_at?: string;
 }
 
@@ -59,19 +52,6 @@ export interface Post {
   tags: string[];
   status: 'draft' | 'published';
   published_at?: string;
-  created_at?: string;
-}
-
-export interface TeamMember {
-  id: string;
-  name: string;
-  role: string;
-  photo_url?: string | null;
-  bio?: string | null;
-  social_linkedin?: string | null;
-  social_twitter?: string | null;
-  display_order: number;
-  is_active: boolean;
   created_at?: string;
 }
 
