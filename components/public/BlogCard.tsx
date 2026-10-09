@@ -1,4 +1,4 @@
-import React, { ViewTransition } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, User, ArrowRight } from 'lucide-react';
@@ -25,7 +25,6 @@ export function BlogCard({ post }: BlogCardProps) {
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
         {post.cover_image ? (
           <Link href={`/blog/${post.slug}`} transitionTypes={['nav-forward']}>
-            <ViewTransition name={`post-${post.id}`} share="morph" default="none">
               <Image
                 src={post.cover_image}
                 alt={post.title}
@@ -33,7 +32,6 @@ export function BlogCard({ post }: BlogCardProps) {
                 className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
-            </ViewTransition>
           </Link>
         ) : (
           <div className="flex h-full w-full items-center justify-center text-muted-foreground text-xs">

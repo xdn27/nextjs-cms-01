@@ -4,7 +4,6 @@ import { Target, Award, CheckCircle2, Cpu } from 'lucide-react';
 import { getCompanySettings } from '@/lib/data';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
-import { DirectionalTransition } from '@/components/public/DirectionalTransition';
 
 export const metadata: Metadata = {
   title: 'Tentang CyberTech Toko Komputer & Servis',
@@ -16,7 +15,6 @@ export default async function AboutPage() {
   const settings = await getCompanySettings();
 
   return (
-    <DirectionalTransition>
       <div className="flex min-h-screen flex-col">
       <Navbar settings={settings} />
 
@@ -112,6 +110,5 @@ export default async function AboutPage() {
 
       <Footer settings={settings} />
     </div>
-    </DirectionalTransition>
   );
 }

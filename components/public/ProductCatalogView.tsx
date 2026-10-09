@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useDeferredValue, startTransition, ViewTransition } from 'react';
+import React, { useState, useMemo, useDeferredValue, startTransition } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, ShoppingBag, ArrowRight, MessageCircle } from 'lucide-react';
@@ -74,7 +74,6 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
 
       {/* Product Grid */}
       {filteredProducts.length === 0 ? (
-        <ViewTransition enter="fade-in" exit="fade-out">
           <div className="rounded-2xl border border-dashed border-border p-12 text-center">
             <ShoppingBag className="mx-auto h-10 w-10 text-muted-foreground opacity-50" />
             <h3 className="mt-4 text-base font-bold text-foreground">
@@ -97,7 +96,6 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
               Reset Pencarian
             </Button>
           </div>
-        </ViewTransition>
       ) : (
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {filteredProducts.map((product) => {
@@ -107,7 +105,6 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
             const waUrl = `https://wa.me/6281388997722?text=${waText}`;
 
             return (
-              <ViewTransition key={product.id}>
               <Card
                 className="group flex flex-col overflow-hidden transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-xl hover:border-[#3584e4]/40"
               >
@@ -115,7 +112,6 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
                   {product.cover_image ? (
                     <Link href={`/katalog/${product.slug}`} transitionTypes={['nav-forward']}>
-                      <ViewTransition name={`product-${product.id}`} share="morph" default="none">
                         <Image
                           src={product.cover_image}
                           alt={product.title}
@@ -123,7 +119,6 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
                           className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
-                      </ViewTransition>
                     </Link>
                   ) : (
                     <div className="flex h-full w-full items-center justify-center text-xs text-muted-foreground">
@@ -187,7 +182,6 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
                   </div>
                 </CardContent>
               </Card>
-              </ViewTransition>
             );
           })}
         </div>

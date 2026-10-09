@@ -5,7 +5,6 @@ import { ArrowRight, Check, MessageCircle, Wrench, ShieldCheck } from 'lucide-re
 import { getCompanySettings, getServices } from '@/lib/data';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
-import { DirectionalTransition } from '@/components/public/DirectionalTransition';
 import { DynamicIcon } from '@/components/public/DynamicIcon';
 import { Button } from '@/components/ui/button';
 
@@ -50,7 +49,6 @@ export default async function ServicesPage() {
   ];
 
   return (
-    <DirectionalTransition>
       <div className="flex min-h-screen flex-col">
       <Navbar settings={settings} />
 
@@ -186,6 +184,5 @@ export default async function ServicesPage() {
 
       <Footer settings={settings} />
     </div>
-    </DirectionalTransition>
   );
 }

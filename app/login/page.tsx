@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, Suspense, ViewTransition } from 'react';
+import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Sparkles, Lock, Mail, Loader2, ArrowRight, AlertCircle, Info } from 'lucide-react';
@@ -142,15 +142,11 @@ export default function LoginPage() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <Suspense fallback={
-          <ViewTransition exit="slide-down">
             <div className="flex justify-center p-8">
               <Loader2 className="h-6 w-6 animate-spin text-[#3584e4]" />
             </div>
-          </ViewTransition>
         }>
-          <ViewTransition enter="slide-up" default="none">
             <LoginForm />
-          </ViewTransition>
         </Suspense>
       </div>
     </div>

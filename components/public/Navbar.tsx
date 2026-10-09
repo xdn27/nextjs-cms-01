@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useTransition, ViewTransition } from 'react';
+import React, { useState, useTransition } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -27,7 +27,6 @@ export function Navbar({ settings }: NavbarProps) {
 
   return (
     <header
-      style={{ viewTransitionName: 'site-header' }}
       className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-md transition-all"
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -76,12 +75,10 @@ export function Navbar({ settings }: NavbarProps) {
                 }`}
               >
                 {isActive && (
-                  <ViewTransition name="nav-indicator" share="tab-pill">
                     <span
                       className="absolute inset-0 rounded-lg bg-muted -z-10"
                       aria-hidden
                     />
-                  </ViewTransition>
                 )}
                 <span className="relative z-10">{link.label}</span>
               </Link>
@@ -103,7 +100,6 @@ export function Navbar({ settings }: NavbarProps) {
 
       {/* Mobile Drawer Menu */}
       {isOpen && (
-        <ViewTransition enter="slide-up" exit="slide-down">
           <div className="border-b border-border bg-background/95 px-4 pt-3 pb-6 shadow-xl backdrop-blur-md md:hidden">
             <div className="flex flex-col space-y-1">
               {navLinks.map((link) => {
@@ -130,7 +126,6 @@ export function Navbar({ settings }: NavbarProps) {
               })}
             </div>
           </div>
-        </ViewTransition>
       )}
     </header>
   );

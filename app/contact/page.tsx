@@ -4,7 +4,6 @@ import { Mail, Phone, MapPin, Clock, MessageSquare, MessageCircle, Store } from 
 import { getCompanySettings } from '@/lib/data';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
-import { DirectionalTransition } from '@/components/public/DirectionalTransition';
 import { ContactForm } from '@/components/public/ContactForm';
 import { Button } from '@/components/ui/button';
 
@@ -19,7 +18,6 @@ export default async function ContactPage() {
   const waNumber = settings.contact_whatsapp.replace(/[^0-9]/g, '');
 
   return (
-    <DirectionalTransition>
       <div className="flex min-h-screen flex-col">
       <Navbar settings={settings} />
 
@@ -149,6 +147,5 @@ export default async function ContactPage() {
 
       <Footer settings={settings} />
     </div>
-    </DirectionalTransition>
   );
 }
