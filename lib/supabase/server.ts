@@ -27,3 +27,18 @@ export async function createClient() {
     },
   });
 }
+
+// Client anon tanpa cookies untuk pembacaan data publik (aman dipakai di 'use cache').
+export function createPublicClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key';
+
+  return createServerClient(url, anonKey, {
+    cookies: {
+      getAll() {
+        return [];
+      },
+      setAll() {},
+    },
+  });
+}

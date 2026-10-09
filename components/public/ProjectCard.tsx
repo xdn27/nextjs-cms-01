@@ -1,4 +1,4 @@
-import React, { ViewTransition } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, MessageCircle } from 'lucide-react';
@@ -27,7 +27,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
         {project.cover_image ? (
           <Link href={`/katalog/${project.slug}`} transitionTypes={['nav-forward']}>
-            <ViewTransition name={`product-${project.id}`} share="morph" default="none">
               <Image
                 src={project.cover_image}
                 alt={project.title}
@@ -35,7 +34,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
-            </ViewTransition>
           </Link>
         ) : (
           <div className="flex h-full w-full items-center justify-center text-muted-foreground text-xs">

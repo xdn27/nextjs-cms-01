@@ -21,7 +21,6 @@ import {
 } from '@/lib/data';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
-import { DirectionalTransition } from '@/components/public/DirectionalTransition';
 import { Hero } from '@/components/public/Hero';
 import { ServiceCard } from '@/components/public/ServiceCard';
 import { ProjectCard } from '@/components/public/ProjectCard';
@@ -83,7 +82,6 @@ export default async function HomePage() {
   const waNumber = settings.contact_whatsapp.replace(/[^0-9]/g, '');
 
   return (
-    <DirectionalTransition>
       <div className="flex min-h-screen flex-col">
       <Navbar settings={settings} />
 
@@ -273,6 +271,5 @@ export default async function HomePage() {
 
       <Footer settings={settings} />
     </div>
-    </DirectionalTransition>
   );
 }

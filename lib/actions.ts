@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { createClient, isSupabaseConfigured } from './supabase/server';
 import { isAdminUser } from './auth';
+import { CMS_CACHE_TAG } from './data';
 import { Service, Project, Post, Testimonial, HeroSlide } from './types';
 
 // =========================================================
@@ -161,7 +162,7 @@ export async function updateCompanySettingsAction(formData: FormData) {
     }
   }
 
-  updateTag('content');
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/');
   revalidatePath('/tentang');
   revalidatePath('/kontak');
@@ -191,7 +192,7 @@ export async function saveServiceAction(service: Partial<Service>) {
     }
   }
 
-  updateTag('content');
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/layanan');
   revalidatePath('/');
   revalidatePath('/admin/layanan');
@@ -208,7 +209,7 @@ export async function deleteServiceAction(id: string) {
     if (error) return { success: false, error: error.message };
   }
 
-  updateTag('content');
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/layanan');
   revalidatePath('/admin/layanan');
   return { success: true, message: 'Layanan berhasil dihapus!' };
@@ -235,7 +236,7 @@ export async function saveProjectAction(project: Partial<Project>) {
     }
   }
 
-  updateTag('content');
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/katalog');
   revalidatePath('/');
   revalidatePath('/admin/katalog');
@@ -252,7 +253,7 @@ export async function deleteProjectAction(id: string) {
     if (error) return { success: false, error: error.message };
   }
 
-  updateTag('content');
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/katalog');
   revalidatePath('/admin/katalog');
   return { success: true, message: 'Proyek berhasil dihapus!' };
@@ -279,7 +280,7 @@ export async function savePostAction(post: Partial<Post>) {
     }
   }
 
-  updateTag('content');
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/blog');
   revalidatePath('/');
   revalidatePath('/admin/blog');
@@ -296,7 +297,7 @@ export async function deletePostAction(id: string) {
     if (error) return { success: false, error: error.message };
   }
 
-  updateTag('content');
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/blog');
   revalidatePath('/admin/blog');
   return { success: true, message: 'Artikel berhasil dihapus!' };
@@ -323,7 +324,7 @@ export async function saveTestimonialAction(testimonial: Partial<Testimonial>) {
     }
   }
 
-  updateTag('content');
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/');
   revalidatePath('/admin/testimoni');
   return { success: true, message: 'Testimoni berhasil disimpan!' };
@@ -339,7 +340,7 @@ export async function deleteTestimonialAction(id: string) {
     if (error) return { success: false, error: error.message };
   }
 
-  updateTag('content');
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/');
   revalidatePath('/admin/testimoni');
   return { success: true, message: 'Testimoni berhasil dihapus!' };
@@ -387,7 +388,7 @@ export async function saveHeroSlideAction(slide: Partial<HeroSlide>) {
     }
   }
 
-  updateTag('content');
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/');
   revalidatePath('/admin/slider');
   return { success: true, message: 'Slide hero berhasil disimpan!' };
@@ -403,7 +404,7 @@ export async function deleteHeroSlideAction(id: string) {
     if (error) return { success: false, error: error.message };
   }
 
-  updateTag('content');
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/');
   revalidatePath('/admin/slider');
   return { success: true, message: 'Slide hero berhasil dihapus!' };
@@ -422,7 +423,7 @@ export async function toggleHeroSlideStatusAction(id: string, is_active: boolean
     if (error) return { success: false, error: error.message };
   }
 
-  updateTag('content');
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/');
   revalidatePath('/admin/slider');
   return { success: true, message: `Status slide berhasil ${is_active ? 'diaktifkan' : 'dinonaktifkan'}!` };

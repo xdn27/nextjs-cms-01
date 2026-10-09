@@ -1,6 +1,8 @@
 import { cacheLife, cacheTag } from 'next/cache';
-import { createClient, isSupabaseConfigured } from './supabase/server';
-import { createPublicClient } from './supabase/public';
+import { createClient, createPublicClient, isSupabaseConfigured } from './supabase/server';
+
+// Tag cache untuk seluruh data publik; di-invalidate oleh server action CMS.
+export const CMS_CACHE_TAG = 'cms';
 import {
   initialSettings,
   initialServices,
@@ -14,8 +16,8 @@ import { CompanySettings, Service, Project, Post, Testimonial, Inquiry, HeroSlid
 
 export async function getCompanySettings(): Promise<CompanySettings> {
   'use cache';
-  cacheLife('minutes');
-  cacheTag('content');
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
     return initialSettings;
@@ -41,8 +43,8 @@ export async function getCompanySettings(): Promise<CompanySettings> {
 
 export async function getServices(): Promise<Service[]> {
   'use cache';
-  cacheLife('minutes');
-  cacheTag('content');
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
     return initialServices;
@@ -68,8 +70,8 @@ export async function getServices(): Promise<Service[]> {
 
 export async function getServiceBySlug(slug: string): Promise<Service | null> {
   'use cache';
-  cacheLife('minutes');
-  cacheTag('content');
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
     return initialServices.find((s) => s.slug === slug) || null;
@@ -95,8 +97,8 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
 
 export async function getProjects(): Promise<Project[]> {
   'use cache';
-  cacheLife('minutes');
-  cacheTag('content');
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
     return initialProjects;
@@ -121,8 +123,8 @@ export async function getProjects(): Promise<Project[]> {
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
   'use cache';
-  cacheLife('minutes');
-  cacheTag('content');
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
     return initialProjects.find((p) => p.slug === slug) || null;
@@ -148,8 +150,8 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
 
 export async function getPosts(): Promise<Post[]> {
   'use cache';
-  cacheLife('minutes');
-  cacheTag('content');
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
     return initialPosts.filter((p) => p.status === 'published');
@@ -175,8 +177,8 @@ export async function getPosts(): Promise<Post[]> {
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   'use cache';
-  cacheLife('minutes');
-  cacheTag('content');
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
     return initialPosts.find((p) => p.slug === slug) || null;
@@ -202,8 +204,8 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
 export async function getTestimonials(): Promise<Testimonial[]> {
   'use cache';
-  cacheLife('minutes');
-  cacheTag('content');
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
     return initialTestimonials;
@@ -251,8 +253,8 @@ export async function getInquiries(): Promise<Inquiry[]> {
 
 export async function getHeroSlides(): Promise<HeroSlide[]> {
   'use cache';
-  cacheLife('minutes');
-  cacheTag('content');
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
     return initialHeroSlides.filter((s) => s.is_active);

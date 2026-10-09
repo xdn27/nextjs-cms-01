@@ -4,7 +4,6 @@ import { BookOpen } from 'lucide-react';
 import { getCompanySettings, getPosts } from '@/lib/data';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
-import { DirectionalTransition } from '@/components/public/DirectionalTransition';
 import { BlogCard } from '@/components/public/BlogCard';
 
 export const metadata: Metadata = {
@@ -20,7 +19,6 @@ export default async function BlogPage() {
   ]);
 
   return (
-    <DirectionalTransition>
       <div className="flex min-h-screen flex-col">
       <Navbar settings={settings} />
 
@@ -55,6 +53,5 @@ export default async function BlogPage() {
 
       <Footer settings={settings} />
     </div>
-    </DirectionalTransition>
   );
 }
