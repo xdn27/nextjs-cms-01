@@ -68,7 +68,10 @@ export function Footer({ settings }: FooterProps) {
               )}
               {settings.contact_whatsapp && (
                 <a
-                  href={waLink(settings.contact_whatsapp, 'Halo CyberTech, saya ingin konsultasi')}
+                  href={waLink(
+                    settings.contact_whatsapp,
+                    `Halo ${settings.company_name}, saya ingin konsultasi`
+                  )}
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-lg bg-[#2ec27e]/20 text-[#2ec27e] p-2 hover:bg-[#2ec27e]/30 transition-colors flex items-center gap-1.5"

@@ -14,9 +14,14 @@ import { Button } from '@/components/ui/button';
 interface ProductCatalogViewProps {
   products: Project[];
   whatsappNumber?: string;
+  companyName?: string;
 }
 
-export function ProductCatalogView({ products, whatsappNumber }: ProductCatalogViewProps) {
+export function ProductCatalogView({
+  products,
+  whatsappNumber,
+  companyName = '',
+}: ProductCatalogViewProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('Semua');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const deferredSearchQuery = useDeferredValue(searchQuery);
@@ -103,7 +108,7 @@ export function ProductCatalogView({ products, whatsappNumber }: ProductCatalogV
           {filteredProducts.map((product) => {
             const waUrl = waLink(
               whatsappNumber,
-              `Halo CyberTech Computer, saya tertarik untuk bertanya/memesan produk: ${product.title} (${product.client_name || ''})`
+              `Halo ${companyName}, saya tertarik untuk bertanya/memesan produk: ${product.title} (${product.client_name || ''})`
             );
 
             return (

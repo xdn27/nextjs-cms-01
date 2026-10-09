@@ -11,12 +11,17 @@ import { Button } from '@/components/ui/button';
 interface ProjectCardProps {
   project: Project;
   whatsappNumber?: string;
+  companyName?: string;
 }
 
-export function ProjectCard({ project, whatsappNumber }: ProjectCardProps) {
+export function ProjectCard({
+  project,
+  whatsappNumber,
+  companyName = '',
+}: ProjectCardProps) {
   const waUrl = waLink(
     whatsappNumber,
-    `Halo CyberTech Computer, saya tertarik bertanya mengenai: ${project.title} (${project.client_name || ''})`
+    `Halo ${companyName}, saya tertarik bertanya mengenai: ${project.title} (${project.client_name || ''})`
   );
 
   return (

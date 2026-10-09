@@ -6,9 +6,13 @@ import { Card, CardContent } from '@/components/ui/card';
 
 interface TestimonialSectionProps {
   testimonials: Testimonial[];
+  companyName?: string;
 }
 
-export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
+export function TestimonialSection({
+  testimonials,
+  companyName = '',
+}: TestimonialSectionProps) {
   if (!testimonials || testimonials.length === 0) return null;
 
   return (
@@ -21,9 +25,10 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
           <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
             Apa Kata Pembeli &amp; Klien Servis Kami
           </h2>
-          <p className="mt-3 max-w-2xl mx-auto text-base text-muted-foreground">
-            Ulasan nyata dari gamer, editor video, dan pelaku usaha yang telah merakit PC atau servis di CyberTech Computer.
-          </p>
+<p className="mt-3 max-w-2xl mx-auto text-base text-muted-foreground">
+              Ulasan nyata dari gamer, editor video, dan pelaku usaha yang telah merakit PC
+              atau servis di {companyName}.
+            </p>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

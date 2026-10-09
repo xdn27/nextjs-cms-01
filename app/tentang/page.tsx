@@ -5,11 +5,15 @@ import { getCompanySettings } from '@/lib/data';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
 
-export const metadata: Metadata = {
-  title: 'Tentang CyberTech Toko Komputer & Servis',
-  description:
-    'Profil toko, filosofi perakitan PC gaming bebas bottleneck, komitmen garansi resmi distributor, dan tim teknisi berpengalaman.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getCompanySettings();
+
+  return {
+    title: `Tentang ${settings.company_name}`,
+    description:
+      'Profil toko, filosofi perakitan PC gaming bebas bottleneck, komitmen garansi resmi distributor, dan tim teknisi berpengalaman.',
+  };
+}
 
 export default async function AboutPage() {
   const settings = await getCompanySettings();
@@ -27,7 +31,7 @@ export default async function AboutPage() {
               <span>Profil Toko &amp; Teknisi Spesialis</span>
             </div>
             <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-foreground sm:text-5xl">
-              Tentang CyberTech Computer &amp; Gaming
+              Tentang {settings.company_name}
             </h1>
             <p className="mt-3 max-w-2xl mx-auto text-base text-muted-foreground sm:text-lg">
               Berkomitmen menghadirkan racikan PC impian yang seimbang, suku cadang 100% original bergaransi resmi, serta layanan servis hardware yang jujur dan transparan.

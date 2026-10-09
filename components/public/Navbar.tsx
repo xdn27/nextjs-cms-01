@@ -35,7 +35,7 @@ export function Navbar({ settings }: NavbarProps) {
           {settings.logo_url ? (
             <Image
               src={settings.logo_url}
-              alt={`Logo ${settings.company_name || 'CyberTech Computer'}`}
+              alt={`Logo ${settings.company_name}`}
               width={44}
               height={44}
               className="h-11 w-11 rounded-xl object-contain"
@@ -47,7 +47,7 @@ export function Navbar({ settings }: NavbarProps) {
           )}
           <div className="flex flex-col">
             <span className="text-xl font-bold tracking-tight text-foreground">
-              {settings.company_name || 'CyberTech Computer'}
+              {settings.company_name}
             </span>
             <span className="text-xs font-medium text-muted-foreground">
               Pusat Rakit PC &amp; Servis Komputer

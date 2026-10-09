@@ -45,6 +45,7 @@ export default async function KatalogPage() {
             <ProductCatalogView
               products={products}
               whatsappNumber={settings.contact_whatsapp}
+              companyName={settings.company_name}
             />
           </div>
         </section>

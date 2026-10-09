@@ -77,7 +77,7 @@ export default async function ServicesPage() {
               {services.map((service, index) => {
                 const waUrl = waLink(
                   settings.contact_whatsapp,
-                  `Halo CyberTech, saya ingin konsultasi mengenai layanan: ${service.title}`
+                  `Halo ${settings.company_name}, saya ingin konsultasi mengenai layanan: ${service.title}`
                 );
 
                 return (

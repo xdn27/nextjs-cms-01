@@ -10,7 +10,7 @@ interface FloatingWhatsAppProps {
 
 export function FloatingWhatsApp({
   whatsappNumber = '',
-  companyName = 'CyberTech Computer',
+  companyName = '',
 }: FloatingWhatsAppProps) {
   const cleanPhone = normalizeWhatsAppNumber(whatsappNumber);
   const waUrl = waLink(

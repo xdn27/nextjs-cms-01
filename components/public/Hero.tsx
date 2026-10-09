@@ -161,7 +161,7 @@ const DEFAULT_SLIDES: FormattedHeroSlide[] = [
   },
 ];
 
-export function Hero({ initialSlides }: HeroProps) {
+export function Hero({ settings, initialSlides }: HeroProps) {
   const slides: FormattedHeroSlide[] = useMemo(() => {
     if (initialSlides && initialSlides.length > 0) {
       return initialSlides.map((s) => {
@@ -187,7 +187,7 @@ export function Hero({ initialSlides }: HeroProps) {
           id: s.id,
           image: s.image_url || '/images/hero/slide-1-gaming-pc.svg',
           badge: {
-            text: s.badge_text || 'CyberTech Computer',
+            text: s.badge_text || settings?.company_name || '',
             icon: s.badge_icon || 'Cpu',
             color: s.badge_color || 'border-[#3584e4]/30 bg-[#3584e4]/10 text-[#3584e4]',
           },
@@ -207,7 +207,7 @@ export function Hero({ initialSlides }: HeroProps) {
       });
     }
     return DEFAULT_SLIDES;
-  }, [initialSlides]);
+  }, [initialSlides, settings?.company_name]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);

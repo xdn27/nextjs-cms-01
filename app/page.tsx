@@ -152,6 +152,7 @@ export default async function HomePage() {
                   key={product.id}
                   project={product}
                   whatsappNumber={settings.contact_whatsapp}
+                  companyName={settings.company_name}
                 />
               ))}
             </div>
@@ -198,7 +199,10 @@ export default async function HomePage() {
         </section>
 
         {/* Testimonials Pelanggan */}
-        <TestimonialSection testimonials={testimonials} />
+        <TestimonialSection
+          testimonials={testimonials}
+          companyName={settings.company_name}
+        />
 
         {/* Tips & Blog Hardware Terbaru */}
         {recentPosts.length > 0 && (
@@ -253,7 +257,7 @@ export default async function HomePage() {
               <a
                 href={waLink(
                   settings.contact_whatsapp,
-                  'Halo CyberTech, saya ingin konsultasi rakit PC atau servis'
+                  `Halo ${settings.company_name}, saya ingin konsultasi rakit PC atau servis`
                 )}
                 target="_blank"
                 rel="noreferrer"

@@ -63,7 +63,7 @@ export default async function ProductDetailPage({
 
   const waUrl = waLink(
     settings.contact_whatsapp,
-    `Halo CyberTech Computer, saya ingin konsultasi / memesan produk: ${product.title} (${product.client_name || ''})`
+    `Halo ${settings.company_name}, saya ingin konsultasi / memesan produk: ${product.title} (${product.client_name || ''})`
   );
 
   return (

@@ -8,11 +8,14 @@ import { Footer } from '@/components/public/Footer';
 import { ContactForm } from '@/components/public/ContactForm';
 import { Button } from '@/components/ui/button';
 
-export const metadata: Metadata = {
-  title: 'Kontak & Lokasi Toko Komputer',
-  description:
-    'Alamat toko fisik, nomor WhatsApp konsultasi rakit PC, cek status servis, dan jam buka CyberTech Computer.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getCompanySettings();
+
+  return {
+    title: 'Kontak & Lokasi Toko Komputer',
+    description: `Alamat toko fisik, nomor WhatsApp konsultasi rakit PC, cek status servis, dan jam buka ${settings.company_name}.`,
+  };
+}
 
 export default async function ContactPage() {
   const settings = await getCompanySettings();
@@ -72,7 +75,10 @@ export default async function ContactPage() {
                       <div>
                         <strong className="block text-foreground">WhatsApp Konsultasi</strong>
                         <a
-                          href={waLink(settings.contact_whatsapp, 'Halo CyberTech, saya mau konsultasi')}
+                          href={waLink(
+                            settings.contact_whatsapp,
+                            `Halo ${settings.company_name}, saya mau konsultasi`
+                          )}
                           target="_blank"
                           rel="noreferrer"
                           className="text-[#2ec27e] font-semibold hover:underline block mt-0.5"
@@ -125,9 +131,9 @@ export default async function ContactPage() {
                     >
                       <a
                         href={waLink(
-                  settings.contact_whatsapp,
-                  'Halo CyberTech, saya mau konsultasi rakit PC atau tanya servis'
-                )}
+                          settings.contact_whatsapp,
+                          `Halo ${settings.company_name}, saya mau konsultasi rakit PC atau tanya servis`
+                        )}
                         target="_blank"
                         rel="noreferrer"
                       >
