@@ -5,6 +5,7 @@ import { Mail, Phone, Reply, Check } from 'lucide-react';
 import { updateInquiryStatusAction } from '@/lib/actions';
 import { initialInquiries } from '@/lib/mock-data';
 import { Inquiry } from '@/lib/types';
+import { waLink } from '@/lib/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/sonner';
@@ -178,7 +179,7 @@ export default function AdminInquiriesPage() {
                   {selectedInquiry.phone && (
                     <Button asChild variant="outline" size="sm" className="border-emerald-500/30 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-500/10">
                       <a
-                        href={`https://wa.me/${selectedInquiry.phone.replace(/[^0-9]/g, '')}`}
+                        href={waLink(selectedInquiry.phone)}
                         target="_blank"
                         rel="noreferrer"
                       >

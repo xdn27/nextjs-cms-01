@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Mail, Phone, MapPin, Clock, MessageSquare, MessageCircle, Store } from 'lucide-react';
 import { getCompanySettings } from '@/lib/data';
+import { waLink } from '@/lib/utils';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
 import { ContactForm } from '@/components/public/ContactForm';
@@ -15,7 +16,6 @@ export const metadata: Metadata = {
 
 export default async function ContactPage() {
   const settings = await getCompanySettings();
-  const waNumber = settings.contact_whatsapp.replace(/[^0-9]/g, '');
 
   return (
       <div className="flex min-h-screen flex-col">
@@ -72,7 +72,7 @@ export default async function ContactPage() {
                       <div>
                         <strong className="block text-foreground">WhatsApp Konsultasi</strong>
                         <a
-                          href={`https://wa.me/${waNumber}?text=Halo%20CyberTech,%20saya%20mau%20konsultasi`}
+                          href={waLink(settings.contact_whatsapp, 'Halo CyberTech, saya mau konsultasi')}
                           target="_blank"
                           rel="noreferrer"
                           className="text-[#2ec27e] font-semibold hover:underline block mt-0.5"
@@ -124,7 +124,10 @@ export default async function ContactPage() {
                       className="w-full bg-[#2ec27e] hover:bg-[#26a269] text-white text-xs font-bold h-11 shadow-sm cursor-pointer"
                     >
                       <a
-                        href={`https://wa.me/${waNumber}?text=Halo%20CyberTech,%20saya%20mau%20konsultasi%20rakit%20PC%20atau%20tanya%20servis`}
+                        href={waLink(
+                  settings.contact_whatsapp,
+                  'Halo CyberTech, saya mau konsultasi rakit PC atau tanya servis'
+                )}
                         target="_blank"
                         rel="noreferrer"
                       >

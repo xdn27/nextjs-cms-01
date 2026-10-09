@@ -19,6 +19,7 @@ import {
   getTestimonials,
   getHeroSlides,
 } from '@/lib/data';
+import { waLink } from '@/lib/utils';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
 import { Hero } from '@/components/public/Hero';
@@ -78,8 +79,6 @@ export default async function HomePage() {
       color: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
     },
   ];
-
-  const waNumber = settings.contact_whatsapp.replace(/[^0-9]/g, '');
 
   return (
       <div className="flex min-h-screen flex-col">
@@ -149,7 +148,11 @@ export default async function HomePage() {
 
             <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {featuredProducts.map((product) => (
-                <ProjectCard key={product.id} project={product} />
+                <ProjectCard
+                  key={product.id}
+                  project={product}
+                  whatsappNumber={settings.contact_whatsapp}
+                />
               ))}
             </div>
           </div>
@@ -248,7 +251,10 @@ export default async function HomePage() {
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <a
-                href={`https://wa.me/${waNumber}?text=Halo%20CyberTech,%20saya%20ingin%20konsultasi%20rakit%20PC%20atau%20servis`}
+                href={waLink(
+                  settings.contact_whatsapp,
+                  'Halo CyberTech, saya ingin konsultasi rakit PC atau servis'
+                )}
                 target="_blank"
                 rel="noreferrer"
                 className="group inline-flex items-center gap-2 rounded-xl bg-[#2ec27e] hover:bg-[#26a269] px-8 py-4 text-base font-semibold text-white shadow-lg shadow-[#2ec27e]/20 transition-all cursor-pointer"

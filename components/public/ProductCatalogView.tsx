@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Search, ShoppingBag, ArrowRight, MessageCircle } from 'lucide-react';
 import { Project } from '@/lib/types';
+import { waLink } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -12,9 +13,10 @@ import { Button } from '@/components/ui/button';
 
 interface ProductCatalogViewProps {
   products: Project[];
+  whatsappNumber?: string;
 }
 
-export function ProductCatalogView({ products }: ProductCatalogViewProps) {
+export function ProductCatalogView({ products, whatsappNumber }: ProductCatalogViewProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('Semua');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const deferredSearchQuery = useDeferredValue(searchQuery);
@@ -99,10 +101,10 @@ export function ProductCatalogView({ products }: ProductCatalogViewProps) {
       ) : (
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {filteredProducts.map((product) => {
-            const waText = encodeURIComponent(
+            const waUrl = waLink(
+              whatsappNumber,
               `Halo CyberTech Computer, saya tertarik untuk bertanya/memesan produk: ${product.title} (${product.client_name || ''})`
             );
-            const waUrl = `https://wa.me/6281388997722?text=${waText}`;
 
             return (
               <Card

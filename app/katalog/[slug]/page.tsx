@@ -12,6 +12,7 @@ import {
   PackageCheck,
 } from 'lucide-react';
 import { getCompanySettings, getProjectBySlug, getProjects } from '@/lib/data';
+import { waLink } from '@/lib/utils';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
 import { Button } from '@/components/ui/button';
@@ -60,10 +61,10 @@ export default async function ProductDetailPage({
     .filter((p) => p.id !== product.id)
     .slice(0, 3);
 
-  const waText = encodeURIComponent(
+  const waUrl = waLink(
+    settings.contact_whatsapp,
     `Halo CyberTech Computer, saya ingin konsultasi / memesan produk: ${product.title} (${product.client_name || ''})`
   );
-  const waUrl = `https://wa.me/6281388997722?text=${waText}`;
 
   return (
       <div className="flex min-h-screen flex-col">

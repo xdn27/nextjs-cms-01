@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { normalizeWhatsAppNumber, waLink } from '@/lib/utils';
 
 interface FloatingWhatsAppProps {
   whatsappNumber?: string;
@@ -8,14 +9,16 @@ interface FloatingWhatsAppProps {
 }
 
 export function FloatingWhatsApp({
-  whatsappNumber = '6281388997722',
+  whatsappNumber = '',
   companyName = 'CyberTech Computer',
 }: FloatingWhatsAppProps) {
-  const cleanPhone = whatsappNumber.replace(/[^0-9]/g, '') || '6281388997722';
-  const defaultMessage = encodeURIComponent(
+  const cleanPhone = normalizeWhatsAppNumber(whatsappNumber);
+  const waUrl = waLink(
+    cleanPhone,
     `Halo ${companyName}, saya ingin konsultasi rakit PC / tanya produk / servis.`
   );
-  const waUrl = `https://wa.me/${cleanPhone}?text=${defaultMessage}`;
+
+  if (!cleanPhone) return null;
 
   return (
     <aside

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Check, MessageCircle, Wrench, ShieldCheck } from 'lucide-react';
 import { getCompanySettings, getServices } from '@/lib/data';
+import { waLink } from '@/lib/utils';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
 import { DynamicIcon } from '@/components/public/DynamicIcon';
@@ -74,9 +75,10 @@ export default async function ServicesPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="space-y-12">
               {services.map((service, index) => {
-                const waUrl = `https://wa.me/${settings.contact_whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
+                const waUrl = waLink(
+                  settings.contact_whatsapp,
                   `Halo CyberTech, saya ingin konsultasi mengenai layanan: ${service.title}`
-                )}`;
+                );
 
                 return (
                   <div

@@ -3,23 +3,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, MessageCircle } from 'lucide-react';
 import { Project } from '@/lib/types';
+import { waLink } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 interface ProjectCardProps {
   project: Project;
+  whatsappNumber?: string;
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
-  const waText = encodeURIComponent(
-    `Halo CyberTech Computer, saya tertarik bertanya mengenai: ${productTitle(project)} (${project.client_name || ''})`
+export function ProjectCard({ project, whatsappNumber }: ProjectCardProps) {
+  const waUrl = waLink(
+    whatsappNumber,
+    `Halo CyberTech Computer, saya tertarik bertanya mengenai: ${project.title} (${project.client_name || ''})`
   );
-  const waUrl = `https://wa.me/6281388997722?text=${waText}`;
-
-  function productTitle(p: Project) {
-    return p.title;
-  }
 
   return (
     <Card className="group flex flex-col overflow-hidden transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-xl hover:border-[#3584e4]/40">

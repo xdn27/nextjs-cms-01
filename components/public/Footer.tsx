@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Mail, Phone, MapPin, Monitor, Clock, MessageCircle } from 'lucide-react';
 import { CompanySettings } from '@/lib/types';
+import { waLink } from '@/lib/utils';
 import { FloatingWhatsApp } from '@/components/public/FloatingWhatsApp';
 
 interface FooterProps {
@@ -67,7 +68,7 @@ export function Footer({ settings }: FooterProps) {
               )}
               {settings.contact_whatsapp && (
                 <a
-                  href={`https://wa.me/${settings.contact_whatsapp.replace(/[^0-9]/g, '')}?text=Halo%20CyberTech,%20saya%20ingin%20konsultasi`}
+                  href={waLink(settings.contact_whatsapp, 'Halo CyberTech, saya ingin konsultasi')}
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-lg bg-[#2ec27e]/20 text-[#2ec27e] p-2 hover:bg-[#2ec27e]/30 transition-colors flex items-center gap-1.5"

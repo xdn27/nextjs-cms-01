@@ -42,7 +42,10 @@ export default async function KatalogPage() {
         {/* Product Catalog Grid & Filters */}
         <section className="py-8 pb-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <ProductCatalogView products={products} />
+            <ProductCatalogView
+              products={products}
+              whatsappNumber={settings.contact_whatsapp}
+            />
           </div>
         </section>
       </main>
