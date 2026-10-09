@@ -29,12 +29,11 @@ import {
 import { toast } from '@/components/ui/sonner';
 
 interface ProjectManagerProps {
-  initialProjects: Project[];
-  isFallback: boolean;
+  serverProjects: Project[];
 }
 
-export default function ProjectManager({ initialProjects, isFallback }: ProjectManagerProps) {
-  const [projects, setProjects] = useState<Project[]>(initialProjects);
+export default function ProjectManager({ serverProjects }: ProjectManagerProps) {
+  const [projects, setProjects] = useState<Project[]>(serverProjects);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Partial<Project> | null>(null);
   const [coverImageUrl, setCoverImageUrl] = useState<string>('');
@@ -141,11 +140,6 @@ export default function ProjectManager({ initialProjects, isFallback }: ProjectM
           <p className="text-xs text-muted-foreground">
             Daftar paket rakitan PC, laptop gaming/office, dan aksesoris yang ditampilkan di katalog website.
           </p>
-          {isFallback && (
-            <p className="mt-2 text-xs font-medium text-amber-600 dark:text-amber-400">
-              Menampilkan data contoh karena database katalog belum tersedia.
-            </p>
-          )}
         </div>
 
         <Button onClick={handleOpenCreate} size="sm" className="bg-[#3584e4] hover:bg-[#1c71d8] text-white">

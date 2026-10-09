@@ -6,7 +6,6 @@ export const CMS_CACHE_TAG = 'cms';
 import {
   initialSettings,
   initialServices,
-  initialProjects,
   initialPosts,
   initialTestimonials,
   initialInquiries,
@@ -101,7 +100,7 @@ export async function getProjects(): Promise<Project[]> {
   cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
-    return initialProjects;
+    return [];
   }
 
   try {
@@ -111,23 +110,23 @@ export async function getProjects(): Promise<Project[]> {
       .select('*')
       .order('display_order', { ascending: true });
 
-    if (error || !data || data.length === 0) {
-      return initialProjects;
+    if (error || !data) {
+      return [];
     }
 
     return data as Project[];
   } catch {
-    return initialProjects;
+    return [];
   }
 }
 
-export async function getAdminProjects(): Promise<{ projects: Project[]; isFallback: boolean }> {
+export async function getAdminProjects(): Promise<Project[]> {
   'use cache';
   cacheTag(CMS_CACHE_TAG);
   cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
-    return { projects: initialProjects, isFallback: true };
+    return [];
   }
 
   try {
@@ -137,13 +136,13 @@ export async function getAdminProjects(): Promise<{ projects: Project[]; isFallb
       .select('*')
       .order('display_order', { ascending: true });
 
-    if (error) {
-      return { projects: initialProjects, isFallback: true };
+    if (error || !data) {
+      return [];
     }
 
-    return { projects: (data as Project[]) ?? [], isFallback: false };
+    return data as Project[];
   } catch {
-    return { projects: initialProjects, isFallback: true };
+    return [];
   }
 }
 
@@ -153,7 +152,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
   cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
-    return initialProjects.find((p) => p.slug === slug) || null;
+    return null;
   }
 
   try {
@@ -165,12 +164,12 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
       .single();
 
     if (error || !data) {
-      return initialProjects.find((p) => p.slug === slug) || null;
+      return null;
     }
 
     return data as Project;
   } catch {
-    return initialProjects.find((p) => p.slug === slug) || null;
+    return null;
   }
 }
 

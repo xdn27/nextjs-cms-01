@@ -40,6 +40,11 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const products = await getProjects();
+  if (products.length === 0) {
+    // Cache Components mewajibkan minimal satu param untuk validasi build.
+    // Slug ini tidak ada di database sehingga me-render halaman 404.
+    return [{ slug: '__placeholder__' }];
+  }
   return products.map((p) => ({ slug: p.slug }));
 }
 
