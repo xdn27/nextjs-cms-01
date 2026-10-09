@@ -42,7 +42,7 @@ export async function submitContactInquiry(formData: FormData) {
     }
   }
 
-  revalidatePath('/admin/inquiries');
+  revalidatePath('/admin/pesan');
   return { success: true, message: 'Pesan Anda berhasil dikirim! Tim kami akan segera menghubungi Anda.' };
 }
 
@@ -137,9 +137,9 @@ export async function updateCompanySettingsAction(formData: FormData) {
   }
 
   revalidatePath('/');
-  revalidatePath('/about');
-  revalidatePath('/contact');
-  revalidatePath('/admin/settings');
+  revalidatePath('/tentang');
+  revalidatePath('/kontak');
+  revalidatePath('/admin/pengaturan');
 
   return { success: true, message: 'Pengaturan perusahaan berhasil diperbarui!' };
 }
@@ -162,9 +162,9 @@ export async function saveServiceAction(service: Partial<Service>) {
     }
   }
 
-  revalidatePath('/services');
+  revalidatePath('/layanan');
   revalidatePath('/');
-  revalidatePath('/admin/services');
+  revalidatePath('/admin/layanan');
   return { success: true, message: 'Layanan berhasil disimpan!' };
 }
 
@@ -175,8 +175,8 @@ export async function deleteServiceAction(id: string) {
     if (error) return { success: false, error: error.message };
   }
 
-  revalidatePath('/services');
-  revalidatePath('/admin/services');
+  revalidatePath('/layanan');
+  revalidatePath('/admin/layanan');
   return { success: true, message: 'Layanan berhasil dihapus!' };
 }
 
@@ -198,9 +198,9 @@ export async function saveProjectAction(project: Partial<Project>) {
     }
   }
 
-  revalidatePath('/portfolio');
+  revalidatePath('/katalog');
   revalidatePath('/');
-  revalidatePath('/admin/portfolio');
+  revalidatePath('/admin/katalog');
   return { success: true, message: 'Proyek portofolio berhasil disimpan!' };
 }
 
@@ -211,8 +211,8 @@ export async function deleteProjectAction(id: string) {
     if (error) return { success: false, error: error.message };
   }
 
-  revalidatePath('/portfolio');
-  revalidatePath('/admin/portfolio');
+  revalidatePath('/katalog');
+  revalidatePath('/admin/katalog');
   return { success: true, message: 'Proyek berhasil dihapus!' };
 }
 
@@ -271,7 +271,7 @@ export async function saveTestimonialAction(testimonial: Partial<Testimonial>) {
   }
 
   revalidatePath('/');
-  revalidatePath('/admin/testimonials');
+  revalidatePath('/admin/testimoni');
   return { success: true, message: 'Testimoni berhasil disimpan!' };
 }
 
@@ -283,7 +283,7 @@ export async function deleteTestimonialAction(id: string) {
   }
 
   revalidatePath('/');
-  revalidatePath('/admin/testimonials');
+  revalidatePath('/admin/testimoni');
   return { success: true, message: 'Testimoni berhasil dihapus!' };
 }
 
@@ -298,7 +298,7 @@ export async function updateInquiryStatusAction(id: string, status: 'unread' | '
     if (error) return { success: false, error: error.message };
   }
 
-  revalidatePath('/admin/inquiries');
+  revalidatePath('/admin/pesan');
   return { success: true, message: 'Status pesan berhasil diperbarui!' };
 }
 
@@ -324,7 +324,7 @@ export async function saveHeroSlideAction(slide: Partial<HeroSlide>) {
   }
 
   revalidatePath('/');
-  revalidatePath('/admin/sliders');
+  revalidatePath('/admin/slider');
   return { success: true, message: 'Slide hero berhasil disimpan!' };
 }
 
@@ -336,7 +336,7 @@ export async function deleteHeroSlideAction(id: string) {
   }
 
   revalidatePath('/');
-  revalidatePath('/admin/sliders');
+  revalidatePath('/admin/slider');
   return { success: true, message: 'Slide hero berhasil dihapus!' };
 }
 
@@ -351,6 +351,6 @@ export async function toggleHeroSlideStatusAction(id: string, is_active: boolean
   }
 
   revalidatePath('/');
-  revalidatePath('/admin/sliders');
+  revalidatePath('/admin/slider');
   return { success: true, message: `Status slide berhasil ${is_active ? 'diaktifkan' : 'dinonaktifkan'}!` };
 }

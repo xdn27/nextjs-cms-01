@@ -112,7 +112,7 @@ export default async function ServicesPage() {
                           </a>
                         </Button>
                         <Button asChild variant="outline" className="text-xs h-10 px-4 cursor-pointer">
-                          <Link transitionTypes={['nav-lateral']} href={`/contact?service=${encodeURIComponent(service.title)}`}>
+                          <Link transitionTypes={['nav-lateral']} href={`/kontak?service=${encodeURIComponent(service.title)}`}>
                             <span>Kirim Formulir</span>
                             <ArrowRight className="h-3.5 w-3.5 ml-1" />
                           </Link>

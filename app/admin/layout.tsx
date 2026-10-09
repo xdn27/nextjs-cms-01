@@ -28,13 +28,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const navItems = [
     { href: '/admin', label: 'Ringkasan Dashboard', icon: LayoutDashboard },
-    { href: '/admin/sliders', label: 'Kelola Slider Hero', icon: Sliders },
-    { href: '/admin/settings', label: 'Pengaturan Toko', icon: Settings },
-    { href: '/admin/services', label: 'Kelola Layanan Servis', icon: Wrench },
-    { href: '/admin/portfolio', label: 'Kelola Katalog Produk', icon: ShoppingBag },
+    { href: '/admin/slider', label: 'Kelola Slider Hero', icon: Sliders },
+    { href: '/admin/pengaturan', label: 'Pengaturan Toko', icon: Settings },
+    { href: '/admin/layanan', label: 'Kelola Layanan Servis', icon: Wrench },
+    { href: '/admin/katalog', label: 'Kelola Katalog Produk', icon: ShoppingBag },
     { href: '/admin/blog', label: 'Kelola Blog & Tips Hardware', icon: FileText },
-    { href: '/admin/testimonials', label: 'Kelola Ulasan Pelanggan', icon: MessageSquareQuote },
-    { href: '/admin/inquiries', label: 'Pesan & Konsultasi', icon: Mail },
+    { href: '/admin/testimoni', label: 'Kelola Ulasan Pelanggan', icon: MessageSquareQuote },
+    { href: '/admin/pesan', label: 'Pesan & Konsultasi', icon: Mail },
   ];
 
   return (
@@ -123,9 +123,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Shield className="h-4 w-4 text-[#3584e4]" />
               <span className="text-xs font-bold text-white">
                 Pusat Kendali Konten
-              </span>
-              <span className="hidden sm:inline-block rounded-full bg-[#3584e4]/15 px-2 py-0.5 text-[10px] font-semibold text-[#78aeed] border border-[#3584e4]/30">
-                Adwaita Dark
               </span>
             </div>
           </div>

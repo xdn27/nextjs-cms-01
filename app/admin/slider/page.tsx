@@ -81,7 +81,7 @@ export default function AdminSlidersPage() {
       primary_cta_text: 'Lihat Katalog Produk',
       primary_cta_link: '/katalog',
       secondary_cta_text: 'Hubungi Kontak Toko',
-      secondary_cta_link: '/contact',
+      secondary_cta_link: '/kontak',
       display_order: slides.length + 1,
       is_active: true,
     });
@@ -506,8 +506,8 @@ export default function AdminSlidersPage() {
                   />
                   <Input
                     name="secondary_cta_link"
-                    defaultValue={editingSlide.secondary_cta_link || '/contact'}
-                    placeholder="URL Tujuan (cth: /contact)"
+                    defaultValue={editingSlide.secondary_cta_link || '/kontak'}
+                    placeholder="URL Tujuan (cth: /kontak)"
                     required
                     className="bg-[#1e1e1e] border-[#383838] text-xs h-8"
                   />

@@ -307,7 +307,7 @@ export const initialHeroSlides: HeroSlide[] = [
     primary_cta_text: 'Lihat Katalog Produk',
     primary_cta_link: '/katalog',
     secondary_cta_text: 'Hubungi Kontak Toko',
-    secondary_cta_link: '/contact',
+    secondary_cta_link: '/kontak',
     highlights: [
       { text: 'Racikan Bebas Bottleneck', icon: 'Zap', iconColor: 'text-amber-500' },
       { text: '100% Komponen Baru & Resmi', icon: 'ShieldCheck', iconColor: 'text-[#2ec27e]' },
@@ -326,9 +326,9 @@ export const initialHeroSlides: HeroSlide[] = [
     badge_icon: 'Wrench',
     image_url: '/images/hero/slide-2-service-workshop.svg',
     primary_cta_text: 'Lihat Layanan Servis',
-    primary_cta_link: '/services',
+    primary_cta_link: '/layanan',
     secondary_cta_text: 'Cek Alamat & Jadwal Toko',
-    secondary_cta_link: '/contact',
+    secondary_cta_link: '/kontak',
     highlights: [
       { text: 'Pengerjaan Cepat & Transparan', icon: 'Zap', iconColor: 'text-amber-500' },
       { text: 'Garansi Servis Pasti', icon: 'ShieldCheck', iconColor: 'text-emerald-500' },
@@ -349,7 +349,7 @@ export const initialHeroSlides: HeroSlide[] = [
     primary_cta_text: 'Jelajahi Produk Pilihan',
     primary_cta_link: '/katalog',
     secondary_cta_text: 'Tanya Stok & Spesifikasi',
-    secondary_cta_link: '/contact',
+    secondary_cta_link: '/kontak',
     highlights: [
       { text: 'Garansi Distributor Resmi', icon: 'ShieldCheck', iconColor: 'text-purple-400' },
       { text: 'Packing Kayu Aman Se-Nusantara', icon: 'Zap', iconColor: 'text-amber-500' },

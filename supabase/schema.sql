@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS public.hero_slides (
     primary_cta_text TEXT NOT NULL DEFAULT 'Lihat Katalog Produk',
     primary_cta_link TEXT NOT NULL DEFAULT '/katalog',
     secondary_cta_text TEXT NOT NULL DEFAULT 'Hubungi Kontak Toko',
-    secondary_cta_link TEXT NOT NULL DEFAULT '/contact',
+    secondary_cta_link TEXT NOT NULL DEFAULT '/kontak',
     highlights JSONB DEFAULT '[]'::jsonb,
     display_order INT DEFAULT 0,
     is_active BOOLEAN DEFAULT true,

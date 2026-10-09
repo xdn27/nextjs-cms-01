@@ -39,21 +39,21 @@ export default async function AdminDashboardPage() {
       title: 'Slider Hero Banner',
       count: slides.length,
       subtext: `${slides.filter((s) => s.is_active).length} aktif tayang`,
-      href: '/admin/sliders',
+      href: '/admin/slider',
       icon: Sliders,
       color: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20',
     },
     {
       title: 'Layanan Servis',
       count: services.length,
-      href: '/admin/services',
+      href: '/admin/layanan',
       icon: Wrench,
       color: 'text-blue-500 bg-blue-500/10 border-blue-500/20',
     },
     {
       title: 'Katalog Produk',
       count: products.length,
-      href: '/admin/portfolio',
+      href: '/admin/katalog',
       icon: ShoppingBag,
       color: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
     },
@@ -68,7 +68,7 @@ export default async function AdminDashboardPage() {
       title: 'Pesan & Konsultasi',
       count: inquiries.length,
       subtext: `${unreadInquiries.length} belum dibaca`,
-      href: '/admin/inquiries',
+      href: '/admin/pesan',
       icon: Mail,
       color: 'text-amber-500 bg-amber-500/10 border-amber-500/20',
     },
@@ -158,7 +158,7 @@ export default async function AdminDashboardPage() {
               </CardDescription>
             </div>
             <Link
-              href="/admin/inquiries"
+              href="/admin/pesan"
               className="text-xs font-semibold text-primary hover:underline"
             >
               Lihat Semua ({inquiries.length})
@@ -203,21 +203,21 @@ export default async function AdminDashboardPage() {
 
           <CardContent className="p-6 pt-4 space-y-2.5">
             <Link
-              href="/admin/settings"
+              href="/admin/pengaturan"
               className="flex items-center justify-between rounded-xl border border-border p-3 text-xs font-semibold text-foreground transition-colors hover:bg-muted"
             >
               <span>Edit Profil Perusahaan</span>
               <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
             </Link>
             <Link
-              href="/admin/services"
+              href="/admin/layanan"
               className="flex items-center justify-between rounded-xl border border-border p-3 text-xs font-semibold text-foreground transition-colors hover:bg-muted"
             >
               <span>Tambah / Edit Layanan</span>
               <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
             </Link>
             <Link
-              href="/admin/portfolio"
+              href="/admin/katalog"
               className="flex items-center justify-between rounded-xl border border-border p-3 text-xs font-semibold text-foreground transition-colors hover:bg-muted"
             >
               <span>Unggah Proyek Baru</span>

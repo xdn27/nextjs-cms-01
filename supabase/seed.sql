@@ -269,7 +269,7 @@ INSERT INTO public.hero_slides (
     'Lihat Katalog Produk',
     '/katalog',
     'Hubungi Kontak Toko',
-    '/contact',
+    '/kontak',
     '[{"text":"Racikan Bebas Bottleneck","icon":"Zap","iconColor":"text-amber-500"},{"text":"100% Komponen Baru & Resmi","icon":"ShieldCheck","iconColor":"text-[#2ec27e]"},{"text":"Stress Test & Uji Beban 24 Jam","icon":"Cpu","iconColor":"text-[#3584e4]"}]'::jsonb,
     1,
     true
@@ -282,9 +282,9 @@ INSERT INTO public.hero_slides (
     'Wrench',
     '/images/hero/slide-2-service-workshop.svg',
     'Lihat Layanan Servis',
-    '/services',
+    '/layanan',
     'Cek Alamat & Jadwal Toko',
-    '/contact',
+    '/kontak',
     '[{"text":"Pengerjaan Cepat & Transparan","icon":"Zap","iconColor":"text-amber-500"},{"text":"Garansi Servis Pasti","icon":"ShieldCheck","iconColor":"text-emerald-500"},{"text":"Thermal Paste Premium","icon":"Sparkles","iconColor":"text-sky-400"}]'::jsonb,
     2,
     true
@@ -299,7 +299,7 @@ INSERT INTO public.hero_slides (
     'Jelajahi Produk Pilihan',
     '/katalog',
     'Tanya Stok & Spesifikasi',
-    '/contact',
+    '/kontak',
     '[{"text":"Garansi Distributor Resmi","icon":"ShieldCheck","iconColor":"text-purple-400"},{"text":"Packing Kayu Aman Se-Nusantara","icon":"Zap","iconColor":"text-amber-500"},{"text":"Harga Kompetitif & Real-Time","icon":"Cpu","iconColor":"text-[#3584e4]"}]'::jsonb,
     3,
     true

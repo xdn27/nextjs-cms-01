@@ -63,7 +63,7 @@ const DEFAULT_SLIDES: FormattedHeroSlide[] = [
     },
     secondaryCta: {
       text: 'Hubungi Kontak Toko',
-      href: '/contact',
+      href: '/kontak',
     },
     highlights: [
       {
@@ -96,12 +96,12 @@ const DEFAULT_SLIDES: FormattedHeroSlide[] = [
       'Solusi tuntas laptop lambat dan overheat. Upgrade SSD NVMe & RAM instan, penggantian pasta termal berkualitas tinggi, serta perbaikan motherboard terpercaya.',
     primaryCta: {
       text: 'Lihat Layanan Servis',
-      href: '/services',
+      href: '/layanan',
       icon: 'Wrench',
     },
     secondaryCta: {
       text: 'Cek Alamat & Jadwal Toko',
-      href: '/contact',
+      href: '/kontak',
     },
     highlights: [
       {
@@ -139,7 +139,7 @@ const DEFAULT_SLIDES: FormattedHeroSlide[] = [
     },
     secondaryCta: {
       text: 'Tanya Stok & Spesifikasi',
-      href: '/contact',
+      href: '/kontak',
     },
     highlights: [
       {
@@ -200,7 +200,7 @@ export function Hero({ initialSlides }: HeroProps) {
           },
           secondaryCta: {
             text: s.secondary_cta_text || 'Hubungi Kontak Toko',
-            href: s.secondary_cta_link || '/contact',
+            href: s.secondary_cta_link || '/kontak',
           },
           highlights: parsedHighlights.length > 0 ? parsedHighlights : DEFAULT_SLIDES[0].highlights,
         };

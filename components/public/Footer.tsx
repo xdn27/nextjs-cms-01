@@ -92,7 +92,7 @@ export function Footer({ settings }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link transitionTypes={['nav-lateral']} href="/services" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/layanan" className="hover:text-white transition-colors">
                   Layanan &amp; Servis
                 </Link>
               </li>
@@ -107,7 +107,7 @@ export function Footer({ settings }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link transitionTypes={['nav-lateral']} href="/contact" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/kontak" className="hover:text-white transition-colors">
                   Kontak &amp; Alamat Toko
                 </Link>
               </li>
@@ -131,22 +131,22 @@ export function Footer({ settings }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link transitionTypes={['nav-lateral']} href="/services#rakit-pc-gaming-custom" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/layanan#rakit-pc-gaming-custom" className="hover:text-white transition-colors">
                   Jasa Rakit PC Custom
                 </Link>
               </li>
               <li>
-                <Link transitionTypes={['nav-lateral']} href="/services#servis-laptop-pc-desktop" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/layanan#servis-laptop-pc-desktop" className="hover:text-white transition-colors">
                   Servis Laptop &amp; PC
                 </Link>
               </li>
               <li>
-                <Link transitionTypes={['nav-lateral']} href="/services#cleaning-repaste-laptop-pc" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/layanan#cleaning-repaste-laptop-pc" className="hover:text-white transition-colors">
                   Deep Cleaning &amp; Repaste
                 </Link>
               </li>
               <li>
-                <Link transitionTypes={['nav-lateral']} href="/services#upgrade-ram-ssd-gpu" className="hover:text-white transition-colors">
+                <Link transitionTypes={['nav-lateral']} href="/layanan#upgrade-ram-ssd-gpu" className="hover:text-white transition-colors">
                   Upgrade RAM &amp; SSD NVMe
                 </Link>
               </li>
@@ -186,13 +186,13 @@ export function Footer({ settings }: FooterProps) {
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[#2e2e34] pt-8 text-xs text-neutral-500 sm:flex-row">
           <p>© {currentYear} {settings.company_name}. Hak Cipta Dilindungi Undang-Undang.</p>
           <div className="flex items-center gap-6">
-            <Link transitionTypes={['nav-lateral']} href="/services" className="hover:text-neutral-400">
+            <Link transitionTypes={['nav-lateral']} href="/layanan" className="hover:text-neutral-400">
               Layanan
             </Link>
             <Link transitionTypes={['nav-lateral']} href="/katalog" className="hover:text-neutral-400">
               Katalog
             </Link>
-            <Link transitionTypes={['nav-lateral']} href="/contact" className="hover:text-neutral-400">
+            <Link transitionTypes={['nav-lateral']} href="/kontak" className="hover:text-neutral-400">
               Kontak
             </Link>
           </div>

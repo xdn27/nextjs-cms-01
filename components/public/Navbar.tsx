@@ -19,10 +19,10 @@ export function Navbar({ settings }: NavbarProps) {
 
   const navLinks = [
     { href: '/', label: 'Beranda' },
-    { href: '/services', label: 'Layanan' },
+    { href: '/layanan', label: 'Layanan' },
     { href: '/katalog', label: 'Katalog Produk' },
     { href: '/blog', label: 'Blog' },
-    { href: '/contact', label: 'Kontak' },
+    { href: '/kontak', label: 'Kontak' },
   ];
 
   return (

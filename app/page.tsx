@@ -107,7 +107,7 @@ export default async function HomePage() {
                 </p>
               </div>
               <Link
-                href="/services"
+                href="/layanan"
                 transitionTypes={['nav-lateral']}
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#3584e4] hover:text-[#1c71d8] transition-colors"
               >
@@ -259,7 +259,7 @@ export default async function HomePage() {
                 <span>Chat WhatsApp Cepat</span>
               </a>
               <Link
-                href="/contact"
+                href="/kontak"
                 transitionTypes={['nav-lateral']}
                 className="inline-flex items-center gap-2 rounded-xl border border-neutral-700 bg-neutral-800/80 px-8 py-4 text-base font-semibold text-neutral-200 transition-colors hover:bg-neutral-700 hover:text-white"
               >

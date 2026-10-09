@@ -3,7 +3,7 @@
 import React, { useState, Suspense, ViewTransition } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { Sparkles, Lock, Mail, Loader2, ArrowRight, AlertCircle, Info } from 'lucide-react';
+import { Sparkles, Lock, Mail, Loader2, ArrowRight, AlertCircle } from 'lucide-react';
 import { adminLogin } from '@/lib/actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -46,17 +46,6 @@ function LoginForm() {
           </div>
         )}
 
-        {/* Quick Demo Credentials Info */}
-        <div className="mb-6 rounded-xl border border-[#3584e4]/30 bg-[#3584e4]/10 p-4 text-xs text-white">
-          <div className="flex items-center gap-2 font-semibold text-[#78aeed]">
-            <Info className="h-4 w-4 text-[#3584e4]" />
-            <span>Akses Demo / Kredensial Uji Coba:</span>
-          </div>
-          <p className="mt-1 text-[11px] leading-relaxed text-[#c0bfbc]">
-            Email: <code className="rounded bg-[#242424] px-1.5 py-0.5 font-mono text-white border border-[#383838]">admin@example.com</code> | Kata Sandi: <code className="rounded bg-[#242424] px-1.5 py-0.5 font-mono text-white border border-[#383838]">admin123</code>
-          </p>
-        </div>
-
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-1.5">
             <Label htmlFor="email" className="text-[#9a9996]">Email Administrator</Label>
@@ -67,7 +56,6 @@ function LoginForm() {
                 type="email"
                 name="email"
                 required
-                defaultValue="admin@example.com"
                 placeholder="admin@example.com"
                 className="pl-10 bg-[#282828] border-[#383838] text-white focus-visible:ring-[#3584e4]"
               />
