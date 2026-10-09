@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -182,7 +182,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Page Content View */}
         <main className="flex-1 overflow-y-auto bg-[#1e1e1e] p-4 sm:p-6 lg:p-8">
-          {children}
+          <Suspense fallback={<div className="p-6 text-sm text-[#9a9996]">Memuat data...</div>}>
+            {children}
+          </Suspense>
         </main>
       </div>
     </div>

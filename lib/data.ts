@@ -1,4 +1,6 @@
+import { cacheLife, cacheTag } from 'next/cache';
 import { createClient, isSupabaseConfigured } from './supabase/server';
+import { createPublicClient } from './supabase/public';
 import {
   initialSettings,
   initialServices,
@@ -11,12 +13,16 @@ import {
 import { CompanySettings, Service, Project, Post, Testimonial, Inquiry, HeroSlide } from './types';
 
 export async function getCompanySettings(): Promise<CompanySettings> {
+  'use cache';
+  cacheLife('minutes');
+  cacheTag('content');
+
   if (!isSupabaseConfigured()) {
     return initialSettings;
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from('company_settings')
       .select('*')
@@ -34,12 +40,16 @@ export async function getCompanySettings(): Promise<CompanySettings> {
 }
 
 export async function getServices(): Promise<Service[]> {
+  'use cache';
+  cacheLife('minutes');
+  cacheTag('content');
+
   if (!isSupabaseConfigured()) {
     return initialServices;
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from('services')
       .select('*')
@@ -57,12 +67,16 @@ export async function getServices(): Promise<Service[]> {
 }
 
 export async function getServiceBySlug(slug: string): Promise<Service | null> {
+  'use cache';
+  cacheLife('minutes');
+  cacheTag('content');
+
   if (!isSupabaseConfigured()) {
     return initialServices.find((s) => s.slug === slug) || null;
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from('services')
       .select('*')
@@ -80,12 +94,16 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
 }
 
 export async function getProjects(): Promise<Project[]> {
+  'use cache';
+  cacheLife('minutes');
+  cacheTag('content');
+
   if (!isSupabaseConfigured()) {
     return initialProjects;
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from('projects')
       .select('*')
@@ -102,12 +120,16 @@ export async function getProjects(): Promise<Project[]> {
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  'use cache';
+  cacheLife('minutes');
+  cacheTag('content');
+
   if (!isSupabaseConfigured()) {
     return initialProjects.find((p) => p.slug === slug) || null;
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from('projects')
       .select('*')
@@ -125,12 +147,16 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
 }
 
 export async function getPosts(): Promise<Post[]> {
+  'use cache';
+  cacheLife('minutes');
+  cacheTag('content');
+
   if (!isSupabaseConfigured()) {
     return initialPosts.filter((p) => p.status === 'published');
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from('posts')
       .select('*')
@@ -148,12 +174,16 @@ export async function getPosts(): Promise<Post[]> {
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
+  'use cache';
+  cacheLife('minutes');
+  cacheTag('content');
+
   if (!isSupabaseConfigured()) {
     return initialPosts.find((p) => p.slug === slug) || null;
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from('posts')
       .select('*')
@@ -171,12 +201,16 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 }
 
 export async function getTestimonials(): Promise<Testimonial[]> {
+  'use cache';
+  cacheLife('minutes');
+  cacheTag('content');
+
   if (!isSupabaseConfigured()) {
     return initialTestimonials;
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from('testimonials')
       .select('*')
@@ -216,12 +250,16 @@ export async function getInquiries(): Promise<Inquiry[]> {
 }
 
 export async function getHeroSlides(): Promise<HeroSlide[]> {
+  'use cache';
+  cacheLife('minutes');
+  cacheTag('content');
+
   if (!isSupabaseConfigured()) {
     return initialHeroSlides.filter((s) => s.is_active);
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from('hero_slides')
       .select('*')
