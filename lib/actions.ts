@@ -1,6 +1,7 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, updateTag } from 'next/cache';
+import { CMS_CACHE_TAG } from './data';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { createClient, isSupabaseConfigured } from './supabase/server';
@@ -42,6 +43,7 @@ export async function submitContactInquiry(formData: FormData) {
     }
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/admin/inquiries');
   return { success: true, message: 'Pesan Anda berhasil dikirim! Tim kami akan segera menghubungi Anda.' };
 }
@@ -136,6 +138,7 @@ export async function updateCompanySettingsAction(formData: FormData) {
     }
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/');
   revalidatePath('/about');
   revalidatePath('/contact');
@@ -162,6 +165,7 @@ export async function saveServiceAction(service: Partial<Service>) {
     }
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/services');
   revalidatePath('/');
   revalidatePath('/admin/services');
@@ -175,6 +179,7 @@ export async function deleteServiceAction(id: string) {
     if (error) return { success: false, error: error.message };
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/services');
   revalidatePath('/admin/services');
   return { success: true, message: 'Layanan berhasil dihapus!' };
@@ -198,6 +203,7 @@ export async function saveProjectAction(project: Partial<Project>) {
     }
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/portfolio');
   revalidatePath('/');
   revalidatePath('/admin/portfolio');
@@ -211,6 +217,7 @@ export async function deleteProjectAction(id: string) {
     if (error) return { success: false, error: error.message };
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/portfolio');
   revalidatePath('/admin/portfolio');
   return { success: true, message: 'Proyek berhasil dihapus!' };
@@ -234,6 +241,7 @@ export async function savePostAction(post: Partial<Post>) {
     }
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/blog');
   revalidatePath('/');
   revalidatePath('/admin/blog');
@@ -247,6 +255,7 @@ export async function deletePostAction(id: string) {
     if (error) return { success: false, error: error.message };
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/blog');
   revalidatePath('/admin/blog');
   return { success: true, message: 'Artikel berhasil dihapus!' };
@@ -270,6 +279,7 @@ export async function saveTestimonialAction(testimonial: Partial<Testimonial>) {
     }
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/');
   revalidatePath('/admin/testimonials');
   return { success: true, message: 'Testimoni berhasil disimpan!' };
@@ -282,6 +292,7 @@ export async function deleteTestimonialAction(id: string) {
     if (error) return { success: false, error: error.message };
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/');
   revalidatePath('/admin/testimonials');
   return { success: true, message: 'Testimoni berhasil dihapus!' };
@@ -298,6 +309,7 @@ export async function updateInquiryStatusAction(id: string, status: 'unread' | '
     if (error) return { success: false, error: error.message };
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/admin/inquiries');
   return { success: true, message: 'Status pesan berhasil diperbarui!' };
 }
@@ -323,6 +335,7 @@ export async function saveHeroSlideAction(slide: Partial<HeroSlide>) {
     }
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/');
   revalidatePath('/admin/sliders');
   return { success: true, message: 'Slide hero berhasil disimpan!' };
@@ -335,6 +348,7 @@ export async function deleteHeroSlideAction(id: string) {
     if (error) return { success: false, error: error.message };
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/');
   revalidatePath('/admin/sliders');
   return { success: true, message: 'Slide hero berhasil dihapus!' };
@@ -350,6 +364,7 @@ export async function toggleHeroSlideStatusAction(id: string, is_active: boolean
     if (error) return { success: false, error: error.message };
   }
 
+  updateTag(CMS_CACHE_TAG);
   revalidatePath('/');
   revalidatePath('/admin/sliders');
   return { success: true, message: `Status slide berhasil ${is_active ? 'diaktifkan' : 'dinonaktifkan'}!` };
