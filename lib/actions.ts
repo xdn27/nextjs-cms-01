@@ -218,31 +218,108 @@ export async function deleteServiceAction(id: string) {
 }
 
 // PROJECT ACTIONS
-export async function saveProjectAction(project: Partial<Project>) {
+type SaveProjectResult =
+  | { success: true; message: string; project: Project }
+  | { success: false; error: string };
+
+function isDatabaseId(id?: string | null): id is string {
+  return (
+    typeof id === 'string' &&
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)
+  );
+}
+
+export async function saveProjectAction(project: Partial<Project>): Promise<SaveProjectResult> {
   const denied = await requireAdmin();
   if (denied) return denied;
 
+  const payload = {
+    slug: project.slug,
+    title: project.title,
+    category: project.category,
+    client_name: project.client_name ?? null,
+    summary: project.summary,
+    description: project.description ?? null,
+    cover_image: project.cover_image ?? null,
+    project_url: project.project_url ?? null,
+    is_featured: project.is_featured ?? false,
+    display_order: Number(project.display_order) || 0,
+  };
+
+  if (!payload.title || !payload.slug || !payload.summary) {
+    return { success: false, error: 'Nama, slug, dan ringkasan produk wajib diisi.' };
+  }
+
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
-    if (project.id && !project.id.startsWith('p')) {
-      const { error } = await supabase
+
+    if (isDatabaseId(project.id)) {
+      const { data, error } = await supabase
         .from('projects')
-        .update(project)
-        .eq('id', project.id);
-      if (error) return { success: false, error: error.message };
-    } else {
-      const insertData = { ...project };
-      delete insertData.id;
-      const { error } = await supabase.from('projects').insert(insertData);
-      if (error) return { success: false, error: error.message };
+        .update(payload)
+        .eq('id', project.id)
+        .select()
+        .single();
+
+      if (error || !data) {
+        return { success: false, error: error?.message || 'Produk tidak ditemukan di database.' };
+      }
+
+      updateTag(CMS_CACHE_TAG);
+      revalidatePath('/katalog');
+      revalidatePath('/');
+      revalidatePath('/admin/katalog');
+      return {
+        success: true,
+        message: 'Produk katalog berhasil diperbarui!',
+        project: data as Project,
+      };
     }
+
+    const { data, error } = await supabase
+      .from('projects')
+      .insert(payload)
+      .select()
+      .single();
+
+    if (error || !data) {
+      return { success: false, error: error?.message || 'Gagal menyimpan produk.' };
+    }
+
+    updateTag(CMS_CACHE_TAG);
+    revalidatePath('/katalog');
+    revalidatePath('/');
+    revalidatePath('/admin/katalog');
+    return {
+      success: true,
+      message: 'Produk baru berhasil ditambahkan ke katalog!',
+      project: data as Project,
+    };
   }
+
+  const fallbackProject: Project = {
+    id: project.id ?? `prod-${Date.now()}`,
+    slug: payload.slug,
+    title: payload.title,
+    category: payload.category || 'PC Gaming & Streaming',
+    client_name: payload.client_name,
+    summary: payload.summary,
+    description: payload.description,
+    cover_image: payload.cover_image,
+    project_url: payload.project_url,
+    is_featured: payload.is_featured,
+    display_order: payload.display_order,
+  };
 
   updateTag(CMS_CACHE_TAG);
   revalidatePath('/katalog');
   revalidatePath('/');
   revalidatePath('/admin/katalog');
-  return { success: true, message: 'Proyek portofolio berhasil disimpan!' };
+  return {
+    success: true,
+    message: project.id ? 'Produk katalog berhasil diperbarui!' : 'Produk baru berhasil ditambahkan ke katalog!',
+    project: fallbackProject,
+  };
 }
 
 export async function deleteProjectAction(id: string) {

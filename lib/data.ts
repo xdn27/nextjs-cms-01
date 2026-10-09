@@ -121,6 +121,32 @@ export async function getProjects(): Promise<Project[]> {
   }
 }
 
+export async function getAdminProjects(): Promise<{ projects: Project[]; isFallback: boolean }> {
+  'use cache';
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
+
+  if (!isSupabaseConfigured()) {
+    return { projects: initialProjects, isFallback: true };
+  }
+
+  try {
+    const supabase = createPublicClient();
+    const { data, error } = await supabase
+      .from('projects')
+      .select('*')
+      .order('display_order', { ascending: true });
+
+    if (error) {
+      return { projects: initialProjects, isFallback: true };
+    }
+
+    return { projects: (data as Project[]) ?? [], isFallback: false };
+  } catch {
+    return { projects: initialProjects, isFallback: true };
+  }
+}
+
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
   'use cache';
   cacheTag(CMS_CACHE_TAG);
