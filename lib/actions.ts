@@ -53,7 +53,12 @@ export async function submitContactInquiry(formData: FormData) {
 export async function adminLogin(formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
-  const redirectTo = (formData.get('redirect') as string) || '/admin';
+  // Hanya izinkan redirect ke path internal /admin (cegah open redirect, mis. //evil.com)
+  const requestedRedirect = (formData.get('redirect') as string) || '';
+  const redirectTo =
+    requestedRedirect === '/admin' || /^\/admin\/[A-Za-z0-9_\-/]*$/.test(requestedRedirect)
+      ? requestedRedirect
+      : '/admin';
 
   if (!email || !password) {
     return { success: false, error: 'Email dan kata sandi wajib diisi.' };
