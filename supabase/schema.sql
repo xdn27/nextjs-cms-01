@@ -124,25 +124,34 @@ ALTER TABLE public.testimonials ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.inquiries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.hero_slides ENABLE ROW LEVEL SECURITY;
 
+-- Helper: true jika JWT memiliki app_metadata.role = 'admin' (diatur lewat dashboard/SQL, bukan oleh user)
+CREATE OR REPLACE FUNCTION public.is_admin()
+RETURNS boolean
+LANGUAGE sql
+STABLE
+AS $$
+  SELECT COALESCE((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin', false);
+$$;
+
 -- Public READ policies
 CREATE POLICY "Public can view company settings" ON public.company_settings FOR SELECT USING (true);
-CREATE POLICY "Public can view active services" ON public.services FOR SELECT USING (is_active = true OR auth.role() = 'authenticated');
+CREATE POLICY "Public can view active services" ON public.services FOR SELECT USING (is_active = true OR public.is_admin());
 CREATE POLICY "Public can view projects" ON public.projects FOR SELECT USING (true);
-CREATE POLICY "Public can view published posts" ON public.posts FOR SELECT USING (status = 'published' OR auth.role() = 'authenticated');
-CREATE POLICY "Public can view active testimonials" ON public.testimonials FOR SELECT USING (is_active = true OR auth.role() = 'authenticated');
-CREATE POLICY "Public can view active hero slides" ON public.hero_slides FOR SELECT USING (is_active = true OR auth.role() = 'authenticated');
+CREATE POLICY "Public can view published posts" ON public.posts FOR SELECT USING (status = 'published' OR public.is_admin());
+CREATE POLICY "Public can view active testimonials" ON public.testimonials FOR SELECT USING (is_active = true OR public.is_admin());
+CREATE POLICY "Public can view active hero slides" ON public.hero_slides FOR SELECT USING (is_active = true OR public.is_admin());
 
 -- Public INSERT policy for Inquiries (Contact Form)
 CREATE POLICY "Public can submit inquiries" ON public.inquiries FOR INSERT WITH CHECK (true);
 
 -- Authenticated Admin FULL ACCESS policies (CRUD)
-CREATE POLICY "Admin full access company settings" ON public.company_settings FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin full access services" ON public.services FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin full access projects" ON public.projects FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin full access posts" ON public.posts FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin full access testimonials" ON public.testimonials FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin full access inquiries" ON public.inquiries FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin full access hero slides" ON public.hero_slides FOR ALL USING (auth.role() = 'authenticated');
+CREATE POLICY "Admin full access company settings" ON public.company_settings FOR ALL USING (public.is_admin());
+CREATE POLICY "Admin full access services" ON public.services FOR ALL USING (public.is_admin());
+CREATE POLICY "Admin full access projects" ON public.projects FOR ALL USING (public.is_admin());
+CREATE POLICY "Admin full access posts" ON public.posts FOR ALL USING (public.is_admin());
+CREATE POLICY "Admin full access testimonials" ON public.testimonials FOR ALL USING (public.is_admin());
+CREATE POLICY "Admin full access inquiries" ON public.inquiries FOR ALL USING (public.is_admin());
+CREATE POLICY "Admin full access hero slides" ON public.hero_slides FOR ALL USING (public.is_admin());
 
 -- =========================================================
 -- STORAGE BUCKET CONFIGURATION (cms-media)
@@ -158,12 +167,12 @@ USING (bucket_id = 'cms-media');
 
 CREATE POLICY "Admin Upload cms-media"
 ON storage.objects FOR INSERT
-WITH CHECK (bucket_id = 'cms-media' AND auth.role() = 'authenticated');
+WITH CHECK (bucket_id = 'cms-media' AND public.is_admin());
 
 CREATE POLICY "Admin Update cms-media"
 ON storage.objects FOR UPDATE
-USING (bucket_id = 'cms-media' AND auth.role() = 'authenticated');
+USING (bucket_id = 'cms-media' AND public.is_admin());
 
 CREATE POLICY "Admin Delete cms-media"
 ON storage.objects FOR DELETE
-USING (bucket_id = 'cms-media' AND auth.role() = 'authenticated');
+USING (bucket_id = 'cms-media' AND public.is_admin());

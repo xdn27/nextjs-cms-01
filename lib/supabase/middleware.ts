@@ -1,6 +1,7 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 import { isSupabaseConfigured } from './client';
+import { isAdminUser } from '../auth';
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -56,15 +57,16 @@ export async function updateSession(request: NextRequest) {
 
   const isAdminPath = request.nextUrl.pathname.startsWith('/admin');
   const isLoginPath = request.nextUrl.pathname === '/login';
+  const isAdmin = isAdminUser(user);
 
-  if (isAdminPath && !user) {
+  if (isAdminPath && !isAdmin) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = '/login';
     redirectUrl.searchParams.set('redirect', request.nextUrl.pathname);
     return NextResponse.redirect(redirectUrl);
   }
 
-  if (isLoginPath && user) {
+  if (isLoginPath && isAdmin) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = '/admin';
     return NextResponse.redirect(redirectUrl);

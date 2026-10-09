@@ -4,6 +4,7 @@ import { revalidatePath, updateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { createClient, isSupabaseConfigured } from './supabase/server';
+import { isAdminUser } from './auth';
 import { Service, Project, Post, Testimonial, HeroSlide } from './types';
 
 // =========================================================
@@ -67,13 +68,18 @@ export async function adminLogin(formData: FormData) {
   if (isSupabaseConfigured()) {
     try {
       const supabase = await createClient();
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
       if (error) {
         return { success: false, error: error.message };
+      }
+
+      if (!isAdminUser(data.user)) {
+        await supabase.auth.signOut();
+        return { success: false, error: 'Akun ini tidak memiliki akses admin.' };
       }
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : 'Gagal melakukan autentikasi';
@@ -116,7 +122,7 @@ async function requireAdmin(): Promise<{ success: false; error: string } | null>
   if (!isSupabaseConfigured()) return null;
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
-  if (!data.user) {
+  if (!isAdminUser(data.user)) {
     return { success: false, error: 'Tidak diizinkan. Silakan login sebagai admin.' };
   }
   return null;
