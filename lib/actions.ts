@@ -167,6 +167,8 @@ export async function updateCompanySettingsAction(formData: FormData) {
   revalidatePath('/tentang');
   revalidatePath('/kontak');
   revalidatePath('/admin/pengaturan');
+  // Nama perusahaan dipakai pada title browser (metadata root layout)
+  revalidatePath('/', 'layout');
 
   return { success: true, message: 'Pengaturan perusahaan berhasil diperbarui!' };
 }

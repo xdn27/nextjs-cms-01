@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
+import { getCompanySettings } from '@/lib/data';
 import './globals.css';
 
 const geistSans = Geist({
@@ -13,16 +14,31 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
-  title: {
-    template: '%s | CyberTech Computer & Gaming',
-    default: 'CyberTech Computer | Pusat Rakit PC Gaming, Laptop & Servis Komputer',
-  },
-  description:
-    'Pusat rakit PC gaming & workstation custom, laptop garansi resmi, upgrade RAM & SSD NVMe super cepat, serta service komputer profesional dengan sparepart original.',
-  keywords: ['toko komputer', 'rakit pc gaming', 'service laptop', 'upgrade ssd ram', 'harco mangga dua', 'pc workstation', 'komputer jakarta'],
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getCompanySettings();
+  const companyName = settings.company_name || 'CyberTech Computer & Gaming';
+  const siteDescription =
+    settings.description ||
+    'Pusat rakit PC gaming & workstation custom, laptop garansi resmi, upgrade RAM & SSD NVMe super cepat, serta service komputer profesional dengan sparepart original.';
+
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+    title: {
+      template: `%s | ${companyName}`,
+      default: `${companyName} | Pusat Rakit PC Gaming, Laptop & Servis Komputer`,
+    },
+    description: siteDescription,
+    keywords: [
+      'toko komputer',
+      'rakit pc gaming',
+      'service laptop',
+      'upgrade ssd ram',
+      'harco mangga dua',
+      'pc workstation',
+      'komputer jakarta',
+    ],
+  };
+}
 
 export default function RootLayout({
   children,
