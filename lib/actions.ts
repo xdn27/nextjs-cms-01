@@ -106,11 +106,25 @@ export async function adminLogout() {
   redirect('/login');
 }
 
+// Memastikan pemanggil adalah admin yang sudah login. Mode offline (tanpa Supabase) dilewati.
+async function requireAdmin(): Promise<{ success: false; error: string } | null> {
+  if (!isSupabaseConfigured()) return null;
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getUser();
+  if (!data.user) {
+    return { success: false, error: 'Tidak diizinkan. Silakan login sebagai admin.' };
+  }
+  return null;
+}
+
 // =========================================================
 // 3. CMS ADMIN ACTIONS (SETTINGS & CONTENT)
 // =========================================================
 
 export async function updateCompanySettingsAction(formData: FormData) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   const data = {
     company_name: formData.get('company_name') as string,
     description: formData.get('description') as string,
@@ -147,6 +161,9 @@ export async function updateCompanySettingsAction(formData: FormData) {
 
 // SERVICE ACTIONS
 export async function saveServiceAction(service: Partial<Service>) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     if (service.id && !service.id.startsWith('s')) {
@@ -171,6 +188,9 @@ export async function saveServiceAction(service: Partial<Service>) {
 }
 
 export async function deleteServiceAction(id: string) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     const { error } = await supabase.from('services').delete().eq('id', id);
@@ -185,6 +205,9 @@ export async function deleteServiceAction(id: string) {
 
 // PROJECT ACTIONS
 export async function saveProjectAction(project: Partial<Project>) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     if (project.id && !project.id.startsWith('p')) {
@@ -209,6 +232,9 @@ export async function saveProjectAction(project: Partial<Project>) {
 }
 
 export async function deleteProjectAction(id: string) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     const { error } = await supabase.from('projects').delete().eq('id', id);
@@ -223,6 +249,9 @@ export async function deleteProjectAction(id: string) {
 
 // POST ACTIONS
 export async function savePostAction(post: Partial<Post>) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     if (post.id && !post.id.startsWith('b')) {
@@ -247,6 +276,9 @@ export async function savePostAction(post: Partial<Post>) {
 }
 
 export async function deletePostAction(id: string) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     const { error } = await supabase.from('posts').delete().eq('id', id);
@@ -261,6 +293,9 @@ export async function deletePostAction(id: string) {
 
 // TESTIMONIAL ACTIONS
 export async function saveTestimonialAction(testimonial: Partial<Testimonial>) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     if (testimonial.id && !testimonial.id.startsWith('tm')) {
@@ -284,6 +319,9 @@ export async function saveTestimonialAction(testimonial: Partial<Testimonial>) {
 }
 
 export async function deleteTestimonialAction(id: string) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     const { error } = await supabase.from('testimonials').delete().eq('id', id);
@@ -298,6 +336,9 @@ export async function deleteTestimonialAction(id: string) {
 
 // INQUIRY STATUS ACTION
 export async function updateInquiryStatusAction(id: string, status: 'unread' | 'read' | 'replied') {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     const { error } = await supabase
@@ -316,6 +357,9 @@ export async function updateInquiryStatusAction(id: string, status: 'unread' | '
 // =========================================================
 
 export async function saveHeroSlideAction(slide: Partial<HeroSlide>) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     if (slide.id && !slide.id.startsWith('slide-')) {
@@ -339,6 +383,9 @@ export async function saveHeroSlideAction(slide: Partial<HeroSlide>) {
 }
 
 export async function deleteHeroSlideAction(id: string) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     const { error } = await supabase.from('hero_slides').delete().eq('id', id);
@@ -352,6 +399,9 @@ export async function deleteHeroSlideAction(id: string) {
 }
 
 export async function toggleHeroSlideStatusAction(id: string, is_active: boolean) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     const { error } = await supabase
