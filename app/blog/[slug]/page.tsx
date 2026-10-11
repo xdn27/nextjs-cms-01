@@ -33,6 +33,9 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
 
 export async function generateStaticParams() {
   const posts = await getPosts();
+  if (posts.length === 0) {
+    return [{ slug: '__placeholder__' }];
+  }
   return posts.map((p) => ({ slug: p.slug }));
 }
 

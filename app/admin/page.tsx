@@ -97,9 +97,9 @@ export default async function AdminDashboardPage() {
               Supabase Terhubung
             </span>
           ) : (
-            <span className="flex items-center gap-1.5 font-semibold text-amber-600 dark:text-amber-400">
-              <span className="h-2 w-2 rounded-full bg-amber-500" />
-              Demo / Mock Mode
+            <span className="flex items-center gap-1.5 font-semibold text-destructive">
+              <span className="h-2 w-2 rounded-full bg-destructive" />
+              Belum Terhubung
             </span>
           )}
         </div>

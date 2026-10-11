@@ -3,15 +3,20 @@ import { createClient, createPublicClient, isSupabaseConfigured } from './supaba
 
 // Tag cache untuk seluruh data publik; di-invalidate oleh server action CMS.
 export const CMS_CACHE_TAG = 'cms';
-import {
-  initialSettings,
-  initialServices,
-  initialPosts,
-  initialTestimonials,
-  initialInquiries,
-  initialHeroSlides,
-} from './mock-data';
 import { CompanySettings, Service, Project, Post, Testimonial, Inquiry, HeroSlide } from './types';
+
+export const emptyCompanySettings: CompanySettings = {
+  id: 1,
+  company_name: '',
+  description: '',
+  logo_url: null,
+  contact_email: '',
+  contact_phone: '',
+  contact_whatsapp: '',
+  contact_address: '',
+  social_facebook: null,
+  social_instagram: null,
+};
 
 export async function getCompanySettings(): Promise<CompanySettings> {
   'use cache';
@@ -19,7 +24,7 @@ export async function getCompanySettings(): Promise<CompanySettings> {
   cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
-    return initialSettings;
+    return emptyCompanySettings;
   }
 
   try {
@@ -31,12 +36,12 @@ export async function getCompanySettings(): Promise<CompanySettings> {
       .single();
 
     if (error || !data) {
-      return initialSettings;
+      return emptyCompanySettings;
     }
 
     return data as CompanySettings;
   } catch {
-    return initialSettings;
+    return emptyCompanySettings;
   }
 }
 
@@ -46,7 +51,7 @@ export async function getServices(): Promise<Service[]> {
   cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
-    return initialServices;
+    return [];
   }
 
   try {
@@ -57,13 +62,39 @@ export async function getServices(): Promise<Service[]> {
       .eq('is_active', true)
       .order('display_order', { ascending: true });
 
-    if (error || !data || data.length === 0) {
-      return initialServices;
+    if (error || !data) {
+      return [];
     }
 
     return data as Service[];
   } catch {
-    return initialServices;
+    return [];
+  }
+}
+
+export async function getAdminServices(): Promise<Service[]> {
+  'use cache';
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
+
+  if (!isSupabaseConfigured()) {
+    return [];
+  }
+
+  try {
+    const supabase = createPublicClient();
+    const { data, error } = await supabase
+      .from('services')
+      .select('*')
+      .order('display_order', { ascending: true });
+
+    if (error || !data) {
+      return [];
+    }
+
+    return data as Service[];
+  } catch {
+    return [];
   }
 }
 
@@ -73,7 +104,7 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
   cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
-    return initialServices.find((s) => s.slug === slug) || null;
+    return null;
   }
 
   try {
@@ -85,12 +116,12 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
       .single();
 
     if (error || !data) {
-      return initialServices.find((s) => s.slug === slug) || null;
+      return null;
     }
 
     return data as Service;
   } catch {
-    return initialServices.find((s) => s.slug === slug) || null;
+    return null;
   }
 }
 
@@ -179,7 +210,7 @@ export async function getPosts(): Promise<Post[]> {
   cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
-    return initialPosts.filter((p) => p.status === 'published');
+    return [];
   }
 
   try {
@@ -190,13 +221,39 @@ export async function getPosts(): Promise<Post[]> {
       .eq('status', 'published')
       .order('published_at', { ascending: false });
 
-    if (error || !data || data.length === 0) {
-      return initialPosts.filter((p) => p.status === 'published');
+    if (error || !data) {
+      return [];
     }
 
     return data as Post[];
   } catch {
-    return initialPosts.filter((p) => p.status === 'published');
+    return [];
+  }
+}
+
+export async function getAdminPosts(): Promise<Post[]> {
+  'use cache';
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
+
+  if (!isSupabaseConfigured()) {
+    return [];
+  }
+
+  try {
+    const supabase = createPublicClient();
+    const { data, error } = await supabase
+      .from('posts')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error || !data) {
+      return [];
+    }
+
+    return data as Post[];
+  } catch {
+    return [];
   }
 }
 
@@ -206,7 +263,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
-    return initialPosts.find((p) => p.slug === slug) || null;
+    return null;
   }
 
   try {
@@ -218,12 +275,12 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       .single();
 
     if (error || !data) {
-      return initialPosts.find((p) => p.slug === slug) || null;
+      return null;
     }
 
     return data as Post;
   } catch {
-    return initialPosts.find((p) => p.slug === slug) || null;
+    return null;
   }
 }
 
@@ -233,7 +290,7 @@ export async function getTestimonials(): Promise<Testimonial[]> {
   cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
-    return initialTestimonials;
+    return [];
   }
 
   try {
@@ -244,19 +301,45 @@ export async function getTestimonials(): Promise<Testimonial[]> {
       .eq('is_active', true)
       .order('display_order', { ascending: true });
 
-    if (error || !data || data.length === 0) {
-      return initialTestimonials;
+    if (error || !data) {
+      return [];
     }
 
     return data as Testimonial[];
   } catch {
-    return initialTestimonials;
+    return [];
+  }
+}
+
+export async function getAdminTestimonials(): Promise<Testimonial[]> {
+  'use cache';
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
+
+  if (!isSupabaseConfigured()) {
+    return [];
+  }
+
+  try {
+    const supabase = createPublicClient();
+    const { data, error } = await supabase
+      .from('testimonials')
+      .select('*')
+      .order('display_order', { ascending: true });
+
+    if (error || !data) {
+      return [];
+    }
+
+    return data as Testimonial[];
+  } catch {
+    return [];
   }
 }
 
 export async function getInquiries(): Promise<Inquiry[]> {
   if (!isSupabaseConfigured()) {
-    return initialInquiries;
+    return [];
   }
 
   try {
@@ -266,13 +349,13 @@ export async function getInquiries(): Promise<Inquiry[]> {
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (error || !data || data.length === 0) {
-      return initialInquiries;
+    if (error || !data) {
+      return [];
     }
 
     return data as Inquiry[];
   } catch {
-    return initialInquiries;
+    return [];
   }
 }
 
@@ -282,7 +365,7 @@ export async function getHeroSlides(): Promise<HeroSlide[]> {
   cacheLife('hours');
 
   if (!isSupabaseConfigured()) {
-    return initialHeroSlides.filter((s) => s.is_active);
+    return [];
   }
 
   try {
@@ -293,19 +376,19 @@ export async function getHeroSlides(): Promise<HeroSlide[]> {
       .eq('is_active', true)
       .order('display_order', { ascending: true });
 
-    if (error || !data || data.length === 0) {
-      return initialHeroSlides.filter((s) => s.is_active);
+    if (error || !data) {
+      return [];
     }
 
     return data as HeroSlide[];
   } catch {
-    return initialHeroSlides.filter((s) => s.is_active);
+    return [];
   }
 }
 
 export async function getAllHeroSlides(): Promise<HeroSlide[]> {
   if (!isSupabaseConfigured()) {
-    return initialHeroSlides;
+    return [];
   }
 
   try {
@@ -315,12 +398,12 @@ export async function getAllHeroSlides(): Promise<HeroSlide[]> {
       .select('*')
       .order('display_order', { ascending: true });
 
-    if (error || !data || data.length === 0) {
-      return initialHeroSlides;
+    if (error || !data) {
+      return [];
     }
 
     return data as HeroSlide[];
   } catch {
-    return initialHeroSlides;
+    return [];
   }
 }
