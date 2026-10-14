@@ -253,23 +253,6 @@ export function SliderManager({ initialSlides }: SliderManagerProps) {
         </div>
       </div>
 
-      {/* Info Tip Libadwaita Card */}
-      <Card className="border-[#383838] bg-[#242424] p-4 text-xs text-[#c0bfbc]">
-        <div className="flex items-start gap-3">
-          <div className="rounded-lg bg-[#3584e4]/15 p-2 text-[#3584e4] shrink-0">
-            <Sliders className="h-4 w-4" />
-          </div>
-          <div className="space-y-1">
-            <p className="font-semibold text-white">
-              Arsitektur Anti-Jumping Aktif
-            </p>
-            <p className="text-[#9a9996] leading-relaxed">
-              Slider pada beranda web menggunakan sistem <span className="text-[#78aeed]">CSS Grid Stacking</span>. Anda bebas membuat judul atau subjudul dengan panjang berbeda — tinggi layout otomatis terkunci pada slide tertinggi sehingga tampilan beranda tidak akan melompat saat transisi.
-            </p>
-          </div>
-        </div>
-      </Card>
-
       {/* Slide Table Card */}
       <Card className="border-[#383838] bg-[#242424] overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
