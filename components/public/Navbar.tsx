@@ -21,6 +21,7 @@ export function Navbar({ settings }: NavbarProps) {
     { href: '/', label: 'Beranda' },
     { href: '/layanan', label: 'Layanan' },
     { href: '/katalog', label: 'Katalog Produk' },
+    { href: '/galeri', label: 'Galeri' },
     { href: '/blog', label: 'Blog' },
     { href: '/kontak', label: 'Kontak' },
   ];

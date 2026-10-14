@@ -3,7 +3,7 @@ import { createClient, createPublicClient, isSupabaseConfigured } from './supaba
 
 // Tag cache untuk seluruh data publik; di-invalidate oleh server action CMS.
 export const CMS_CACHE_TAG = 'cms';
-import { CompanySettings, Service, Project, Post, Testimonial, Inquiry, HeroSlide } from './types';
+import { CompanySettings, Service, Project, Post, Testimonial, Inquiry, HeroSlide, GalleryItem } from './types';
 
 export const emptyCompanySettings: CompanySettings = {
   id: 1,
@@ -404,6 +404,55 @@ export async function getAllHeroSlides(): Promise<HeroSlide[]> {
     }
 
     return data as HeroSlide[];
+  } catch {
+    return [];
+  }
+}
+
+export async function getGalleryItems(): Promise<GalleryItem[]> {
+  'use cache';
+  cacheTag(CMS_CACHE_TAG);
+  cacheLife('hours');
+
+  if (!isSupabaseConfigured()) {
+    return [];
+  }
+
+  try {
+    const supabase = createPublicClient();
+    const { data, error } = await supabase
+      .from('gallery_items')
+      .select('*')
+      .eq('is_active', true)
+      .order('display_order', { ascending: true });
+
+    if (error || !data) {
+      return [];
+    }
+
+    return data as GalleryItem[];
+  } catch {
+    return [];
+  }
+}
+
+export async function getAllGalleryItems(): Promise<GalleryItem[]> {
+  if (!isSupabaseConfigured()) {
+    return [];
+  }
+
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('gallery_items')
+      .select('*')
+      .order('display_order', { ascending: true });
+
+    if (error || !data) {
+      return [];
+    }
+
+    return data as GalleryItem[];
   } catch {
     return [];
   }

@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation';
 import { createClient, isSupabaseConfigured } from './supabase/server';
 import { isAdminUser } from './auth';
 import { CMS_CACHE_TAG } from './data';
-import { Service, Project, Post, Testimonial, HeroSlide } from './types';
+import { Service, Project, Post, Testimonial, HeroSlide, GalleryItem } from './types';
 
 // =========================================================
 // 1. PUBLIC ACTIONS
@@ -507,4 +507,57 @@ export async function toggleHeroSlideStatusAction(id: string, is_active: boolean
   revalidatePath('/');
   revalidatePath('/admin/slider');
   return { success: true, message: `Status slide berhasil ${is_active ? 'diaktifkan' : 'dinonaktifkan'}!` };
+}
+
+// =========================================================
+// GALLERY ACTIONS
+// =========================================================
+
+function revalidateGallery() {
+  updateTag(CMS_CACHE_TAG);
+  revalidatePath('/');
+  revalidatePath('/galeri');
+  revalidatePath('/admin/galeri');
+}
+
+export async function saveGalleryItemAction(item: Partial<GalleryItem>) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
+  if (!item.title?.trim() || !item.image_url?.trim()) {
+    return { success: false, error: 'Judul dan foto wajib diisi.' };
+  }
+
+  if (isSupabaseConfigured()) {
+    const supabase = await createClient();
+    if (item.id) {
+      const { error } = await supabase
+        .from('gallery_items')
+        .update(item)
+        .eq('id', item.id);
+      if (error) return { success: false, error: error.message };
+    } else {
+      const insertData = { ...item };
+      delete insertData.id;
+      const { error } = await supabase.from('gallery_items').insert(insertData);
+      if (error) return { success: false, error: error.message };
+    }
+  }
+
+  revalidateGallery();
+  return { success: true, message: 'Foto galeri berhasil disimpan!' };
+}
+
+export async function deleteGalleryItemAction(id: string) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
+  if (isSupabaseConfigured()) {
+    const supabase = await createClient();
+    const { error } = await supabase.from('gallery_items').delete().eq('id', id);
+    if (error) return { success: false, error: error.message };
+  }
+
+  revalidateGallery();
+  return { success: true, message: 'Foto galeri berhasil dihapus!' };
 }

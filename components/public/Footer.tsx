@@ -106,6 +106,11 @@ export function Footer({ settings }: FooterProps) {
                 </Link>
               </li>
               <li>
+                <Link transitionTypes={['nav-lateral']} href="/galeri" className="hover:text-white transition-colors">
+                  Galeri
+                </Link>
+              </li>
+              <li>
                 <Link transitionTypes={['nav-lateral']} href="/blog" className="hover:text-white transition-colors">
                   Blog &amp; Tips Hardware
                 </Link>

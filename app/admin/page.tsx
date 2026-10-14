@@ -8,6 +8,7 @@ import {
   ArrowRight,
   Database,
   Sliders,
+  Images,
 } from 'lucide-react';
 import {
   getCompanySettings,
@@ -16,19 +17,21 @@ import {
   getPosts,
   getInquiries,
   getAllHeroSlides,
+  getAllGalleryItems,
 } from '@/lib/data';
 import { isSupabaseConfigured } from '@/lib/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
 export default async function AdminDashboardPage() {
-  const [settings, services, products, posts, inquiries, slides] = await Promise.all([
+  const [settings, services, products, posts, inquiries, slides, gallery] = await Promise.all([
     getCompanySettings(),
     getServices(),
     getProjects(),
     getPosts(),
     getInquiries(),
     getAllHeroSlides(),
+    getAllGalleryItems(),
   ]);
 
   const unreadInquiries = inquiries.filter((inq) => inq.status === 'unread');
@@ -56,6 +59,14 @@ export default async function AdminDashboardPage() {
       href: '/admin/katalog',
       icon: ShoppingBag,
       color: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
+    },
+    {
+      title: 'Galeri Foto',
+      count: gallery.length,
+      subtext: `${gallery.filter((g) => g.is_featured && g.is_active).length} unggulan di beranda`,
+      href: '/admin/galeri',
+      icon: Images,
+      color: 'text-pink-500 bg-pink-500/10 border-pink-500/20',
     },
     {
       title: 'Tips & Blog',

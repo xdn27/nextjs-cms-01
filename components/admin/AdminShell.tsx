@@ -18,6 +18,7 @@ import {
   Monitor,
   Shield,
   Sliders,
+  Images,
 } from 'lucide-react';
 import { adminLogout } from '@/lib/actions';
 import { Button } from '@/components/ui/button';
@@ -37,6 +38,7 @@ export default function AdminShell({ children, companyName }: AdminShellProps) {
     { href: '/admin/pengaturan', label: 'Pengaturan Toko', icon: Settings },
     { href: '/admin/layanan', label: 'Kelola Layanan Servis', icon: Wrench },
     { href: '/admin/katalog', label: 'Kelola Katalog Produk', icon: ShoppingBag },
+    { href: '/admin/galeri', label: 'Kelola Galeri Foto', icon: Images },
     { href: '/admin/blog', label: 'Kelola Blog & Tips Hardware', icon: FileText },
     { href: '/admin/testimoni', label: 'Kelola Ulasan Pelanggan', icon: MessageSquareQuote },
     { href: '/admin/pesan', label: 'Pesan & Konsultasi', icon: Mail },

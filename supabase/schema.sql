@@ -113,6 +113,19 @@ CREATE TABLE IF NOT EXISTS public.hero_slides (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- 8. GALLERY ITEMS TABLE
+CREATE TABLE IF NOT EXISTS public.gallery_items (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title TEXT NOT NULL,
+    caption TEXT,
+    image_url TEXT NOT NULL,
+    category TEXT,
+    is_featured BOOLEAN DEFAULT false,
+    display_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- =========================================================
 -- ROW LEVEL SECURITY (RLS) POLICIES
 -- =========================================================
@@ -124,6 +137,7 @@ ALTER TABLE public.posts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.testimonials ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.inquiries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.hero_slides ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.gallery_items ENABLE ROW LEVEL SECURITY;
 
 -- Helper: true jika JWT memiliki app_metadata.role = 'admin' (diatur lewat dashboard/SQL, bukan oleh user)
 CREATE OR REPLACE FUNCTION public.is_admin()
@@ -141,6 +155,7 @@ CREATE POLICY "Public can view projects" ON public.projects FOR SELECT USING (tr
 CREATE POLICY "Public can view published posts" ON public.posts FOR SELECT USING (status = 'published' OR public.is_admin());
 CREATE POLICY "Public can view active testimonials" ON public.testimonials FOR SELECT USING (is_active = true OR public.is_admin());
 CREATE POLICY "Public can view active hero slides" ON public.hero_slides FOR SELECT USING (is_active = true OR public.is_admin());
+CREATE POLICY "Public can view active gallery items" ON public.gallery_items FOR SELECT USING (is_active = true OR public.is_admin());
 
 -- Public INSERT policy for Inquiries (Contact Form)
 CREATE POLICY "Public can submit inquiries" ON public.inquiries FOR INSERT WITH CHECK (true);
@@ -153,6 +168,7 @@ CREATE POLICY "Admin full access posts" ON public.posts FOR ALL USING (public.is
 CREATE POLICY "Admin full access testimonials" ON public.testimonials FOR ALL USING (public.is_admin());
 CREATE POLICY "Admin full access inquiries" ON public.inquiries FOR ALL USING (public.is_admin());
 CREATE POLICY "Admin full access hero slides" ON public.hero_slides FOR ALL USING (public.is_admin());
+CREATE POLICY "Admin full access gallery items" ON public.gallery_items FOR ALL USING (public.is_admin());
 
 -- =========================================================
 -- STORAGE BUCKET CONFIGURATION (cms-media)

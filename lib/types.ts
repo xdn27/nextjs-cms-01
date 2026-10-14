@@ -103,3 +103,15 @@ export interface HeroSlide {
   is_active: boolean;
   created_at?: string;
 }
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  caption?: string | null;
+  image_url: string;
+  category?: string | null;
+  is_featured: boolean;
+  display_order: number;
+  is_active: boolean;
+  created_at?: string;
+}

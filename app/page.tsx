@@ -18,6 +18,7 @@ import {
   getPosts,
   getTestimonials,
   getHeroSlides,
+  getGalleryItems,
 } from '@/lib/data';
 import { waLink } from '@/lib/utils';
 import { Navbar } from '@/components/public/Navbar';
@@ -27,19 +28,22 @@ import { ServiceCard } from '@/components/public/ServiceCard';
 import { ProjectCard } from '@/components/public/ProjectCard';
 import { BlogCard } from '@/components/public/BlogCard';
 import { TestimonialSection } from '@/components/public/TestimonialSection';
+import { GallerySection } from '@/components/public/GallerySection';
 
 export default async function HomePage() {
-  const [settings, services, products, posts, testimonials, slides] = await Promise.all([
+  const [settings, services, products, posts, testimonials, slides, galleryItems] = await Promise.all([
     getCompanySettings(),
     getServices(),
     getProjects(),
     getPosts(),
     getTestimonials(),
     getHeroSlides(),
+    getGalleryItems(),
   ]);
 
   const featuredProducts = products.filter((p) => p.is_featured).slice(0, 3);
   const recentPosts = posts.slice(0, 3);
+  const featuredGallery = galleryItems.filter((g) => g.is_featured).slice(0, 6);
 
   const advantages = [
     {
@@ -197,6 +201,9 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* Galeri Unggulan (disembunyikan bila kosong) */}
+        <GallerySection items={featuredGallery} />
 
         {/* Testimonials Pelanggan */}
         <TestimonialSection
