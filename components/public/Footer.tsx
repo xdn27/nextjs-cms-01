@@ -167,10 +167,21 @@ export function Footer({ settings }: FooterProps) {
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#3584e4]" />
                 <span className="leading-snug">{settings.contact_address}</span>
               </li>
-              <li className="flex items-center gap-2.5">
-                <Clock className="h-4 w-4 shrink-0 text-[#3584e4]" />
-                <span className="leading-snug">Senin - Sabtu: 09:00 - 20:00 WIB</span>
-              </li>
+              {settings.business_hours?.trim() && (
+                <li className="flex items-start gap-2.5">
+                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[#3584e4]" />
+                  <span className="leading-snug">
+                    {settings.business_hours
+                      .split('\n')
+                      .filter((line) => line.trim())
+                      .map((line, i) => (
+                        <span key={i} className="block">
+                          {line}
+                        </span>
+                      ))}
+                  </span>
+                </li>
+              )}
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 shrink-0 text-[#3584e4]" />
                 <a href={`tel:${settings.contact_phone}`} className="hover:text-white">

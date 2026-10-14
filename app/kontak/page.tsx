@@ -112,16 +112,27 @@ export default async function ContactPage() {
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-3">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500">
-                        <Clock className="h-4 w-4" />
+                    {settings.business_hours?.trim() && (
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500">
+                          <Clock className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <strong className="block text-foreground">Jam Operasional Toko</strong>
+                          {settings.business_hours
+                            .split('\n')
+                            .filter((line) => line.trim())
+                            .map((line, i) => (
+                              <span
+                                key={i}
+                                className={`text-muted-foreground block${i === 0 ? ' mt-0.5' : ''}`}
+                              >
+                                {line}
+                              </span>
+                            ))}
+                        </div>
                       </div>
-                      <div>
-                        <strong className="block text-foreground">Jam Operasional Toko</strong>
-                        <span className="text-muted-foreground block mt-0.5">Senin - Sabtu: 09:00 - 20:00 WIB</span>
-                        <span className="text-muted-foreground block">Minggu: 10:00 - 18:00 WIB</span>
-                      </div>
-                    </div>
+                    )}
                   </div>
 
                   <div className="mt-8 pt-6 border-t border-border">

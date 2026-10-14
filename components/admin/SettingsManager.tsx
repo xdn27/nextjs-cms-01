@@ -178,6 +178,20 @@ export default function SettingsManager({ initialSettings }: SettingsManagerProp
                 placeholder="Alamat fisik toko / kantor..."
               />
             </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="business_hours">Jam Operasional</Label>
+              <Textarea
+                id="business_hours"
+                name="business_hours"
+                rows={3}
+                defaultValue={settings.business_hours ?? ''}
+                placeholder={'Senin - Sabtu: 09:00 - 20:00 WIB\nMinggu: 10:00 - 18:00 WIB'}
+              />
+              <p className="text-xs text-muted-foreground">
+                Satu baris untuk satu jadwal. Tampil di footer dan halaman Kontak.
+              </p>
+            </div>
           </CardContent>
         </Card>
 

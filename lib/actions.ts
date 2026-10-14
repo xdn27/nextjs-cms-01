@@ -145,6 +145,7 @@ export async function updateCompanySettingsAction(formData: FormData) {
     contact_phone: formData.get('contact_phone') as string,
     contact_whatsapp: formData.get('contact_whatsapp') as string,
     contact_address: formData.get('contact_address') as string,
+    business_hours: formData.get('business_hours') as string,
     social_facebook: formData.get('social_facebook') as string,
     social_instagram: formData.get('social_instagram') as string,
     updated_at: new Date().toISOString(),

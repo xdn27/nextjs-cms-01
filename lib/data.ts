@@ -14,6 +14,7 @@ export const emptyCompanySettings: CompanySettings = {
   contact_phone: '',
   contact_whatsapp: '',
   contact_address: '',
+  business_hours: '',
   social_facebook: null,
   social_instagram: null,
 };

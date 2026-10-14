@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS public.company_settings (
     contact_phone TEXT DEFAULT '+62 21 6230 1888',
     contact_whatsapp TEXT DEFAULT '+62 813 8899 7722',
     contact_address TEXT DEFAULT 'Harco Mangga Dua Plaza Lt. 2 Blok B No. 12-14, Jl. Mangga Dua Raya, Jakarta Pusat 10730',
+    business_hours TEXT DEFAULT E'Senin - Sabtu: 09:00 - 20:00 WIB\nMinggu: 10:00 - 18:00 WIB',
     social_facebook TEXT DEFAULT 'https://facebook.com/cybertechcomputer',
     social_instagram TEXT DEFAULT 'https://instagram.com/cybertechcomputer',
     updated_at TIMESTAMPTZ DEFAULT NOW(),

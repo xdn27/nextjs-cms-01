@@ -8,6 +8,7 @@ export const initialSettings: CompanySettings = {
   contact_email: 'sales@cybertechcomputer.co.id',
   contact_phone: '+62 21 6230 1888',
   contact_whatsapp: '+62 813 8899 7722',
+  business_hours: 'Senin - Sabtu: 09:00 - 20:00 WIB\nMinggu: 10:00 - 18:00 WIB',
   contact_address: 'Harco Mangga Dua Plaza Lt. 2 Blok B No. 12-14, Jl. Mangga Dua Raya, Jakarta Pusat 10730',
   social_facebook: 'https://facebook.com/cybertechcomputer',
   social_instagram: 'https://instagram.com/cybertechcomputer',
