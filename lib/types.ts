@@ -8,6 +8,7 @@ export interface CompanySettings {
   contact_whatsapp: string;
   contact_address: string;
   business_hours?: string | null;
+  maps_embed_url?: string | null;
   social_facebook?: string | null;
   social_instagram?: string | null;
   updated_at?: string;

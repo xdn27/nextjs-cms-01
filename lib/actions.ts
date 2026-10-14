@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 import { createClient, isSupabaseConfigured } from './supabase/server';
 import { isAdminUser } from './auth';
 import { CMS_CACHE_TAG } from './data';
+import { parseMapsEmbedUrl } from './utils';
 import { Service, Project, Post, Testimonial, HeroSlide, GalleryItem } from './types';
 
 // =========================================================
@@ -137,6 +138,16 @@ export async function updateCompanySettingsAction(formData: FormData) {
   const denied = await requireAdmin();
   if (denied) return denied;
 
+  const mapsInput = ((formData.get('maps_embed_url') as string) || '').trim();
+  const mapsEmbedUrl = parseMapsEmbedUrl(mapsInput);
+  if (mapsInput && !mapsEmbedUrl) {
+    return {
+      success: false,
+      error:
+        'Embed Google Maps tidak valid. Gunakan "Bagikan > Sematkan peta" di Google Maps lalu salin kode iframe atau URL-nya (https://www.google.com/maps/embed...).',
+    };
+  }
+
   const data = {
     company_name: formData.get('company_name') as string,
     description: formData.get('description') as string,
@@ -146,6 +157,7 @@ export async function updateCompanySettingsAction(formData: FormData) {
     contact_whatsapp: formData.get('contact_whatsapp') as string,
     contact_address: formData.get('contact_address') as string,
     business_hours: formData.get('business_hours') as string,
+    maps_embed_url: mapsEmbedUrl,
     social_facebook: formData.get('social_facebook') as string,
     social_instagram: formData.get('social_instagram') as string,
     updated_at: new Date().toISOString(),

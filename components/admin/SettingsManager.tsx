@@ -192,6 +192,20 @@ export default function SettingsManager({ initialSettings }: SettingsManagerProp
                 Satu baris untuk satu jadwal. Tampil di footer dan halaman Kontak.
               </p>
             </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="maps_embed_url">Embed Google Maps</Label>
+              <Textarea
+                id="maps_embed_url"
+                name="maps_embed_url"
+                rows={3}
+                defaultValue={settings.maps_embed_url ?? ''}
+                placeholder='<iframe src="https://www.google.com/maps/embed?pb=..." ...></iframe>'
+              />
+              <p className="text-xs text-muted-foreground">
+                Di Google Maps: Bagikan &rarr; Sematkan peta &rarr; salin HTML (atau hanya URL <code>src</code>-nya). Kosongkan untuk menyembunyikan peta di halaman Kontak.
+              </p>
+            </div>
           </CardContent>
         </Card>
 

@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Mail, Phone, MapPin, Clock, MessageSquare, MessageCircle, Store } from 'lucide-react';
 import { getCompanySettings } from '@/lib/data';
-import { waLink } from '@/lib/utils';
+import { waLink, parseMapsEmbedUrl } from '@/lib/utils';
 import { Navbar } from '@/components/public/Navbar';
 import { Footer } from '@/components/public/Footer';
 import { ContactForm } from '@/components/public/ContactForm';
@@ -19,6 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ContactPage() {
   const settings = await getCompanySettings();
+  const mapsEmbedUrl = parseMapsEmbedUrl(settings.maps_embed_url);
 
   return (
       <div className="flex min-h-screen flex-col">
@@ -161,6 +162,19 @@ export default async function ContactPage() {
                 <ContactForm />
               </div>
             </div>
+
+            {mapsEmbedUrl && (
+              <div className="mt-12 overflow-hidden rounded-2xl border border-border shadow-sm">
+                <iframe
+                  src={mapsEmbedUrl}
+                  title={`Lokasi ${settings.company_name} di Google Maps`}
+                  className="h-[360px] w-full sm:h-[450px]"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+              </div>
+            )}
           </div>
         </section>
       </main>
